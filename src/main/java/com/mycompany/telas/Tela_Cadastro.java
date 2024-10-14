@@ -344,7 +344,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         checkboxSenha.setFocusPainted(false);
         checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaMostrar.png"))); // NOI18N
-        checkbocSenha.setVisible(false);
+        checkboxSenha.setVisible(false);
         checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxSenhaActionPerformed(evt);
