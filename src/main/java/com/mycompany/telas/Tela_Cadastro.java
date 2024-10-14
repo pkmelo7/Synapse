@@ -52,8 +52,8 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         labelSenha = new javax.swing.JLabel();
         checkboxSenha = new javax.swing.JCheckBox();
         fieldSenha = new javax.swing.JPasswordField();
-        buttonLogged = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
+        buttonLogged = new javax.swing.JButton();
         tela = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -344,7 +344,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         checkboxSenha.setFocusPainted(false);
         checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaMostrar.png"))); // NOI18N
-        checkboxSenha.setVisible(false);
         checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxSenhaActionPerformed(evt);
@@ -377,31 +376,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(fieldSenha);
         fieldSenha.setBounds(500, 540, 360, 30);
 
-        buttonLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
-        buttonLogged.setBorder(null);
-        buttonLogged.setBorderPainted(false);
-        buttonLogged.setContentAreaFilled(false);
-        buttonLogged.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonLogged.setFocusPainted(false);
-        buttonLogged.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonLogged.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonLogged.setVisible(false);
-        buttonLogged.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonLoggedMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonLoggedMouseExited(evt);
-            }
-        });
-        buttonLogged.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonLoggedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonLogged);
-        buttonLogged.setBounds(1150, 40, 170, 70);
-
         buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
         buttonLogin.setBorder(null);
         buttonLogin.setBorderPainted(false);
@@ -425,6 +399,30 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(buttonLogin);
         buttonLogin.setBounds(1150, 40, 170, 70);
+
+        buttonLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
+        buttonLogged.setBorder(null);
+        buttonLogged.setBorderPainted(false);
+        buttonLogged.setContentAreaFilled(false);
+        buttonLogged.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonLogged.setFocusPainted(false);
+        buttonLogged.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonLogged.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonLogged.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonLoggedMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonLoggedMouseExited(evt);
+            }
+        });
+        buttonLogged.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoggedActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonLogged);
+        buttonLogged.setBounds(1150, 40, 170, 70);
 
         tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
         getContentPane().add(tela);
