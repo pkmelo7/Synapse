@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>Synapse</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+        <exec.mainClass>com.mycompany.synapse.Synapse</exec.mainClass>
+    </properties>
+<build>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>images/FundosTelas/FundoCadastro.png</include>
+                <include>images/FundosTelas/FundoCursos.png</include>
+                <include>images/FundosTelas/FundoCLogin.png</include>
+                <include>images/FundosTelas/FundoMenu.png</include>
+                <include>images/FundosTelas/FundoSobre.png</include>
+                
+                <include>images/Botoes/BarraPesquisa.png</include>
+                <include>images/Botoes/BotaoCurso.png</include>
+                <include>images/Botoes/Cadastrar.png</include>
+                <include>images/Botoes/CadastrarAzul.png</include>
+                <include>images/Botoes/Cadastrarse.png</include>
+                <include>images/Botoes/CadastrarseAzul.png</include>
+                <include>images/Botoes/CadastrarseSeta.png</include>
+                <include>images/Botoes/Conta.png</include>
+                <include>images/Botoes/ContaAzul.png</include>
+                <include>images/Botoes/Cursos.png</include>
+                <include>images/Botoes/CursosAzul.png</include>
+                <include>images/Botoes/DesenhoComputador.png</include>
+                <include>images/Botoes/Entrar.png</include>
+                <include>images/Botoes/EntrarAzul.png</include>
+                <include>images/Botoes/EsqueciSenha.png</include>
+                <include>images/Botoes/EsqueciSenhaAzul.png</include>
+                <include>images/Botoes/FazerLogin.png</include>
+                <include>images/Botoes/FazerLoginAzul.png</include>
+                <include>images/Botoes/Field.png</include>
+                <include>images/Botoes/IconSynapse.png</include>
+                <include>images/Botoes/IconSynapseAzul.png</include>
+                <include>images/Botoes/IconSynapsePreto.png</include>
+                <include>images/Botoes/Login.png</include>
+                <include>images/Botoes/LoginAzul.png</include>
+                <include>images/Botoes/NomeLogo.png</include>
+                <include>images/Botoes/Sacola.png</include>
+                <include>images/Botoes/SacolaAzul.png</include>
+                <include>images/Botoes/SenhaMostrar.png</include>
+                <include>images/Botoes/SenhaOcultar.png</include>
+                <include>images/Botoes/SenhaOcultarNull.png</include>
+                <include>images/Botoes/Seta.png</include>
+                <include>images/Botoes/Sobre.png</include>
+                <include>images/Botoes/SobreAzul.png</include>
+                <include>images/Botoes/VendoVideo.png</include>
+                <include>images/Botoes/X.png</include>
+                <include>images/Botoes/XAzul.png</include>
+                
+                <include>images/TelasCompletas/Cadastro.png</include>
+                <include>images/TelasCompletas/Cursos.png</include>
+                <include>images/TelasCompletas/Login.png</include>
+                <include>images/TelasCompletas/MenuEntrar.png</include>
+                <include>images/TelasCompletas/MenuLogado.png</include>
+                <include>images/TelasCompletas/Sobre.png</include>
+            </includes>
+        </resource>
+    </resources>
+</build>
+</project>
