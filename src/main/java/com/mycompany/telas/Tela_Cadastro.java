@@ -344,6 +344,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         checkboxSenha.setFocusPainted(false);
         checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaOcultarNull.png"))); // NOI18N
+        checkboxSenha.setVisible(false);
         checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxSenhaActionPerformed(evt);
@@ -384,6 +385,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         buttonLogged.setFocusPainted(false);
         buttonLogged.setMaximumSize(new java.awt.Dimension(86, 19));
         buttonLogged.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonLogged.setVisible(false);
         buttonLogged.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttonLoggedMouseEntered(evt);
