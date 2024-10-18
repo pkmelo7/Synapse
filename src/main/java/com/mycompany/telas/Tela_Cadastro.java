@@ -31,6 +31,8 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     
     Font poppins;
     GraphicsEnvironment GE = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    
+    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png"));  
     //Final da declaração de variáveis
     
     public Tela_Cadastro() throws FontFormatException, IOException {
@@ -69,7 +71,9 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         tela = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Synapse Connect");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(icon.getImage());
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);

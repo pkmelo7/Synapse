@@ -18,7 +18,7 @@
             <includes>
                 <include>images/FundosTelas/FundoCadastro.png</include>
                 <include>images/FundosTelas/FundoCursos.png</include>
-                <include>images/FundosTelas/FundoCLogin.png</include>
+                <include>images/FundosTelas/FundoLogin.png</include>
                 <include>images/FundosTelas/FundoMenu.png</include>
                 <include>images/FundosTelas/FundoSobre.png</include>
                 
@@ -58,7 +58,9 @@
                 <include>images/Botoes/VendoVideo.png</include>
                 <include>images/Botoes/X.png</include>
                 <include>images/Botoes/XAzul.png</include>
-                
+                <include>images/Botoes/icon.png</include>
+                <include>images/Botoes/FormaCarrinho.png</include>
+
                 <include>images/TelasCompletas/Cadastro.png</include>
                 <include>images/TelasCompletas/Cursos.png</include>
                 <include>images/TelasCompletas/Login.png</include>
