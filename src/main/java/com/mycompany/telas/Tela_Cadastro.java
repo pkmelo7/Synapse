@@ -21,7 +21,6 @@ import javax.swing.Timer;
 public class Tela_Cadastro extends javax.swing.JFrame {
     
     //Declaração de variáveis
-    int teste2 = 2;
     final int originalX = 10;
     final int targetX = 150;
     final int step = 10;
