@@ -4,11 +4,19 @@ package com.mycompany.telas;
 
 //Importações necessárias
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+import javax.swing.JOptionPane;
 
 public class Tela_Cadastro extends javax.swing.JFrame {
     
@@ -20,9 +28,15 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     Timer timer = new Timer(20, null);
     
     boolean showing = false;
+    
+    Font poppins;
+    GraphicsEnvironment GE = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    
+    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png"));  
     //Final da declaração de variáveis
     
-    public Tela_Cadastro() {
+    public Tela_Cadastro() throws FontFormatException, IOException {
+        this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents();
     }
 
@@ -52,20 +66,23 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         labelSenha = new javax.swing.JLabel();
         checkboxSenha = new javax.swing.JCheckBox();
         fieldSenha = new javax.swing.JPasswordField();
-        buttonLogin = new javax.swing.JButton();
         buttonLogged = new javax.swing.JButton();
+        buttonLogin = new javax.swing.JButton();
         tela = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Synapse Connect");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(icon.getImage());
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
 
         fieldNasc.setBackground(new java.awt.Color(224, 222, 222));
+        fieldNasc.setFont(poppins.deriveFont(14f));
         fieldNasc.setForeground(new java.awt.Color(128, 128, 128));
         fieldNasc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        fieldNasc.setText("Nascimento                                                                 Formato: 00/00/0000");
+        fieldNasc.setText("Nascimento                                           Formato: 00/00/0000");
         fieldNasc.setToolTipText("");
         fieldNasc.setBorder(null);
         fieldNasc.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -85,6 +102,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         fieldNasc.setBounds(500, 360, 380, 40);
 
         fieldEmail.setBackground(new java.awt.Color(224, 222, 222));
+        fieldEmail.setFont(poppins.deriveFont(14f));
         fieldEmail.setForeground(new java.awt.Color(128, 128, 128));
         fieldEmail.setText("E-mail");
         fieldEmail.setBorder(null);
@@ -105,6 +123,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         fieldEmail.setBounds(500, 480, 380, 40);
 
         fieldUser.setBackground(new java.awt.Color(224, 222, 222));
+        fieldUser.setFont(poppins.deriveFont(14f));
         fieldUser.setForeground(new java.awt.Color(128, 128, 128));
         fieldUser.setText("Usuário");
         fieldUser.setBorder(null);
@@ -246,6 +265,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(buttonSynapseLogo);
         buttonSynapseLogo.setBounds(10, 20, 170, 120);
 
+        buttonSobre.setFont(poppins.deriveFont(24f));
         buttonSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Sobre.png"))); // NOI18N
         buttonSobre.setBorder(null);
         buttonSobre.setBorderPainted(false);
@@ -295,6 +315,8 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         buttonCadastrar.setBounds(610, 600, 160, 40);
 
         fieldNome.setBackground(new java.awt.Color(224, 222, 222));
+        fieldNome.setFont(poppins.deriveFont(14f)
+        );
         fieldNome.setForeground(new java.awt.Color(128, 128, 128));
         fieldNome.setText("Nome");
         fieldNome.setBorder(null);
@@ -315,6 +337,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         fieldNome.setBounds(500, 300, 380, 40);
 
         fieldPesquisa.setBackground(new java.awt.Color(224, 222, 222));
+        fieldPesquisa.setFont(poppins.deriveFont(14f));
         fieldPesquisa.setForeground(new java.awt.Color(128, 128, 128));
         fieldPesquisa.setText("Pesquisar:");
         fieldPesquisa.setBorder(null);
@@ -334,6 +357,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(fieldPesquisa);
         fieldPesquisa.setBounds(380, 60, 380, 30);
 
+        labelSenha.setFont(poppins.deriveFont(14f));
         labelSenha.setForeground(new java.awt.Color(128, 128, 128));
         labelSenha.setText("Senha:");
         getContentPane().add(labelSenha);
@@ -344,6 +368,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         checkboxSenha.setFocusPainted(false);
         checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaMostrar.png"))); // NOI18N
+        checkboxSenha.setVisible(false);
         checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxSenhaActionPerformed(evt);
@@ -353,6 +378,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         checkboxSenha.setBounds(860, 540, 20, 30);
 
         fieldSenha.setBackground(new java.awt.Color(224, 222, 222));
+        fieldSenha.setFont(poppins.deriveFont(14f));
         fieldSenha.setForeground(new java.awt.Color(128, 128, 128));
         fieldSenha.setBorder(null);
         fieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -375,6 +401,31 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(fieldSenha);
         fieldSenha.setBounds(500, 540, 360, 30);
+
+        buttonLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
+        buttonLogged.setBorder(null);
+        buttonLogged.setBorderPainted(false);
+        buttonLogged.setContentAreaFilled(false);
+        buttonLogged.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonLogged.setFocusPainted(false);
+        buttonLogged.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonLogged.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonLogged.setVisible(false);
+        buttonLogged.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonLoggedMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonLoggedMouseExited(evt);
+            }
+        });
+        buttonLogged.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoggedActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonLogged);
+        buttonLogged.setBounds(1150, 40, 170, 70);
 
         buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
         buttonLogin.setBorder(null);
@@ -399,30 +450,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(buttonLogin);
         buttonLogin.setBounds(1150, 40, 170, 70);
-
-        buttonLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
-        buttonLogged.setBorder(null);
-        buttonLogged.setBorderPainted(false);
-        buttonLogged.setContentAreaFilled(false);
-        buttonLogged.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonLogged.setFocusPainted(false);
-        buttonLogged.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonLogged.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonLogged.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonLoggedMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonLoggedMouseExited(evt);
-            }
-        });
-        buttonLogged.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonLoggedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonLogged);
-        buttonLogged.setBounds(1150, 40, 170, 70);
 
         tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
         getContentPane().add(tela);
@@ -466,7 +493,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     //Faz com que a palavra "Nascimento" desapareça de dentro do field quando o foco é retomado
     private void fieldNascFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNascFocusGained
         // TODO add your handling code here:
-        if (fieldNasc.getText().equals("Nascimento                                                                 Formato: 00/00/0000")) {
+        if (fieldNasc.getText().equals("Nascimento                                           Formato: 00/00/0000")) {
             fieldNasc.setText("");
             fieldNasc.setForeground(Color.BLACK);
         }
@@ -476,7 +503,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (fieldNasc.getText().isEmpty()) {
             fieldNasc.setForeground(Color.GRAY);
-            fieldNasc.setText("Nascimento                                                                 Formato: 00/00/0000");
+            fieldNasc.setText("Nascimento                                           Formato: 00/00/0000");
         }
     }//GEN-LAST:event_fieldNascFocusLost
 //Fim dos comandos do field "Nascimento"
@@ -768,6 +795,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     //<null>
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "OK");
     }//GEN-LAST:event_buttonCadastrarActionPerformed
     //Faz o botão Cadastrar ficar Azul ao passar o mouse por cima
     private void buttonCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarMouseEntered
@@ -872,7 +900,13 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tela_Cadastro().setVisible(true);
+                try {
+                    new Tela_Cadastro().setVisible(true);
+                } catch (FontFormatException ex) {
+                    Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
