@@ -16,12 +16,12 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
-import javax.swing.JOptionPane;
+//Fim das importações necessárias
 
 public class Tela_Cadastro extends javax.swing.JFrame {
     
     //Declaração de variáveis
-    int teste = 1;
+    int teste2 = 2;
     final int originalX = 10;
     final int targetX = 150;
     final int step = 10;
@@ -796,7 +796,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     //<null>
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "OK");
     }//GEN-LAST:event_buttonCadastrarActionPerformed
     //Faz o botão Cadastrar ficar Azul ao passar o mouse por cima
     private void buttonCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarMouseEntered
