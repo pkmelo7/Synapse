@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 public class Tela_Cadastro extends javax.swing.JFrame {
     
     //Declaração de variáveis
+    int teste = 1;
     final int originalX = 10;
     final int targetX = 150;
     final int step = 10;
