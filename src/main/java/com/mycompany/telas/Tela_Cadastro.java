@@ -63,11 +63,13 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         buttonCadastrar = new javax.swing.JButton();
         fieldNome = new javax.swing.JTextField();
         fieldPesquisa = new javax.swing.JTextField();
-        labelSenha = new javax.swing.JLabel();
         checkboxSenha = new javax.swing.JCheckBox();
-        fieldSenha = new javax.swing.JPasswordField();
         buttonLogged = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        labelFundoCarrinho = new javax.swing.JLabel();
+        labelSenha = new javax.swing.JLabel();
+        fieldSenha = new javax.swing.JPasswordField();
         tela = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -357,12 +359,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(fieldPesquisa);
         fieldPesquisa.setBounds(380, 60, 380, 30);
 
-        labelSenha.setFont(poppins.deriveFont(14f));
-        labelSenha.setForeground(new java.awt.Color(128, 128, 128));
-        labelSenha.setText("Senha:");
-        getContentPane().add(labelSenha);
-        labelSenha.setBounds(500, 540, 50, 30);
-
         checkboxSenha.setBorder(null);
         checkboxSenha.setContentAreaFilled(false);
         checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -376,31 +372,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(checkboxSenha);
         checkboxSenha.setBounds(860, 540, 20, 30);
-
-        fieldSenha.setBackground(new java.awt.Color(224, 222, 222));
-        fieldSenha.setFont(poppins.deriveFont(14f));
-        fieldSenha.setForeground(new java.awt.Color(128, 128, 128));
-        fieldSenha.setBorder(null);
-        fieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldSenhaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldSenhaFocusLost(evt);
-            }
-        });
-        fieldSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldSenhaActionPerformed(evt);
-            }
-        });
-        fieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldSenhaKeyReleased(evt);
-            }
-        });
-        getContentPane().add(fieldSenha);
-        fieldSenha.setBounds(500, 540, 360, 30);
 
         buttonLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
         buttonLogged.setBorder(null);
@@ -451,7 +422,49 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(buttonLogin);
         buttonLogin.setBounds(1150, 40, 170, 70);
 
-        tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        labelFundoCarrinho.setFont(poppins.deriveFont(14f));
+        labelFundoCarrinho.setForeground(new java.awt.Color(128, 128, 128));
+        labelFundoCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/FundoCarrinhoSup.png"))); // NOI18N
+        jScrollPane1.setViewportView(labelFundoCarrinho);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(760, 100, 240, 200);
+
+        labelSenha.setFont(poppins.deriveFont(14f));
+        labelSenha.setForeground(new java.awt.Color(128, 128, 128));
+        labelSenha.setText("Senha:");
+        getContentPane().add(labelSenha);
+        labelSenha.setBounds(500, 540, 50, 30);
+
+        fieldSenha.setBackground(new java.awt.Color(224, 222, 222));
+        fieldSenha.setFont(poppins.deriveFont(14f));
+        fieldSenha.setForeground(new java.awt.Color(128, 128, 128));
+        fieldSenha.setBorder(null);
+        fieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSenhaFocusLost(evt);
+            }
+        });
+        fieldSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldSenhaActionPerformed(evt);
+            }
+        });
+        fieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldSenhaKeyReleased(evt);
+            }
+        });
+        getContentPane().add(fieldSenha);
+        fieldSenha.setBounds(500, 540, 360, 30);
+
+        tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TelasCompletas/JanelaCarrinho.png"))); // NOI18N
         getContentPane().add(tela);
         tela.setBounds(0, 0, 1370, 770);
 
@@ -929,6 +942,8 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JPasswordField fieldSenha;
     private javax.swing.JTextField fieldUser;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelFundoCarrinho;
     private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel tela;
     // End of variables declaration//GEN-END:variables

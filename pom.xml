@@ -60,6 +60,7 @@
                 <include>images/Botoes/XAzul.png</include>
                 <include>images/Botoes/icon.png</include>
                 <include>images/Botoes/FormaCarrinho.png</include>
+                <include>images/Botoes/FundoCarrinhoSup.png</include>
 
                 <include>images/TelasCompletas/Cadastro.png</include>
                 <include>images/TelasCompletas/Cursos.png</include>
@@ -67,6 +68,7 @@
                 <include>images/TelasCompletas/MenuEntrar.png</include>
                 <include>images/TelasCompletas/MenuLogado.png</include>
                 <include>images/TelasCompletas/Sobre.png</include>
+                <include>images/TelasCompletas/JanelaCarrinho.png</include>
             </includes>
         </resource>
     </resources>
