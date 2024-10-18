@@ -67,8 +67,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         checkboxSenha = new javax.swing.JCheckBox();
         buttonLogged = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        labelFundoCarrinho = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
         fieldSenha = new javax.swing.JPasswordField();
         tela = new javax.swing.JLabel();
@@ -423,17 +421,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(buttonLogin);
         buttonLogin.setBounds(1150, 40, 170, 70);
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        labelFundoCarrinho.setFont(poppins.deriveFont(14f));
-        labelFundoCarrinho.setForeground(new java.awt.Color(128, 128, 128));
-        labelFundoCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/FundoCarrinhoSup.png"))); // NOI18N
-        jScrollPane1.setViewportView(labelFundoCarrinho);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(760, 100, 240, 200);
-
         labelSenha.setFont(poppins.deriveFont(14f));
         labelSenha.setForeground(new java.awt.Color(128, 128, 128));
         labelSenha.setText("Senha:");
@@ -465,7 +452,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         getContentPane().add(fieldSenha);
         fieldSenha.setBounds(500, 540, 360, 30);
 
-        tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TelasCompletas/JanelaCarrinho.png"))); // NOI18N
+        tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
         getContentPane().add(tela);
         tela.setBounds(0, 0, 1370, 770);
 
@@ -943,8 +930,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JPasswordField fieldSenha;
     private javax.swing.JTextField fieldUser;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelFundoCarrinho;
     private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel tela;
     // End of variables declaration//GEN-END:variables
