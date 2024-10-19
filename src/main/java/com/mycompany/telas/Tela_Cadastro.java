@@ -35,6 +35,14 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png"));  
     //Final da declaração de variáveis
     
+    //Declaração de métodos 
+        //cria o método abrirTela_Login, onde invoca a tela de login e fecha a tela de cadastro
+        private void abrirTela_Login() throws FontFormatException, IOException{
+        Tela_Login Tela_Login = new Tela_Login();
+        Tela_Login.setVisible(true);
+        this.dispose();
+    }
+    
     public Tela_Cadastro() throws FontFormatException, IOException {
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents();
@@ -64,7 +72,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         fieldNome = new javax.swing.JTextField();
         fieldPesquisa = new javax.swing.JTextField();
         checkboxSenha = new javax.swing.JCheckBox();
-        buttonLogged = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
         labelSenha = new javax.swing.JLabel();
         fieldSenha = new javax.swing.JPasswordField();
@@ -99,7 +106,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fieldNasc);
-        fieldNasc.setBounds(500, 360, 380, 40);
+        fieldNasc.setBounds(500, 350, 380, 30);
 
         fieldEmail.setBackground(new java.awt.Color(224, 222, 222));
         fieldEmail.setFont(poppins.deriveFont(14f));
@@ -120,7 +127,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fieldEmail);
-        fieldEmail.setBounds(500, 480, 380, 40);
+        fieldEmail.setBounds(500, 470, 380, 30);
 
         fieldUser.setBackground(new java.awt.Color(224, 222, 222));
         fieldUser.setFont(poppins.deriveFont(14f));
@@ -141,7 +148,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fieldUser);
-        fieldUser.setBounds(500, 420, 380, 40);
+        fieldUser.setBounds(500, 410, 380, 30);
 
         buttonXpesq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/X.png"))); // NOI18N
         buttonXpesq.setBorder(null);
@@ -165,7 +172,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonXpesq);
-        buttonXpesq.setBounds(780, 60, 40, 30);
+        buttonXpesq.setBounds(780, 40, 40, 30);
 
         buttonFazerLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/FazerLogin.png"))); // NOI18N
         buttonFazerLogin.setBorder(null);
@@ -187,7 +194,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonFazerLogin);
-        buttonFazerLogin.setBounds(720, 660, 100, 20);
+        buttonFazerLogin.setBounds(720, 640, 100, 30);
 
         buttonPR.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         buttonPR.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,7 +218,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPR);
-        buttonPR.setBounds(1270, 650, 80, 70);
+        buttonPR.setBounds(1270, 640, 80, 70);
 
         buttonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cursos.png"))); // NOI18N
         buttonCursos.setBorder(null);
@@ -233,7 +240,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonCursos);
-        buttonCursos.setBounds(1030, 60, 100, 30);
+        buttonCursos.setBounds(1030, 40, 100, 30);
 
         buttonSynapse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/NomeLogo.png"))); // NOI18N
         buttonSynapse.setBorder(null);
@@ -255,7 +262,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSynapse);
-        buttonSynapse.setBounds(30, 10, 260, 130);
+        buttonSynapse.setBounds(30, -10, 260, 130);
 
         buttonSynapseLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/IconSynapse.png"))); // NOI18N
         buttonSynapseLogo.setBorder(null);
@@ -263,7 +270,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         buttonSynapseLogo.setContentAreaFilled(false);
         buttonSynapseLogo.setFocusPainted(false);
         getContentPane().add(buttonSynapseLogo);
-        buttonSynapseLogo.setBounds(10, 20, 170, 120);
+        buttonSynapseLogo.setBounds(10, 0, 170, 120);
 
         buttonSobre.setFont(poppins.deriveFont(24f));
         buttonSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Sobre.png"))); // NOI18N
@@ -288,7 +295,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSobre);
-        buttonSobre.setBounds(920, 60, 90, 30);
+        buttonSobre.setBounds(930, 40, 80, 30);
 
         buttonCadastrar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         buttonCadastrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -312,7 +319,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonCadastrar);
-        buttonCadastrar.setBounds(610, 600, 160, 40);
+        buttonCadastrar.setBounds(610, 580, 160, 50);
 
         fieldNome.setBackground(new java.awt.Color(224, 222, 222));
         fieldNome.setFont(poppins.deriveFont(14f)
@@ -334,7 +341,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fieldNome);
-        fieldNome.setBounds(500, 300, 380, 40);
+        fieldNome.setBounds(500, 290, 380, 30);
 
         fieldPesquisa.setBackground(new java.awt.Color(224, 222, 222));
         fieldPesquisa.setFont(poppins.deriveFont(14f));
@@ -355,7 +362,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fieldPesquisa);
-        fieldPesquisa.setBounds(380, 60, 380, 30);
+        fieldPesquisa.setBounds(380, 30, 380, 50);
 
         checkboxSenha.setBorder(null);
         checkboxSenha.setContentAreaFilled(false);
@@ -369,32 +376,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(checkboxSenha);
-        checkboxSenha.setBounds(860, 540, 20, 30);
-
-        buttonLogged.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
-        buttonLogged.setBorder(null);
-        buttonLogged.setBorderPainted(false);
-        buttonLogged.setContentAreaFilled(false);
-        buttonLogged.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonLogged.setFocusPainted(false);
-        buttonLogged.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonLogged.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonLogged.setVisible(false);
-        buttonLogged.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonLoggedMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonLoggedMouseExited(evt);
-            }
-        });
-        buttonLogged.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonLoggedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonLogged);
-        buttonLogged.setBounds(1150, 40, 170, 70);
+        checkboxSenha.setBounds(860, 520, 20, 40);
 
         buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
         buttonLogin.setBorder(null);
@@ -418,13 +400,13 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonLogin);
-        buttonLogin.setBounds(1150, 40, 170, 70);
+        buttonLogin.setBounds(1150, 20, 170, 70);
 
         labelSenha.setFont(poppins.deriveFont(14f));
         labelSenha.setForeground(new java.awt.Color(128, 128, 128));
         labelSenha.setText("Senha:");
         getContentPane().add(labelSenha);
-        labelSenha.setBounds(500, 540, 50, 30);
+        labelSenha.setBounds(500, 520, 50, 40);
 
         fieldSenha.setBackground(new java.awt.Color(224, 222, 222));
         fieldSenha.setFont(poppins.deriveFont(14f));
@@ -449,11 +431,11 @@ public class Tela_Cadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fieldSenha);
-        fieldSenha.setBounds(500, 540, 360, 30);
+        fieldSenha.setBounds(500, 520, 360, 40);
 
         tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
         getContentPane().add(tela);
-        tela.setBounds(0, 0, 1370, 770);
+        tela.setBounds(0, -30, 1370, 800);
 
         setBounds(-6, 0, 1382, 776);
     }// </editor-fold>//GEN-END:initComponents
@@ -750,9 +732,16 @@ public class Tela_Cadastro extends javax.swing.JFrame {
 //---------------------------------------------------------------------------------------------------------------------------------
  
 //Início dos comandos do botão "Entrar"
-    //<null>
+    //Faz com que ao clicar no botao "Entrar", o método abrirTela_Login seja executado
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            abrirTela_Login();
+        } catch (FontFormatException ex) {
+            Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonLoginActionPerformed
     //Faz o botão Entrar ficar Azul ao passar o mouse por cima
     private void buttonLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoginMouseEntered
@@ -767,27 +756,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         buttonLogin.setIcon(Login);
     }//GEN-LAST:event_buttonLoginMouseExited
 //Fim dos comandos do botão "Entrar"
-
-//---------------------------------------------------------------------------------------------------------------------------------
-
-//Início dos comandos do botão "User" para quando já está Logado
-    //<null>
-    private void buttonLoggedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoggedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonLoggedActionPerformed
-    //Faz o botão User (Logado) ficar Azul ao passar o mouse por cima
-    private void buttonLoggedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoggedMouseEntered
-        // TODO add your handling code here:
-        ImageIcon LoggedAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/ContaAzul.png"));
-        buttonLogged.setIcon(LoggedAzul);
-    }//GEN-LAST:event_buttonLoggedMouseEntered
-    //Faz o botão User (Logado) voltar à cor padrão ao tirar o mouse de cima
-    private void buttonLoggedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoggedMouseExited
-        // TODO add your handling code here:
-        ImageIcon Logged = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Conta.png"));
-        buttonLogged.setIcon(Logged);
-    }//GEN-LAST:event_buttonLoggedMouseExited
-//Fim dos comandos do botão "User" (Logado)
 
 //---------------------------------------------------------------------------------------------------------------------------------
 
@@ -813,9 +781,15 @@ public class Tela_Cadastro extends javax.swing.JFrame {
 //---------------------------------------------------------------------------------------------------------------------------------
 
 //Início dos comandos do botão "Fazer Login"
-    //<null>
     private void buttonFazerLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFazerLoginActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            abrirTela_Login();
+        } catch (FontFormatException ex) {
+            Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonFazerLoginActionPerformed
     //Faz o botão Fazer Login ficar Azul ao passar o mouse por cima
     private void buttonFazerLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFazerLoginMouseEntered
@@ -914,7 +888,6 @@ public class Tela_Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonFazerLogin;
-    private javax.swing.JButton buttonLogged;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonPR;
     private javax.swing.JButton buttonSobre;
