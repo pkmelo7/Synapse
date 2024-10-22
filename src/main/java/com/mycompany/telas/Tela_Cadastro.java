@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 //Fim das importações necessárias
 
@@ -80,6 +81,7 @@ public class Tela_Cadastro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Synapse Connect");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setIconImage(icon.getImage());
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));

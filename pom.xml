@@ -21,6 +21,8 @@
                 <include>images/FundosTelas/FundoLogin.png</include>
                 <include>images/FundosTelas/FundoMenu.png</include>
                 <include>images/FundosTelas/FundoSobre.png</include>
+                <include>images/FundosTelas/FundoDefault.png</include>
+                <include>images/FundosTelas/Default.png</include>
                 
                 <include>images/Botoes/BarraPesquisa.png</include>
                 <include>images/Botoes/BotaoCurso.png</include>
@@ -61,6 +63,7 @@
                 <include>images/Botoes/icon.png</include>
                 <include>images/Botoes/FormaCarrinho.png</include>
                 <include>images/Botoes/FundoCarrinhoSup.png</include>
+                <include>images/Botoes/Barra.png</include>
 
                 <include>images/TelasCompletas/Cadastro.png</include>
                 <include>images/TelasCompletas/Cursos.png</include>
@@ -69,6 +72,7 @@
                 <include>images/TelasCompletas/MenuLogado.png</include>
                 <include>images/TelasCompletas/Sobre.png</include>
                 <include>images/TelasCompletas/JanelaCarrinho.png</include>
+                <include>images/TelasCompletas/Default.png</include>
             </includes>
         </resource>
     </resources>
