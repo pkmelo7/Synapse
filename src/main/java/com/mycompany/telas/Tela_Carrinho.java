@@ -352,14 +352,14 @@ public class Tela_Carrinho extends javax.swing.JFrame {
         fundoPrincipal.add(buttonFinalizarCompra);
         buttonFinalizarCompra.setBounds(1030, 684, 180, 50);
 
-        jButton1.setText("ADD PRODUTO");
+        jButton1.setText("ADD PRODUTO CARRINHO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         fundoPrincipal.add(jButton1);
-        jButton1.setBounds(1070, 390, 120, 23);
+        jButton1.setBounds(1010, 390, 220, 23);
 
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -400,7 +400,7 @@ public class Tela_Carrinho extends javax.swing.JFrame {
         fundoPrincipal.add(scrollbar);
         scrollbar.setBounds(0, 205, 970, 420);
 
-        jLabel1.setText("\\/ \\/ \\/ SOMENTE PARA TESTE: ");
+        jLabel1.setText("\\/ \\/ \\/ SOMENTE PARA TESTE ");
         fundoPrincipal.add(jLabel1);
         jLabel1.setBounds(1040, 370, 170, 16);
 

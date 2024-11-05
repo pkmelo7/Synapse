@@ -439,14 +439,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ADD PRODUTO"/>
+            <Property name="text" type="java.lang.String" value="ADD PRODUTO CARRINHO"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="1070" y="390" width="120" height="-1"/>
+              <AbsoluteConstraints x="1010" y="390" width="220" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -520,7 +520,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="\u005c/ \u005c/ \u005c/ SOMENTE PARA TESTE: " containsInvalidXMLChars="true"/>
+            <Property name="text" type="java.lang.String" value="\u005c/ \u005c/ \u005c/ SOMENTE PARA TESTE " containsInvalidXMLChars="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
