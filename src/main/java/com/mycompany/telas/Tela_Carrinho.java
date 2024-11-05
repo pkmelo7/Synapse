@@ -82,6 +82,7 @@ public class Tela_Carrinho extends javax.swing.JFrame {
         scrollbar = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         carrinho = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -351,14 +352,14 @@ public class Tela_Carrinho extends javax.swing.JFrame {
         fundoPrincipal.add(buttonFinalizarCompra);
         buttonFinalizarCompra.setBounds(1030, 684, 180, 50);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("ADD PRODUTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         fundoPrincipal.add(jButton1);
-        jButton1.setBounds(1070, 390, 75, 23);
+        jButton1.setBounds(1070, 390, 120, 23);
 
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -398,6 +399,10 @@ public class Tela_Carrinho extends javax.swing.JFrame {
 
         fundoPrincipal.add(scrollbar);
         scrollbar.setBounds(0, 205, 970, 420);
+
+        jLabel1.setText("\\/ \\/ \\/ SOMENTE PARA TESTE: ");
+        fundoPrincipal.add(jLabel1);
+        jLabel1.setBounds(1040, 370, 170, 16);
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCarrinho.png"))); // NOI18N
         fundoPrincipal.add(fundo);
@@ -704,6 +709,7 @@ public class Tela_Carrinho extends javax.swing.JFrame {
     private javax.swing.JLabel fundo;
     private javax.swing.JPanel fundoPrincipal;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelDescontos;
     private javax.swing.JLabel labelQtdCarrinho;
