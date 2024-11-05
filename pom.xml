@@ -5,27 +5,33 @@
     <artifactId>Synapse</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <exec.mainClass>com.mycompany.synapse.Synapse</exec.mainClass>
     </properties>
+
 <build>
     <resources>
         <resource>
             <directory>src/main/resources</directory>
             <includes>
+                <include>fonts/Poppins-Bold.ttf</include>
+                
+                <include>images/FundosTelas/Default.png</include>
                 <include>images/FundosTelas/FundoCadastro.png</include>
+                <include>images/FundosTelas/FundoCarrinho.png</include>
                 <include>images/FundosTelas/FundoCursos.png</include>
+                <include>images/FundosTelas/FundoDefault.png</include>
                 <include>images/FundosTelas/FundoLogin.png</include>
                 <include>images/FundosTelas/FundoMenu.png</include>
+                <include>images/FundosTelas/FundoPerfil.png</include>
                 <include>images/FundosTelas/FundoSobre.png</include>
-                <include>images/FundosTelas/FundoDefault.png</include>
-                <include>images/FundosTelas/Default.png</include>
                 
-                <include>images/Botoes/BarraPesquisa.png</include>
-                <include>images/Botoes/BotaoCurso.png</include>
+                <include>images/Botoes/AplicarDesconto.png</include>
+                <include>images/Botoes/AplicarDescontoAzul.png</include>
                 <include>images/Botoes/Cadastrar.png</include>
                 <include>images/Botoes/CadastrarAzul.png</include>
                 <include>images/Botoes/Cadastrarse.png</include>
@@ -35,46 +41,77 @@
                 <include>images/Botoes/ContaAzul.png</include>
                 <include>images/Botoes/Cursos.png</include>
                 <include>images/Botoes/CursosAzul.png</include>
-                <include>images/Botoes/DesenhoComputador.png</include>
+                <include>images/Botoes/EditPerfil.png</include>
+                <include>images/Botoes/EditPerfilSalvar.png</include>
+                <include>images/Botoes/EditSenha.png</include>
+                <include>images/Botoes/EditSenhaAzul.png</include>
                 <include>images/Botoes/Entrar.png</include>
                 <include>images/Botoes/EntrarAzul.png</include>
+                <include>images/Botoes/EntrarSeta.png</include>
                 <include>images/Botoes/EsqueciSenha.png</include>
                 <include>images/Botoes/EsqueciSenhaAzul.png</include>
                 <include>images/Botoes/FazerLogin.png</include>
                 <include>images/Botoes/FazerLoginAzul.png</include>
-                <include>images/Botoes/Field.png</include>
-                <include>images/Botoes/IconSynapse.png</include>
+                <include>images/Botoes/FinalizarCompra.png</include>
                 <include>images/Botoes/IconSynapseAzul.png</include>
                 <include>images/Botoes/IconSynapsePreto.png</include>
                 <include>images/Botoes/Login.png</include>
                 <include>images/Botoes/LoginAzul.png</include>
-                <include>images/Botoes/NomeLogo.png</include>
+                <include>images/Botoes/Next.png</include>
+                <include>images/Botoes/Next2.png</include>
                 <include>images/Botoes/Sacola.png</include>
                 <include>images/Botoes/SacolaAzul.png</include>
                 <include>images/Botoes/SenhaMostrar.png</include>
                 <include>images/Botoes/SenhaOcultar.png</include>
                 <include>images/Botoes/SenhaOcultarNull.png</include>
                 <include>images/Botoes/Seta.png</include>
+                <include>images/Botoes/SetaCursos.png</include>
+                <include>images/Botoes/SetaMenu.png</include>
                 <include>images/Botoes/Sobre.png</include>
                 <include>images/Botoes/SobreAzul.png</include>
-                <include>images/Botoes/VendoVideo.png</include>
                 <include>images/Botoes/X.png</include>
                 <include>images/Botoes/XAzul.png</include>
-                <include>images/Botoes/icon.png</include>
-                <include>images/Botoes/FormaCarrinho.png</include>
-                <include>images/Botoes/FundoCarrinhoSup.png</include>
-                <include>images/Botoes/Barra.png</include>
+                <include>images/Botoes/XCompra.png</include>
+                <include>images/Botoes/XCompraAzul.png</include>
+                <include>images/Botoes/XFecharTelas.png</include>
+                <include>images/Botoes/XFecharTelasVerm.png</include>
 
+                <include>images/Formas/BarraPesquisa.png</include>
+                <include>images/Formas/BarraSup.png</include>
+                <include>images/Formas/BotaoCurso.png</include>
+                <include>images/Formas/defaultfoto.png</include>
+                <include>images/Formas/DesenhoComputador.png</include>
+                <include>images/Formas/EditarPerfil.png</include>
+                <include>images/Formas/Field.png</include>
+                <include>images/Formas/FundoBarraSup.png</include>
+                <include>images/Formas/icon.png</include>
+                <include>images/Formas/IconSynapse.png</include>
+                <include>images/Formas/IconSynapse.jpg</include>
+                <include>images/Formas/MeuPerfil.png</include>
+                <include>images/Botoes/NomeLogo.png</include>
+                <include>images/Formas/VendoVideo.png</include>
+                
                 <include>images/TelasCompletas/Cadastro.png</include>
+                <include>images/TelasCompletas/Carrinho.png</include>
                 <include>images/TelasCompletas/Cursos.png</include>
-                <include>images/TelasCompletas/Login.png</include>
-                <include>images/TelasCompletas/MenuEntrar.png</include>
-                <include>images/TelasCompletas/MenuLogado.png</include>
-                <include>images/TelasCompletas/Sobre.png</include>
-                <include>images/TelasCompletas/JanelaCarrinho.png</include>
                 <include>images/TelasCompletas/Default.png</include>
+                <include>images/TelasCompletas/JanelaCarrinho.png</include>
+                <include>images/TelasCompletas/Login.png</include>
+                <include>images/TelasCompletas/Menu.png</include>
+                <include>images/TelasCompletas/Perfil.png</include>
+                <include>images/TelasCompletas/Sobre.png</include>
+                
             </includes>
         </resource>
     </resources>
 </build>
+
+<dependencies>
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.19</version>
+    </dependency>
+</dependencies>
+        
 </project>

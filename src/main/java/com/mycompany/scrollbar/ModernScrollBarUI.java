@@ -1,5 +1,11 @@
 // @author pkmelo7
 
+//Cria uma scrollbar modernizada customizavel
+
+/*Para utilizar pode arrastar o arquivo para dentro do frame ou usar o comando:
+
+(nomedoscrollpanel/scrollbar).setVerticalScrollBar(new ScrollBarCustom());*/
+
 package com.mycompany.scrollbar;
 
 import java.awt.Color;
@@ -16,29 +22,23 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class ModernScrollBarUI extends BasicScrollBarUI 
 {
-    private final int THUMB_SIZE = 60;
+    int THUMB_SIZE = 0;
     
-    protected Dimension getMaximumThumbSize()
+    protected void setThumbBounds(int x, int y, int width, int height) 
     {
-        if(scrollbar.getOrientation()==JScrollBar.VERTICAL)
+        super.setThumbBounds(x, y, width, height);
+        int scrollBarLength = scrollbar.getOrientation() == JScrollBar.VERTICAL ? scrollbar.getHeight() : scrollbar.getWidth();
+        int maxScroll = scrollbar.getMaximum() - scrollbar.getVisibleAmount();
+        int thumbSize = (int) ((double) scrollbar.getVisibleAmount() / (double) (maxScroll + scrollbar.getVisibleAmount()) * scrollBarLength);
+        thumbSize = Math.max(THUMB_SIZE, thumbSize);
+        
+        if (scrollbar.getOrientation() == JScrollBar.VERTICAL) 
         {
-            return new Dimension(0, THUMB_SIZE);
-        }
-        else
+            scrollbar.setPreferredSize(new Dimension(scrollbar.getWidth(), thumbSize));
+        } 
+        else 
         {
-            return new Dimension(THUMB_SIZE, 0);
-        }
-    }
-    
-    protected Dimension getMinimumThumbSize()
-    {
-        if(scrollbar.getOrientation()==JScrollBar.VERTICAL)
-        {
-            return new Dimension(0, THUMB_SIZE);
-        }
-        else
-        {
-            return new Dimension(THUMB_SIZE, 0);
+            scrollbar.setPreferredSize(new Dimension(thumbSize, scrollbar.getHeight()));
         }
     }
    
@@ -80,7 +80,8 @@ public class ModernScrollBarUI extends BasicScrollBarUI
             width = rctngl.width;
             height = size;
         }
-        g2.setColor(new Color(240,240,240));
+        //modificavel para mudar a cor de fundo da barra
+        g2.setColor(new Color(208,208,208));
         g2.fillRect(x, y, width, height);
     }
 

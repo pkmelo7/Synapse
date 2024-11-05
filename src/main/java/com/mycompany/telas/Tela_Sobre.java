@@ -15,24 +15,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.JOptionPane;
 
 public class Tela_Sobre extends javax.swing.JFrame {
     
     //Declaração de variáveis
-    final int originalX = 10;
-    final int targetX = 150;
-    final int step = 10;
-
-    Timer timer = new Timer(20, null);
+        //Variáveis para o movimento do logo Synapse
+        final int originalX = 10;
+        final int targetX = 150;
+        final int step = 10;
+        Timer timer = new Timer(20, null);
     
-    boolean showing = false;
+        //Variável para determinar se o checkbox que torna a senha visivel esta ativo ou nao
+        boolean showing = false;
     
-    Font poppins;
-    GraphicsEnvironment GE = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    
-    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png"));  
+        //Variaveis para configurar a fonte como poppins
+        Font poppins;
+        GraphicsEnvironment GE = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        
+        //Variavel para trazer o icone do projeto
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png"));
     //Final da declaração de variáveis
     
     //Declaração de métodos
@@ -42,8 +46,10 @@ public class Tela_Sobre extends javax.swing.JFrame {
         Tela_Cadastro.setVisible(true);
         this.dispose();
     }
+    //Final da declaração de métodos
     
     public Tela_Sobre() throws FontFormatException, IOException {
+        //cria a fonte poppins no projeto
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents();
     }
@@ -58,23 +64,78 @@ public class Tela_Sobre extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonXpesq = new javax.swing.JButton();
-        buttonPR = new javax.swing.JButton();
-        buttonCursos = new javax.swing.JButton();
         buttonSynapse = new javax.swing.JButton();
         buttonSynapseLogo = new javax.swing.JButton();
-        buttonSobre = new javax.swing.JButton();
         fieldPesquisa = new javax.swing.JTextField();
-        buttonCadastrarse = new javax.swing.JButton();
-        tela = new javax.swing.JLabel();
+        buttonXpesq = new javax.swing.JButton();
+        buttonCarrinho = new javax.swing.JButton();
+        buttonCursos = new javax.swing.JButton();
+        buttonLogin = new javax.swing.JButton();
+        buttonPR = new javax.swing.JButton();
+        buttonXTelas = new javax.swing.JButton();
+        fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Synapse Connect");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setIconImage(icon.getImage());
+        setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        buttonSynapse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/NomeLogo.png"))); // NOI18N
+        buttonSynapse.setBorder(null);
+        buttonSynapse.setBorderPainted(false);
+        buttonSynapse.setContentAreaFilled(false);
+        buttonSynapse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSynapse.setFocusPainted(false);
+        buttonSynapse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSynapseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonSynapseMouseExited(evt);
+            }
+        });
+        buttonSynapse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSynapseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonSynapse);
+        buttonSynapse.setBounds(30, 0, 260, 160);
+
+        buttonSynapseLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/IconSynapse.png"))); // NOI18N
+        buttonSynapseLogo.setBorder(null);
+        buttonSynapseLogo.setBorderPainted(false);
+        buttonSynapseLogo.setContentAreaFilled(false);
+        buttonSynapseLogo.setFocusPainted(false);
+        getContentPane().add(buttonSynapseLogo);
+        buttonSynapseLogo.setBounds(10, 0, 170, 160);
+
+        fieldPesquisa.setBackground(new java.awt.Color(224, 222, 222));
+        fieldPesquisa.setFont(poppins.deriveFont(14f));
+        fieldPesquisa.setForeground(new java.awt.Color(128, 128, 128));
+        fieldPesquisa.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        fieldPesquisa.setText("Pesquisar:");
+        fieldPesquisa.setBorder(null);
+        fieldPesquisa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldPesquisaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldPesquisaFocusLost(evt);
+            }
+        });
+        fieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldPesquisaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fieldPesquisa);
+        fieldPesquisa.setBounds(380, 50, 380, 50);
 
         buttonXpesq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/X.png"))); // NOI18N
         buttonXpesq.setBorder(null);
@@ -98,7 +159,78 @@ public class Tela_Sobre extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonXpesq);
-        buttonXpesq.setBounds(780, 40, 40, 30);
+        buttonXpesq.setBounds(780, 60, 40, 30);
+
+        buttonCarrinho.setFont(poppins.deriveFont(24f));
+        buttonCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Sacola.png"))); // NOI18N
+        buttonCarrinho.setBorder(null);
+        buttonCarrinho.setBorderPainted(false);
+        buttonCarrinho.setContentAreaFilled(false);
+        buttonCarrinho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCarrinho.setFocusPainted(false);
+        buttonCarrinho.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonCarrinho.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonCarrinho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonCarrinhoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonCarrinhoMouseExited(evt);
+            }
+        });
+        buttonCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCarrinhoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonCarrinho);
+        buttonCarrinho.setBounds(970, 60, 50, 30);
+
+        buttonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cursos.png"))); // NOI18N
+        buttonCursos.setBorder(null);
+        buttonCursos.setBorderPainted(false);
+        buttonCursos.setContentAreaFilled(false);
+        buttonCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCursos.setFocusPainted(false);
+        buttonCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonCursosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonCursosMouseExited(evt);
+            }
+        });
+        buttonCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCursosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonCursos);
+        buttonCursos.setBounds(1030, 60, 100, 30);
+
+        buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
+        buttonLogin.setBorder(null);
+        buttonLogin.setBorderPainted(false);
+        buttonLogin.setContentAreaFilled(false);
+        buttonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonLogin.setFocusPainted(false);
+        buttonLogin.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonLogin.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonLoginMouseExited(evt);
+            }
+        });
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonLogin);
+        buttonLogin.setBounds(1150, 50, 170, 50);
 
         buttonPR.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         buttonPR.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,136 +254,35 @@ public class Tela_Sobre extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPR);
-        buttonPR.setBounds(1270, 640, 80, 70);
+        buttonPR.setBounds(1270, 655, 80, 70);
 
-        buttonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cursos.png"))); // NOI18N
-        buttonCursos.setBorder(null);
-        buttonCursos.setBorderPainted(false);
-        buttonCursos.setContentAreaFilled(false);
-        buttonCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonCursos.setFocusPainted(false);
-        buttonCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelas.png"))); // NOI18N
+        buttonXTelas.setBorder(null);
+        buttonXTelas.setBorderPainted(false);
+        buttonXTelas.setContentAreaFilled(false);
+        buttonXTelas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXTelas.setFocusPainted(false);
+        buttonXTelas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonCursosMouseEntered(evt);
+                buttonXTelasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonCursosMouseExited(evt);
+                buttonXTelasMouseExited(evt);
             }
         });
-        buttonCursos.addActionListener(new java.awt.event.ActionListener() {
+        buttonXTelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCursosActionPerformed(evt);
+                buttonXTelasActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonCursos);
-        buttonCursos.setBounds(1030, 40, 100, 30);
+        getContentPane().add(buttonXTelas);
+        buttonXTelas.setBounds(1280, 0, 86, 25);
 
-        buttonSynapse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/NomeLogo.png"))); // NOI18N
-        buttonSynapse.setBorder(null);
-        buttonSynapse.setBorderPainted(false);
-        buttonSynapse.setContentAreaFilled(false);
-        buttonSynapse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonSynapse.setFocusPainted(false);
-        buttonSynapse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSynapseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSynapseMouseExited(evt);
-            }
-        });
-        buttonSynapse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSynapseActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonSynapse);
-        buttonSynapse.setBounds(30, 0, 260, 110);
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoSobre.png"))); // NOI18N
+        getContentPane().add(fundo);
+        fundo.setBounds(0, -17, 1370, 800);
 
-        buttonSynapseLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/IconSynapse.png"))); // NOI18N
-        buttonSynapseLogo.setBorder(null);
-        buttonSynapseLogo.setBorderPainted(false);
-        buttonSynapseLogo.setContentAreaFilled(false);
-        buttonSynapseLogo.setFocusPainted(false);
-        getContentPane().add(buttonSynapseLogo);
-        buttonSynapseLogo.setBounds(10, 0, 170, 120);
-
-        buttonSobre.setFont(poppins.deriveFont(24f));
-        buttonSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Sobre.png"))); // NOI18N
-        buttonSobre.setBorder(null);
-        buttonSobre.setBorderPainted(false);
-        buttonSobre.setContentAreaFilled(false);
-        buttonSobre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonSobre.setFocusPainted(false);
-        buttonSobre.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonSobre.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonSobre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSobreMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSobreMouseExited(evt);
-            }
-        });
-        buttonSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSobreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonSobre);
-        buttonSobre.setBounds(920, 40, 100, 30);
-
-        fieldPesquisa.setBackground(new java.awt.Color(224, 222, 222));
-        fieldPesquisa.setFont(poppins.deriveFont(14f));
-        fieldPesquisa.setForeground(new java.awt.Color(128, 128, 128));
-        fieldPesquisa.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        fieldPesquisa.setText("Pesquisar:");
-        fieldPesquisa.setBorder(null);
-        fieldPesquisa.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldPesquisaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldPesquisaFocusLost(evt);
-            }
-        });
-        fieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldPesquisaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fieldPesquisa);
-        fieldPesquisa.setBounds(380, 30, 380, 50);
-
-        buttonCadastrarse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cadastrarse.png"))); // NOI18N
-        buttonCadastrarse.setBorder(null);
-        buttonCadastrarse.setBorderPainted(false);
-        buttonCadastrarse.setContentAreaFilled(false);
-        buttonCadastrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonCadastrarse.setFocusPainted(false);
-        buttonCadastrarse.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonCadastrarse.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonCadastrarse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonCadastrarseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonCadastrarseMouseExited(evt);
-            }
-        });
-        buttonCadastrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCadastrarseActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonCadastrarse);
-        buttonCadastrarse.setBounds(1150, 30, 170, 50);
-
-        tela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TelasCompletas/Sobre.png"))); // NOI18N
-        getContentPane().add(tela);
-        tela.setBounds(0, -30, 1370, 800);
-
-        setBounds(-6, 0, 1382, 776);
+        setBounds(-6, 0, 1366, 768);
     }// </editor-fold>//GEN-END:initComponents
 
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -342,24 +373,24 @@ public class Tela_Sobre extends javax.swing.JFrame {
 
 //---------------------------------------------------------------------------------------------------------------------------------
     
-//Início dos comandos do botão "Sobre"
+//Início dos comandos do botão "Carrinho"
     //<null>
-    private void buttonSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSobreActionPerformed
+    private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonSobreActionPerformed
-    //Faz o botão Sobre ficar Azul ao passar o mouse por cima
-    private void buttonSobreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSobreMouseEntered
+    }//GEN-LAST:event_buttonCarrinhoActionPerformed
+    //Faz o botão Carrinho ficar Azul ao passar o mouse por cima
+    private void buttonCarrinhoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCarrinhoMouseEntered
         // TODO add your handling code here:
-        ImageIcon SobreAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/SobreAzul.png"));
-        buttonSobre.setIcon(SobreAzul);
-    }//GEN-LAST:event_buttonSobreMouseEntered
-    //Faz o botão Sobre voltar à cor padrão ao tirar o mouse de cima
-    private void buttonSobreMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSobreMouseExited
+        ImageIcon SobreAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/SacolaAzul.png"));
+        buttonCarrinho.setIcon(SobreAzul);
+    }//GEN-LAST:event_buttonCarrinhoMouseEntered
+    //Faz o botão Carrinho voltar à cor padrão ao tirar o mouse de cima
+    private void buttonCarrinhoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCarrinhoMouseExited
         // TODO add your handling code here:
-        ImageIcon Sobre = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Sobre.png"));
-        buttonSobre.setIcon(Sobre);
-    }//GEN-LAST:event_buttonSobreMouseExited
-//Fim dos comandos do botão "Sobre"
+        ImageIcon Sobre = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Sacola.png"));
+        buttonCarrinho.setIcon(Sobre);
+    }//GEN-LAST:event_buttonCarrinhoMouseExited
+//Fim dos comandos do botão "Carrinho"
 
 //---------------------------------------------------------------------------------------------------------------------------------
   
@@ -384,31 +415,24 @@ public class Tela_Sobre extends javax.swing.JFrame {
 
 //---------------------------------------------------------------------------------------------------------------------------------
  
-//Início dos comandos do botão "Cadastrar-se"
+//Início dos comandos do botão "Entrar"
     //<null>
-    private void buttonCadastrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarseActionPerformed
-        try {
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
             // TODO add your handling code here:
-            abrirTela_Cadastro();
-        } catch (FontFormatException ex) {
-            Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_buttonCadastrarseActionPerformed
-    //Faz o botão Cadastrar-se ficar Azul ao passar o mouse por cima
-    private void buttonCadastrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarseMouseEntered
+    }//GEN-LAST:event_buttonLoginActionPerformed
+    //Faz o botão ficar Azul ao passar o mouse por cima
+    private void buttonLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoginMouseEntered
         // TODO add your handling code here:
-        ImageIcon LoginAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/CadastrarseAzul.png"));
-        buttonCadastrarse.setIcon(LoginAzul);
-    }//GEN-LAST:event_buttonCadastrarseMouseEntered
-    //Faz o botão Cadastrar-se voltar à cor padrão ao tirar o mouse de cima
-    private void buttonCadastrarseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarseMouseExited
+        ImageIcon LoginAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/LoginAzul.png"));
+        buttonLogin.setIcon(LoginAzul);
+    }//GEN-LAST:event_buttonLoginMouseEntered
+    //Faz o botão voltar à cor padrão ao tirar o mouse de cima
+    private void buttonLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoginMouseExited
         // TODO add your handling code here:
-        ImageIcon Login = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Cadastrarse.png"));
-        buttonCadastrarse.setIcon(Login);
-    }//GEN-LAST:event_buttonCadastrarseMouseExited
-//Fim dos comandos do botão "Cadastrar-se"
+        ImageIcon Login = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Login.png"));
+        buttonLogin.setIcon(Login);
+    }//GEN-LAST:event_buttonLoginMouseExited
+//Fim dos comandos do botão "Entrar"
 
 //---------------------------------------------------------------------------------------------------------------------------------
 
@@ -429,8 +453,30 @@ public class Tela_Sobre extends javax.swing.JFrame {
         ImageIcon PR = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/IconSynapsePreto.png"));
         buttonPR.setIcon(PR);
     }//GEN-LAST:event_buttonPRMouseExited
-//Fim dos comandos do botão "Fazer Login"
-        
+//Fim dos comandos do botão "P&R"
+
+//---------------------------------------------------------------------------------------------------------------------------------
+ 
+//Início dos comandos do botão X para fechar a aplicação
+    //Faz com que o botao mude de icone e fique vermelho ao passar o mouse por cima
+    private void buttonXTelasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseEntered
+        // TODO add your handling code here:
+        ImageIcon XTelasVerm = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasVerm.png"));
+        buttonXTelas.setIcon(XTelasVerm);
+    }//GEN-LAST:event_buttonXTelasMouseEntered
+    //Faz com que o botao mude de icone e volte a cor padrao ao tirar o mouse de cima
+    private void buttonXTelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseExited
+        // TODO add your handling code here:
+        ImageIcon XTelas = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelas.png"));
+        buttonXTelas.setIcon(XTelas);
+    }//GEN-LAST:event_buttonXTelasMouseExited
+    //Fecha a aplicação ao apertar no botao X
+    private void buttonXTelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXTelasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonXTelasActionPerformed
+//Fim dos comandos do botão X para fechar a aplicação
+
 //---------------------------------------------------------------------------------------------------------------------------------
 
     
@@ -541,14 +587,15 @@ public class Tela_Sobre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonCadastrarse;
+    private javax.swing.JButton buttonCarrinho;
     private javax.swing.JButton buttonCursos;
+    private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonPR;
-    private javax.swing.JButton buttonSobre;
     private javax.swing.JButton buttonSynapse;
     private javax.swing.JButton buttonSynapseLogo;
+    private javax.swing.JButton buttonXTelas;
     private javax.swing.JButton buttonXpesq;
     private javax.swing.JTextField fieldPesquisa;
-    private javax.swing.JLabel tela;
+    private javax.swing.JLabel fundo;
     // End of variables declaration//GEN-END:variables
 }
