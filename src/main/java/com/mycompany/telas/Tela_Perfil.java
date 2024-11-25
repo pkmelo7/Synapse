@@ -52,6 +52,14 @@ public class Tela_Perfil extends javax.swing.JFrame {
             this.dispose();
             Tela_Sobre.setVisible(true);
         }
+        
+        //cria o método abrirTela_Menu, onde invoca a tela de menu e fecha a tela atual
+        private void abrirTelaMenu() throws FontFormatException, IOException
+        {
+            Tela_Menu TelaMenu = new Tela_Menu();
+            this.dispose();
+            TelaMenu.setVisible(true);
+        }
     //Fim da declaração de métodos
     
     public Tela_Perfil() throws FontFormatException, IOException {
@@ -720,7 +728,14 @@ public class Tela_Perfil extends javax.swing.JFrame {
 //Início dos comandos do botão do Logo "Synapse Connect"
     //<null>
     private void buttonSynapseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSynapseActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaMenu();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSynapseActionPerformed
     //Move o Logo "Synapse Connect" à posição final enquanto o mouse estiver em cima
     private void buttonSynapseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSynapseMouseEntered
@@ -761,7 +776,14 @@ public class Tela_Perfil extends javax.swing.JFrame {
 //Início dos comandos do botão "Sobre"
     //<null>
     private void buttonSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSobreActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTela_Sobre();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSobreActionPerformed
     //Faz o botão Sobre ficar Azul ao passar o mouse por cima
     private void buttonSobreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSobreMouseEntered
