@@ -16,7 +16,7 @@ public class Usuario {
     private String senha;
     private String dtnasc;
     private boolean tpUser;
-
+    
     public Usuario() {
     }
 
@@ -44,129 +44,185 @@ public class Usuario {
 //----------------------------------------------------------------------------------------------------------------------------------
  
 //Declaração de metodos
-    
+         
     //Metodo para cadastrar usuario no banco de dados
         public boolean cadastraUser() throws SQLException 
         {
-        String sql = "INSERT INTO tb_usuario (nome, dtnasc, usuario, email, senha) values (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO user (nome, dataNasc, usuario, email, senha) values (?, ?, ?, ?, ?)";
 
-        ConnectionFactory cf = new ConnectionFactory();
+            ConnectionFactory cf = new ConnectionFactory();
 
-        try 
-        (
-            Connection conn = cf.obtemConexao();
-            PreparedStatement ps = conn.prepareStatement(sql);
-        ) 
+            try 
+            (
+                Connection conn = cf.obtemConexao();
+                PreparedStatement ps = conn.prepareStatement(sql);
+            ) 
+                {
+                    ps.setString(1, getNome());
+                    ps.setString(2, getDtnasc());
+                    ps.setString(3, getUser());
+                    ps.setString(4, getEmail());
+                    ps.setString(5, getSenha()); 
+
+                    int affectedRows = ps.executeUpdate(); 
+                    return affectedRows > 0;
+                }   
+            catch (SQLException e) 
             {
-                ps.setString(1, getNome());
-                ps.setString(2, getDtnasc());
-                ps.setString(3, getUser());
-                ps.setString(4, getEmail());
-                ps.setString(5, getSenha()); 
-            
-                int affectedRows = ps.executeUpdate(); 
-                return affectedRows > 0;
-            }   
-        catch (SQLException e) 
-        {
-            e.printStackTrace();
-            System.out.println("ERRO. Não foi possível cadastrar.");
-            return false;
+                e.printStackTrace();
+                System.out.println("ERRO. Não foi possível cadastrar.");
+                return false;
+            }
         }
-    }
   
     //Metodo para validar o usuario e verificar se a senha esta correta    
         public int validaUser() throws SQLException 
         {
-        String sql = "SELECT * FROM tb_usuario WHERE usuario = ?";
-    
-        ConnectionFactory cf = new ConnectionFactory();
-    
-        try 
-        (
-            Connection conn = cf.obtemConexao();
-            PreparedStatement ps = conn.prepareStatement(sql);
-        ) 
+            String sql = "SELECT * FROM user WHERE usuario = ?";
+
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try 
+            (
+                Connection conn = cf.obtemConexao();
+                PreparedStatement ps = conn.prepareStatement(sql);
+            ) 
+                {
+                    ps.setString(1, getUser());
+                    ResultSet rs = ps.executeQuery();
+
+                    if (rs.next()) 
+                    {
+                        // Se o usuário existe, verifica a senha
+                        String senhaRegistrada = rs.getString("senha");
+
+                        if (senhaRegistrada.equals(getSenha())) 
+                        {
+                            return 1; // Senha correta
+                        } 
+                        else 
+                        {
+                            return 2; // Senha incorreta
+                        }
+                    }   
+                    else 
+                    {
+                        return 0; // Usuário não encontrado
+                    }
+                } 
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                System.out.println("Erro ao localizar usuário.");
+                throw e;
+            }
+        }
+
+    //metodo para verificar se o usuario ja existe no banco de dados
+        //busca por user
+        public boolean verificaUserExiste() throws SQLException 
+        {
+            String sql = "SELECT * FROM user WHERE usuario = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) 
             {
                 ps.setString(1, getUser());
                 ResultSet rs = ps.executeQuery();
-        
-                if (rs.next()) 
-                {
-                    // Se o usuário existe, verifica a senha
-                    String senhaRegistrada = rs.getString("senha");
-            
-                    if (senhaRegistrada.equals(getSenha())) 
-                    {
-                        return 1; // Senha correta
-                    } 
-                    else 
-                    {
-                        return 2; // Senha incorreta
-                    }
-                }   
-                else 
-                {
-                    return 0; // Usuário não encontrado
-                }
+                return rs.next();
             } 
-        catch (SQLException e) 
-        {
-            e.printStackTrace();
-            System.out.println("Erro ao localizar usuário.");
-            throw e;
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                throw e;
+            }
         }
-    }
+        
+        public boolean verificaUserExiste(String user) throws SQLException 
+        {
+            String sql = "SELECT * FROM user WHERE usuario = ?";
+            ConnectionFactory cf = new ConnectionFactory();
 
-    //metodo para verificar se o usuario ja existe no banco de dados
-        //busca por user ou email
-        public boolean verificaUserExiste() throws SQLException 
-        {
-        String sql = "SELECT * FROM tb_usuario WHERE usuario = ? OR email = ?";
-        ConnectionFactory cf = new ConnectionFactory();
-
-        try (Connection conn = cf.obtemConexao();
-        PreparedStatement ps = conn.prepareStatement(sql)) 
-        {
-            ps.setString(1, getUser());
-            ps.setString(2, getEmail());
-            ResultSet rs = ps.executeQuery();
-            return rs.next();
-        } 
-        catch (SQLException e) 
-        {
-            e.printStackTrace();
-            throw e;
+            try (Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+                ps.setString(1, user);
+                ResultSet rs = ps.executeQuery();
+                return rs.next();
+            } 
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                throw e;
+            }
         }
-    }
+        
+        public boolean verificaEmailExiste() throws SQLException 
+        {
+            String sql = "SELECT * FROM user WHERE email = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+                ps.setString(1, getEmail());
+                ResultSet rs = ps.executeQuery();
+                return rs.next();
+            } 
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        
+        public boolean verificaEmailExiste(String email) throws SQLException 
+        {
+            String sql = "SELECT * FROM user WHERE email = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                return rs.next();
+            } 
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                throw e;
+            }
+        }
     
     //Metodo para pegar o nome de um certo usuario
         public String getNomePorUsuario() throws SQLException 
         {
-        String sql = "SELECT nome FROM tb_usuario WHERE usuario = ?";
-        ConnectionFactory cf = new ConnectionFactory();
+            String sql = "SELECT nome FROM user WHERE usuario = ?";
+            ConnectionFactory cf = new ConnectionFactory();
 
-        try (Connection conn = cf.obtemConexao();
-        PreparedStatement ps = conn.prepareStatement(sql)) 
-        {
-            ps.setString(1, getUser());
-            ResultSet rs = ps.executeQuery();
-    
-            if (rs.next()) 
+            try (Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) 
             {
-                return rs.getString("nome"); // Retorna o nome se encontrado
-            } 
-            else
+                ps.setString(1, getUser());
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) 
+                {
+                    return rs.getString("nome"); // Retorna o nome se encontrado
+                } 
+                else
+                {
+                    return null; // Retorna null se o usuário não for encontrado
+                }
+            }
+            catch (SQLException e)
             {
-                return null; // Retorna null se o usuário não for encontrado
+                e.printStackTrace();
+                throw e;
             }
         }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-            throw e;
-        }
-    }
     
 //Fim da declaração de metodos
         

@@ -32,7 +32,20 @@ public class Tela_Admin2 extends javax.swing.JFrame {
     //Final da declaração de variáveis
     
     //Declaração de métodos
-   
+        public void abrirTelaAdminCadastrar1() throws FontFormatException, IOException
+        {
+            Tela_AdminCadastrar1 Cadastrar = new Tela_AdminCadastrar1();
+            Cadastrar.setVisible(true);
+            this.dispose();
+        }
+        
+        public void abrirTelaAdminCrud1() throws FontFormatException, IOException
+        {
+            Tela_AdminCrud1 Crud = new Tela_AdminCrud1();
+            Crud.setVisible(true);
+            this.dispose();
+        }
+        
     //Fim da declaração de métodos
         
     public Tela_Admin2() throws FontFormatException, IOException {
@@ -105,7 +118,7 @@ public class Tela_Admin2 extends javax.swing.JFrame {
             }
         });
         telaAdmin.add(buttonCadastrar);
-        buttonCadastrar.setBounds(50, 230, 1316, 90);
+        buttonCadastrar.setBounds(50, 325, 1316, 90);
 
         buttonCrud.setBackground(new java.awt.Color(0, 0, 0));
         buttonCrud.setFont(digital7.deriveFont(75f));
@@ -131,7 +144,7 @@ public class Tela_Admin2 extends javax.swing.JFrame {
             }
         });
         telaAdmin.add(buttonCrud);
-        buttonCrud.setBounds(50, 380, 1316, 90);
+        buttonCrud.setBounds(50, 475, 1316, 90);
 
         getContentPane().add(telaAdmin);
         telaAdmin.setBounds(0, 0, 1366, 768);
@@ -143,18 +156,26 @@ public class Tela_Admin2 extends javax.swing.JFrame {
 //Inicio dos comandos do botao "> Cadastrar"
     //<null>
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
-        // TODO add your handling code here:
-        
+            try {
+                // TODO add your handling code here:
+                abrirTelaAdminCadastrar1();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Admin2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Admin2.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonCadastrarActionPerformed
     //altera o texto pra frente ao passar o mouse por cima do botao
     private void buttonCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarMouseEntered
         // TODO add your handling code here:
+        if(buttonCadastrar.getText().equals("> Cadastrar"))
         buttonCadastrar.setText(">  Cadastrar");
     }//GEN-LAST:event_buttonCadastrarMouseEntered
     //altera o texto de volta para a posicao padrao ao tirar o mouse de cima do botao
     private void buttonCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarMouseExited
         // TODO add your handling code here:
-        buttonCadastrar.setText("> Cadastrar");
+        if(buttonCadastrar.getText().equals(">  Cadastrar"))
+            buttonCadastrar.setText("> Cadastrar");
     }//GEN-LAST:event_buttonCadastrarMouseExited
 //Fim dos comandos do botao "> Cadastrar"
     
@@ -164,16 +185,25 @@ public class Tela_Admin2 extends javax.swing.JFrame {
     //altera o texto pra frente ao passar o mouse por cima do botao
     private void buttonCrudMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCrudMouseEntered
         // TODO add your handling code here:
-        buttonCrud.setText(">  Editar, Consultar ou Excluir");
+        if(buttonCrud.getText().equals("> Editar, Consultar ou Excluir"))
+            buttonCrud.setText(">  Editar, Consultar ou Excluir");
     }//GEN-LAST:event_buttonCrudMouseEntered
     //altera o texto de volta para a posicao padrao ao tirar o mouse de cima do botao
     private void buttonCrudMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCrudMouseExited
         // TODO add your handling code here:
-        buttonCrud.setText("> Editar, Consultar ou Excluir");
+        if (buttonCrud.getText().equals(">  Editar, Consultar ou Excluir"))
+            buttonCrud.setText("> Editar, Consultar ou Excluir");
     }//GEN-LAST:event_buttonCrudMouseExited
     //<null>
     private void buttonCrudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrudActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaAdminCrud1();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Admin2.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Admin2.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonCrudActionPerformed
 //Fim dos comandos do botao CRUD
 
@@ -182,7 +212,7 @@ public class Tela_Admin2 extends javax.swing.JFrame {
 //metodos typpingEffect para criar o efeito das mensagens serem escritas
 private static void typingEffect(JLabel label, String message, JButton bt1, JButton bt2) 
 {
-    Timer timer = new Timer(50, new ActionListener() 
+    Timer timer = new Timer(25, new ActionListener() 
     {
         private int index = 0;
 
@@ -209,7 +239,7 @@ private static void typingEffectButton(JButton button, String message, JButton b
 {
     button.setText("");
     
-    Timer timer = new Timer(50, new ActionListener() 
+    Timer timer = new Timer(25, new ActionListener() 
     {
         private int index = 0;
 
@@ -236,7 +266,7 @@ private static void typingEffectButton2(JButton button, String message)
 {
     button.setText("");
     
-    Timer timer = new Timer(50, new ActionListener() 
+    Timer timer = new Timer(25, new ActionListener() 
     {
         private int index = 0;
 

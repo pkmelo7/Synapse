@@ -3,6 +3,8 @@
 package com.mycompany.telas;
 
 //Importações necessárias
+import com.mycompany.classes.ProdutoCarrinhoJanela;
+import com.mycompany.scrollbar.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -13,11 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import javax.swing.JOptionPane;
 
 public class Tela_Sobre extends javax.swing.JFrame {
     
@@ -37,21 +37,42 @@ public class Tela_Sobre extends javax.swing.JFrame {
         
         //Variavel para trazer o icone do projeto
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png"));
+        
+        //Variavel para trazer a classe ProdutoCarrinho
+        ProdutoCarrinhoJanela produtoCarrinho = new ProdutoCarrinhoJanela();
     //Final da declaração de variáveis
     
     //Declaração de métodos
-        //cria o método abrirTela_Cadastro, onde invoca a tela de cadastro e fecha a tela de cadastro
-        private void abrirTela_Cadastro() throws FontFormatException, IOException{
-        Tela_Cadastro Tela_Cadastro = new Tela_Cadastro();
-        Tela_Cadastro.setVisible(true);
-        this.dispose();
-    }
+        //cria o método abrirTela_Menu, onde invoca a tela de menu e fecha a tela atual
+        private void abrirTelaMenu() throws FontFormatException, IOException
+        {
+            Tela_Menu TelaMenu = new Tela_Menu();
+            this.dispose();
+            TelaMenu.setVisible(true);
+        }
+        
+        //cria o método abrirTela_Login, onde invoca a tela de login e fecha a tela atual
+        private void abrirTelaLogin() throws FontFormatException, IOException
+        {
+            Tela_Login Login = new Tela_Login();
+            this.dispose();
+            Login.setVisible(true);
+        }
+        
+        //cria o método abrirTela_Carrinho, onde invoca a tela de carrinho e fecha a tela atual
+        private void abrirTelaCarrinho() throws FontFormatException, IOException
+        {
+            Tela_Carrinho Carrinho = new Tela_Carrinho();
+            this.dispose();
+            Carrinho.setVisible(true);
+        }
     //Final da declaração de métodos
     
     public Tela_Sobre() throws FontFormatException, IOException {
         //cria a fonte poppins no projeto
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents();
+        scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom()); 
     }
 
     /**
@@ -73,6 +94,12 @@ public class Tela_Sobre extends javax.swing.JFrame {
         buttonLogin = new javax.swing.JButton();
         buttonPR = new javax.swing.JButton();
         buttonXTelas = new javax.swing.JButton();
+        scrollbarCarrinho = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
+        carrinho = new javax.swing.JPanel();
+        carrinho2 = new javax.swing.JPanel();
+        buttonTelaCarrinho = new javax.swing.JButton();
+        labelQtdCarrinho = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -278,6 +305,84 @@ public class Tela_Sobre extends javax.swing.JFrame {
         getContentPane().add(buttonXTelas);
         buttonXTelas.setBounds(1280, 0, 86, 25);
 
+        scrollbarCarrinho.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 2, true));
+        scrollbarCarrinho.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollbarCarrinho.setVisible(false);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        carrinho.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout carrinhoLayout = new javax.swing.GroupLayout(carrinho);
+        carrinho.setLayout(carrinhoLayout);
+        carrinhoLayout.setHorizontalGroup(
+            carrinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+        carrinhoLayout.setVerticalGroup(
+            carrinhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(carrinho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1651, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(carrinho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 419, Short.MAX_VALUE))
+        );
+
+        scrollbarCarrinho.setViewportView(jPanel2);
+
+        getContentPane().add(scrollbarCarrinho);
+        scrollbarCarrinho.setBounds(880, 105, 230, 245);
+
+        carrinho2.setBackground(new java.awt.Color(255, 255, 255));
+        carrinho2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
+        carrinho2.setVisible(false);
+        carrinho2.setLayout(null);
+
+        buttonTelaCarrinho.setFont(poppins.deriveFont(24f));
+        buttonTelaCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Carrinho.png"))); // NOI18N
+        buttonTelaCarrinho.setBorder(null);
+        buttonTelaCarrinho.setBorderPainted(false);
+        buttonTelaCarrinho.setContentAreaFilled(false);
+        buttonTelaCarrinho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonTelaCarrinho.setFocusPainted(false);
+        buttonTelaCarrinho.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonTelaCarrinho.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonTelaCarrinho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonTelaCarrinhoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonTelaCarrinhoMouseExited(evt);
+            }
+        });
+        buttonTelaCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTelaCarrinhoActionPerformed(evt);
+            }
+        });
+        carrinho2.add(buttonTelaCarrinho);
+        buttonTelaCarrinho.setBounds(15, 10, 200, 40);
+
+        getContentPane().add(carrinho2);
+        carrinho2.setBounds(880, 345, 230, 55);
+
+        labelQtdCarrinho.setFont(poppins.deriveFont(15f));
+        labelQtdCarrinho.setForeground(new java.awt.Color(69, 82, 173));
+        produtoCarrinho.setLabel(labelQtdCarrinho);
+        getContentPane().add(labelQtdCarrinho);
+        labelQtdCarrinho.setBounds(993, 50, 20, 20);
+
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoSobre.png"))); // NOI18N
         getContentPane().add(fundo);
         fundo.setBounds(0, -17, 1370, 800);
@@ -335,7 +440,14 @@ public class Tela_Sobre extends javax.swing.JFrame {
 //Início dos comandos do botão do Logo "Synapse Connect"
     //<null>
     private void buttonSynapseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSynapseActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaMenu();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSynapseActionPerformed
     //Move o Logo "Synapse Connect" à posição final enquanto o mouse estiver em cima
     private void buttonSynapseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSynapseMouseEntered
@@ -377,6 +489,16 @@ public class Tela_Sobre extends javax.swing.JFrame {
     //<null>
     private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
         // TODO add your handling code here:
+        if(scrollbarCarrinho.isVisible())
+            {
+                scrollbarCarrinho.setVisible(false);
+                carrinho2.setVisible(false);
+            }
+            else
+            {
+                scrollbarCarrinho.setVisible(true);
+                carrinho2.setVisible(true);
+            }
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
     //Faz o botão Carrinho ficar Azul ao passar o mouse por cima
     private void buttonCarrinhoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCarrinhoMouseEntered
@@ -418,7 +540,14 @@ public class Tela_Sobre extends javax.swing.JFrame {
 //Início dos comandos do botão "Entrar"
     //<null>
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-            // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaLogin();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonLoginActionPerformed
     //Faz o botão ficar Azul ao passar o mouse por cima
     private void buttonLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoginMouseEntered
@@ -475,6 +604,29 @@ public class Tela_Sobre extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonXTelasActionPerformed
+
+    private void buttonTelaCarrinhoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoMouseEntered
+        // TODO add your handling code here:
+        ImageIcon CarrinhoAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/CarrinhoAzul.png"));
+        buttonTelaCarrinho.setIcon(CarrinhoAzul);
+    }//GEN-LAST:event_buttonTelaCarrinhoMouseEntered
+
+    private void buttonTelaCarrinhoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoMouseExited
+        // TODO add your handling code here:
+        ImageIcon Carrinho = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Carrinho.png"));
+        buttonTelaCarrinho.setIcon(Carrinho);
+    }//GEN-LAST:event_buttonTelaCarrinhoMouseExited
+
+    private void buttonTelaCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoActionPerformed
+            try {
+                // TODO add your handling code here:
+                abrirTelaCarrinho();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_buttonTelaCarrinhoActionPerformed
 //Fim dos comandos do botão X para fechar a aplicação
 
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -593,9 +745,15 @@ public class Tela_Sobre extends javax.swing.JFrame {
     private javax.swing.JButton buttonPR;
     private javax.swing.JButton buttonSynapse;
     private javax.swing.JButton buttonSynapseLogo;
+    private javax.swing.JButton buttonTelaCarrinho;
     private javax.swing.JButton buttonXTelas;
     private javax.swing.JButton buttonXpesq;
+    private javax.swing.JPanel carrinho;
+    private javax.swing.JPanel carrinho2;
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JLabel fundo;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelQtdCarrinho;
+    private javax.swing.JScrollPane scrollbarCarrinho;
     // End of variables declaration//GEN-END:variables
 }

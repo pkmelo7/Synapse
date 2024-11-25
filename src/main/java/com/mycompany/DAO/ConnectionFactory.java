@@ -26,7 +26,6 @@ public class ConnectionFactory
                             bd + "?serverTimezone=UTC",
                             usuario, senha
             );
-            System.out.println("Conexao executada com sucesso!!");
                 return c;
         }
         catch(Exception e) {

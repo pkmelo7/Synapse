@@ -49,6 +49,22 @@ public class Tela_Login extends javax.swing.JFrame
             this.dispose();
             Tela_Cadastro.setVisible(true);
         }
+        
+        //cria o método abrirTela_Menu, onde invoca a tela de menu e fecha a tela atual
+        private void abrirTelaMenu() throws FontFormatException, IOException
+        {
+            Tela_Menu TelaMenu = new Tela_Menu();
+            this.dispose();
+            TelaMenu.setVisible(true);
+        }
+        
+        //cria o método abrirTela_Sobre, onde invoca a tela de sobre e fecha a tela de cadastro
+        private void abrirTela_Sobre() throws FontFormatException, IOException
+        {
+            Tela_Sobre Tela_Sobre = new Tela_Sobre();
+            this.dispose();
+            Tela_Sobre.setVisible(true);
+        }
     //Fim da declaração de métodos
 
     public Tela_Login() throws FontFormatException, IOException {
@@ -81,7 +97,6 @@ public class Tela_Login extends javax.swing.JFrame
         checkboxSenha = new javax.swing.JCheckBox();
         buttonSeta = new javax.swing.JButton();
         buttonEntrar = new javax.swing.JButton();
-        buttonEsqueciSenha = new javax.swing.JButton();
         buttonPR = new javax.swing.JButton();
         buttonXTelas = new javax.swing.JButton();
         fundo = new javax.swing.JLabel();
@@ -359,28 +374,6 @@ public class Tela_Login extends javax.swing.JFrame
         telaLogin.add(buttonEntrar);
         buttonEntrar.setBounds(760, 543, 170, 50);
 
-        buttonEsqueciSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/EsqueciSenha.png"))); // NOI18N
-        buttonEsqueciSenha.setBorder(null);
-        buttonEsqueciSenha.setBorderPainted(false);
-        buttonEsqueciSenha.setContentAreaFilled(false);
-        buttonEsqueciSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonEsqueciSenha.setFocusPainted(false);
-        buttonEsqueciSenha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonEsqueciSenhaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonEsqueciSenhaMouseExited(evt);
-            }
-        });
-        buttonEsqueciSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEsqueciSenhaActionPerformed(evt);
-            }
-        });
-        telaLogin.add(buttonEsqueciSenha);
-        buttonEsqueciSenha.setBounds(770, 602, 150, 30);
-
         buttonPR.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         buttonPR.setForeground(new java.awt.Color(255, 255, 255));
         buttonPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/IconSynapsePreto.png"))); // NOI18N
@@ -573,7 +566,14 @@ public class Tela_Login extends javax.swing.JFrame
 //Início dos comandos do botão do Logo "Synapse Connect"
     //<null>
     private void buttonSynapseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSynapseActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaMenu();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSynapseActionPerformed
     //Move o Logo "Synapse Connect" à posição final enquanto o mouse estiver em cima
     private void buttonSynapseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSynapseMouseEntered
@@ -614,7 +614,14 @@ public class Tela_Login extends javax.swing.JFrame
 //Início dos comandos do botão "Sobre"
     //<null>
     private void buttonSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSobreActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTela_Sobre();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSobreActionPerformed
     //Faz o botão Sobre ficar Azul ao passar o mouse por cima
     private void buttonSobreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSobreMouseEntered
@@ -711,7 +718,7 @@ public class Tela_Login extends javax.swing.JFrame
                     String nome = usuario.getNomePorUsuario();
                     if (nome != null) 
                     {
-                        //Usuario logado
+                        System.out.println("Lofins certp");
                     } 
                 }
             } 
@@ -743,27 +750,6 @@ public class Tela_Login extends javax.swing.JFrame
         buttonEntrar.setIcon(Cadastrar);
     }//GEN-LAST:event_buttonEntrarMouseExited
 //Fim dos comandos do botão "Entrar"
-
-//---------------------------------------------------------------------------------------------------------------------------------
-
-//Início dos comandos do botão "Esqueci minha senha"
-    //<null>
-    private void buttonEsqueciSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEsqueciSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonEsqueciSenhaActionPerformed
-    //Faz o botão Fazer Login ficar Azul ao passar o mouse por cima
-    private void buttonEsqueciSenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEsqueciSenhaMouseEntered
-        // TODO add your handling code here:
-        ImageIcon FazerLoginAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/EsqueciSenhaAzul.png"));
-        buttonEsqueciSenha.setIcon(FazerLoginAzul);
-    }//GEN-LAST:event_buttonEsqueciSenhaMouseEntered
-    //Faz o botão Fazer Login voltar a cor padrão ao tirar o mouse de cima
-    private void buttonEsqueciSenhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEsqueciSenhaMouseExited
-        // TODO add your handling code here:
-        ImageIcon FazerLogin = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/EsqueciSenha.png"));
-        buttonEsqueciSenha.setIcon(FazerLogin);
-    }//GEN-LAST:event_buttonEsqueciSenhaMouseExited
-//Fim dos comandos do botão "Esqueci minha senha"
 
 //---------------------------------------------------------------------------------------------------------------------------------
 
@@ -884,7 +870,6 @@ public class Tela_Login extends javax.swing.JFrame
     private javax.swing.JButton buttonCadastrarse;
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonEntrar;
-    private javax.swing.JButton buttonEsqueciSenha;
     private javax.swing.JButton buttonPR;
     private javax.swing.JButton buttonSeta;
     private javax.swing.JButton buttonSobre;

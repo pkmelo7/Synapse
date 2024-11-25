@@ -29,7 +29,7 @@ public class Tela_Admin1 extends javax.swing.JFrame {
         
         //Variavel para trazer o icone do projeto
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png")); 
-    //Final da declaração de variáveis
+        //Final da declaração de variáveis
     
     //Declaração de métodos
         //cria o metodo abrirTelaAdmin2 onde abre a segunda tela de admin
@@ -84,7 +84,7 @@ public class Tela_Admin1 extends javax.swing.JFrame {
         String message = "Ola admin, seja bem-vindo!";
         typingEffect(messageLabel1, message, buttonNext);
         telaAdmin.add(messageLabel1);
-        messageLabel1.setBounds(0, 284, 1366, 201);
+        messageLabel1.setBounds(0, 135, 1366, 201);
 
         buttonNext.setBackground(new java.awt.Color(0, 0, 0));
         buttonNext.setForeground(new java.awt.Color(0, 0, 0));
@@ -132,14 +132,14 @@ public class Tela_Admin1 extends javax.swing.JFrame {
     //muda o icone da seta para uma seta maior ao passar o mouse por cima do botao
     private void buttonNextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNextMouseEntered
         // TODO add your handling code here:
-        ImageIcon Next2 = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Next2.png"));
-        buttonNext.setIcon(Next2);
+            ImageIcon Next2 = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Next2.png"));
+            buttonNext.setIcon(Next2);
     }//GEN-LAST:event_buttonNextMouseEntered
     //muda o icone da seta para uma seta padrao ao tirar o mouse de cima do botao
     private void buttonNextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNextMouseExited
         // TODO add your handling code here:
-        ImageIcon Next = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Next.png"));
-        buttonNext.setIcon(Next);
+            ImageIcon Next = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Next.png"));
+            buttonNext.setIcon(Next);
     }//GEN-LAST:event_buttonNextMouseExited
 //Fim dos comandos do botao Seta/Next
 
