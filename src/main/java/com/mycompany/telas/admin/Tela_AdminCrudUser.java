@@ -93,6 +93,7 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonXTelas = new javax.swing.JButton();
         panelExcluir = new javax.swing.JPanel();
         panelExcluir2 = new javax.swing.JPanel();
         labelExcluir = new javax.swing.JLabel();
@@ -123,6 +124,28 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelasAdmin.png"))); // NOI18N
+        buttonXTelas.setBorder(null);
+        buttonXTelas.setBorderPainted(false);
+        buttonXTelas.setContentAreaFilled(false);
+        buttonXTelas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXTelas.setFocusPainted(false);
+        buttonXTelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseExited(evt);
+            }
+        });
+        buttonXTelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXTelasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonXTelas);
+        buttonXTelas.setBounds(1280, 0, 86, 25);
 
         panelExcluir.setOpaque(false);
         panelExcluir.setVisible(false);
@@ -687,6 +710,23 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_panelExcluirMouseClicked
+
+    private void buttonXTelasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseEntered
+        // TODO add your handling code here:
+        ImageIcon XTelasVerm = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin2.png"));
+        buttonXTelas.setIcon(XTelasVerm);
+    }//GEN-LAST:event_buttonXTelasMouseEntered
+
+    private void buttonXTelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseExited
+        // TODO add your handling code here:
+        ImageIcon XTelas = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin.png"));
+        buttonXTelas.setIcon(XTelas);
+    }//GEN-LAST:event_buttonXTelasMouseExited
+
+    private void buttonXTelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXTelasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonXTelasActionPerformed
 //---------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -883,6 +923,7 @@ private static void typingEffectButton2(JButton button, String message)
     private javax.swing.JButton buttonOkExcluir;
     private javax.swing.JButton buttonSalvarAlt;
     private javax.swing.JButton buttonVoltar;
+    private javax.swing.JButton buttonXTelas;
     private javax.swing.JButton buttonXpesq;
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JLabel fundo;

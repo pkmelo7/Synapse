@@ -5,7 +5,6 @@ package com.mycompany.telas.admin;
 //Importações necessárias
 import com.mycompany.classes.Admin;
 import com.mycompany.classes.Usuario;
-import com.mycompany.telas.admin.Tela_AdminCadastrar1;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -53,6 +52,7 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         MaskFormatter mask;
         
         Timer timerUsu;
+        Timer timerAdm;
         Timer timerData;
         Timer timerUsuEx;
         Timer timerEmailEx;
@@ -63,6 +63,10 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         Timer timerSenhaVz;
         
         boolean acaoConcluida = false;
+        
+        boolean check = false;
+        
+        boolean admin = false;
     //Final da declaração de variáveis
     
     //Declaração de métodos
@@ -105,6 +109,7 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonXTelas = new javax.swing.JButton();
         panelNomeVazio = new javax.swing.JPanel();
         panelNomeVazio2 = new javax.swing.JPanel();
         labelNomeVazio = new javax.swing.JLabel();
@@ -150,6 +155,11 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         labelCadastrado = new javax.swing.JLabel();
         buttonOkCadastrado = new javax.swing.JButton();
         labelContagemCadastrado = new javax.swing.JLabel();
+        panelCadastradoAdm = new javax.swing.JPanel();
+        panelCadastradoAdm2 = new javax.swing.JPanel();
+        labelCadastradoAdm = new javax.swing.JLabel();
+        buttonOkCadastradoAdm = new javax.swing.JButton();
+        labelContagemCadastradoAdm = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
         messageLabel1 = new javax.swing.JLabel();
         telaAdmin = new javax.swing.JPanel();
@@ -166,6 +176,7 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         fieldSenha = new javax.swing.JPasswordField();
         labelUser = new javax.swing.JLabel();
         labelEmail = new javax.swing.JLabel();
+        checkboxAdmin = new javax.swing.JCheckBox();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -178,6 +189,28 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelasAdmin.png"))); // NOI18N
+        buttonXTelas.setBorder(null);
+        buttonXTelas.setBorderPainted(false);
+        buttonXTelas.setContentAreaFilled(false);
+        buttonXTelas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXTelas.setFocusPainted(false);
+        buttonXTelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseExited(evt);
+            }
+        });
+        buttonXTelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXTelasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonXTelas);
+        buttonXTelas.setBounds(1280, 0, 86, 25);
 
         panelNomeVazio.setOpaque(false);
         panelNomeVazio.setVisible(false);
@@ -665,6 +698,60 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         getContentPane().add(panelCadastrado);
         panelCadastrado.setBounds(0, 0, 1366, 768);
 
+        panelCadastradoAdm.setOpaque(false);
+        panelCadastradoAdm.setVisible(false);
+        panelCadastradoAdm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelCadastradoAdmMouseClicked(evt);
+            }
+        });
+        panelCadastradoAdm.setLayout(null);
+
+        panelCadastradoAdm2.setBackground(new java.awt.Color(0, 0, 0));
+        panelCadastradoAdm2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 8), 1, true));
+        panelCadastradoAdm2.setForeground(new java.awt.Color(0, 255, 8));
+        panelCadastradoAdm2.setLayout(null);
+
+        labelCadastradoAdm.setFont(digital7.deriveFont(30f));
+        labelCadastradoAdm.setForeground(new java.awt.Color(0, 255, 8));
+        labelCadastradoAdm.setText("Administrador cadastrado com sucesso.");
+        labelCadastradoAdm.setHorizontalAlignment(SwingConstants.CENTER);
+        panelCadastradoAdm2.add(labelCadastradoAdm);
+        labelCadastradoAdm.setBounds(7, 26, 490, 120);
+
+        buttonOkCadastradoAdm.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkCadastradoAdm.setFont(digital7.deriveFont(20f));
+        buttonOkCadastradoAdm.setForeground(new java.awt.Color(0, 255, 8));
+        buttonOkCadastradoAdm.setText("OK");
+        buttonOkCadastradoAdm.setBorder(null);
+        buttonOkCadastradoAdm.setBorderPainted(false);
+        buttonOkCadastradoAdm.setContentAreaFilled(false);
+        buttonOkCadastradoAdm.setFocusable(false);
+        buttonOkCadastradoAdm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkCadastradoAdmMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkCadastradoAdmMouseExited(evt);
+            }
+        });
+        panelCadastradoAdm2.add(buttonOkCadastradoAdm);
+        buttonOkCadastradoAdm.setBounds(355, 210, 100, 40);
+
+        labelContagemCadastradoAdm.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagemCadastradoAdm.setFont(digital7.deriveFont(20f));
+        labelContagemCadastradoAdm.setForeground(new java.awt.Color(0, 255, 8));
+        labelContagemCadastradoAdm.setText("Tempo Restante: 5");
+        labelContagemCadastradoAdm.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelCadastradoAdm2.add(labelContagemCadastradoAdm);
+        labelContagemCadastradoAdm.setBounds(87, 210, 260, 40);
+
+        panelCadastradoAdm.add(panelCadastradoAdm2);
+        panelCadastradoAdm2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelCadastradoAdm);
+        panelCadastradoAdm.setBounds(0, 0, 1366, 768);
+
         panel.setBackground(new java.awt.Color(0, 0, 0));
         panel.setLayout(null);
 
@@ -847,6 +934,19 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         telaAdmin.add(labelEmail);
         labelEmail.setBounds(190, 526, 320, 30);
 
+        checkboxAdmin.setFont(digital7.deriveFont(25f));
+        checkboxAdmin.setForeground(new java.awt.Color(0, 255, 8));
+        checkboxAdmin.setText("Cadastrar Usuario como admin?");
+        checkboxAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/checkboxFAdm.png"))); // NOI18N
+        checkboxAdmin.setHorizontalAlignment(SwingConstants.RIGHT);
+        checkboxAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkboxAdminActionPerformed(evt);
+            }
+        });
+        telaAdmin.add(checkboxAdmin);
+        checkboxAdmin.setBounds(655, 650, 370, 40);
+
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarAdmin.png"))); // NOI18N
         telaAdmin.add(fundo);
         fundo.setBounds(0, 0, 1366, 768);
@@ -954,14 +1054,29 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
             }
             else 
             {
-                // Cadastra o novo usuário
-                if (usuario.cadastraUser()) 
+                if(checkboxAdmin.isSelected())
                 {
-                   usuCadastrado();
+                    if(usuario.cadastraAdmin())
+                    {
+                        admCadastrado();
+                    }
+                    else
+                    {
+                        System.out.println("Erro ao cadastrar");
+                    }
                 }
                 else
                 {
-                    System.out.println("Erro ao cadastar");
+                    // Cadastra o novo usuário
+                    if (usuario.cadastraUser()) 
+                    {
+                       usuCadastrado();
+                    }
+                    else
+                    {
+                        System.out.println("Erro ao cadastar");
+                    }
+                    
                 }
             }
         }
@@ -1051,6 +1166,87 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
                 // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
                 tempoRestante[0] = tempoInicial; // Reinicia a contagem
                 labelContagemCadastrado.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+    
+    private void admCadastrado()
+    {
+         // Garantir que o painel esteja visível após a exclusão
+        panelCadastradoAdm.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelCadastradoAdm.revalidate();
+        panelCadastradoAdm.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerAdm != null && timerAdm.isRunning()) 
+        {
+            timerAdm.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerAdm = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagemCadastradoAdm.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagemCadastradoAdm.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelCadastradoAdm.setVisible(false);
+
+                    // Para o Timer
+                    timerAdm.stop();
+
+                    acaoConcluida = true;
+                    
+                    // Limpar os campos de texto após o painel desaparecer
+                    limparCampos();
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerAdm.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkCadastradoAdm.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerAdm != null) 
+                {
+                    timerAdm.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelCadastradoAdm.setVisible(false);
+
+                acaoConcluida = true;
+                
+                 // Limpar os campos de texto após o painel desaparecer
+                limparCampos();
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagemCadastradoAdm.setText("Tempo restante: " + tempoRestante[0]);
             }
         });
     }
@@ -2035,6 +2231,53 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_panelNomeVazioMouseClicked
 
+    private void buttonXTelasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseEntered
+        // TODO add your handling code here:
+        ImageIcon XTelasVerm = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin2.png"));
+        buttonXTelas.setIcon(XTelasVerm);
+    }//GEN-LAST:event_buttonXTelasMouseEntered
+
+    private void buttonXTelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseExited
+        // TODO add your handling code here:
+        ImageIcon XTelas = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin.png"));
+        buttonXTelas.setIcon(XTelas);
+    }//GEN-LAST:event_buttonXTelasMouseExited
+
+    private void buttonXTelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXTelasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonXTelasActionPerformed
+
+    private void checkboxAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxAdminActionPerformed
+        // TODO add your handling code here:
+        Icon adminT = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/checkboxTAdm.png"));
+        Icon adminF = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/checkboxFAdm.png"));
+
+        if(check)
+        {
+            checkboxAdmin.setIcon(adminF);
+            admin = false;
+        }
+        else
+        {
+            checkboxAdmin.setIcon(adminT);
+            admin = true;
+        }
+        check = !check;
+    }//GEN-LAST:event_checkboxAdminActionPerformed
+
+    private void buttonOkCadastradoAdmMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkCadastradoAdmMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkCadastradoAdmMouseEntered
+
+    private void buttonOkCadastradoAdmMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkCadastradoAdmMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkCadastradoAdmMouseExited
+
+    private void panelCadastradoAdmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCadastradoAdmMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelCadastradoAdmMouseClicked
+
     public boolean validarData(String data) 
     {
         try {
@@ -2288,6 +2531,7 @@ private static void typingEffect(JButton button, String message)
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonOkCadastrado;
+    private javax.swing.JButton buttonOkCadastradoAdm;
     private javax.swing.JButton buttonOkDataErrada;
     private javax.swing.JButton buttonOkEmailExiste;
     private javax.swing.JButton buttonOkEmailVazio;
@@ -2297,6 +2541,8 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JButton buttonOkUserVazio;
     private javax.swing.JButton buttonOkUsuExiste;
     private javax.swing.JButton buttonVoltar;
+    private javax.swing.JButton buttonXTelas;
+    private javax.swing.JCheckBox checkboxAdmin;
     private javax.swing.JCheckBox checkboxSenha;
     private javax.swing.JTextField fieldEmail;
     private javax.swing.JFormattedTextField fieldNasc;
@@ -2305,7 +2551,9 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JTextField fieldUser;
     private javax.swing.JLabel fundo;
     private javax.swing.JLabel labelCadastrado;
+    private javax.swing.JLabel labelCadastradoAdm;
     private javax.swing.JLabel labelContagemCadastrado;
+    private javax.swing.JLabel labelContagemCadastradoAdm;
     private javax.swing.JLabel labelContagemDataErrada;
     private javax.swing.JLabel labelContagemEmailExiste;
     private javax.swing.JLabel labelContagemEmailVazio;
@@ -2331,6 +2579,8 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelCadastrado;
     private javax.swing.JPanel panelCadastrado2;
+    private javax.swing.JPanel panelCadastradoAdm;
+    private javax.swing.JPanel panelCadastradoAdm2;
     private javax.swing.JPanel panelDataErrada;
     private javax.swing.JPanel panelDataErrada2;
     private javax.swing.JPanel panelEmailExiste;

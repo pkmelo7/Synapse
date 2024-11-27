@@ -3,8 +3,12 @@
 package com.mycompany.telas;
 
 //Importações necessárias
+import com.mycompany.classes.FontePersonalizada;
+import com.mycompany.classes.GerenciadorDeCategorias;
 import com.mycompany.classes.ProdutoCarrinhoJanela;
+import com.mycompany.classes.Session;
 import com.mycompany.scrollbar.ScrollBarCustom;
+import com.mycompany.scrollbar.ScrollBarCustom_Cursos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -13,16 +17,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JScrollBar;
 import javax.swing.Timer;
 //Fim das importações necessárias
 
 public class Tela_Menu extends javax.swing.JFrame {
     
     //Declaração de variáveis
+        Session sessao = new Session();
+    
         //Variáveis para o movimento do logo Synapse
         final int originalX = 10;
         final int targetX = 150;
@@ -68,13 +76,33 @@ public class Tela_Menu extends javax.swing.JFrame {
         }
     //Fim da declaração de métodos
         
-    public Tela_Menu() throws FontFormatException, IOException {
+    public Tela_Menu() throws FontFormatException, IOException, SQLException {
         //cria a fonte poppins no projeto
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents(); 
         //Configurar scrollbar vertical como customizada
         scrollbar.setVerticalScrollBar(new ScrollBarCustom());
-        scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom());  
+        scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom()); 
+        
+        FontePersonalizada fp = new FontePersonalizada();
+        fp.carregarFonte();
+        
+        ScrollBarCustom_Cursos sb = new ScrollBarCustom_Cursos();
+        sb.setOrientation(JScrollBar.HORIZONTAL);
+        scrollDispCursos.setHorizontalScrollBar(sb);
+        
+        ScrollBarCustom_Cursos sb2 = new ScrollBarCustom_Cursos();
+        sb2.setOrientation(JScrollBar.HORIZONTAL);
+        scrollDispCursos1.setHorizontalScrollBar(sb2);
+        
+        String cat1 = categoria1.getText();
+        String cat2 = categoria2.getText();
+        
+        GerenciadorDeCategorias gerenciador = new GerenciadorDeCategorias();
+        gerenciador.listarCursosPorCategoria(cat1, panelDispCursos1, scrollDispCursos1);
+        
+        GerenciadorDeCategorias gerenciador2 = new GerenciadorDeCategorias();
+        gerenciador2.listarCursosPorCategoria(cat2, panelDispCursos, scrollDispCursos);
     }
     
     /**
@@ -97,7 +125,8 @@ public class Tela_Menu extends javax.swing.JFrame {
         scrollbarCarrinho = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         carrinho = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        carrinho2 = new javax.swing.JPanel();
+        buttonTelaCarrinho = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
         buttonCarrinho = new javax.swing.JButton();
         fundoBarraSup = new javax.swing.JLabel();
@@ -107,7 +136,16 @@ public class Tela_Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         buttonSeta = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        categoria1 = new javax.swing.JLabel();
+        scrollDispCursos1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        panelDispCursos1 = new javax.swing.JPanel();
+        scrollDispCursos = new javax.swing.JScrollPane();
+        jPanel5 = new javax.swing.JPanel();
+        panelDispCursos = new javax.swing.JPanel();
+        categoria2 = new javax.swing.JLabel();
+        barra = new javax.swing.JLabel();
+        fundo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -305,14 +343,38 @@ public class Tela_Menu extends javax.swing.JFrame {
         getContentPane().add(scrollbarCarrinho);
         scrollbarCarrinho.setBounds(767, 105, 230, 245);
 
-        jButton1.setText("ADD PRODUTO CARRINHO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        carrinho2.setBackground(new java.awt.Color(255, 255, 255));
+        carrinho2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
+        carrinho2.setVisible(false);
+        carrinho2.setLayout(null);
+
+        buttonTelaCarrinho.setFont(poppins.deriveFont(24f));
+        buttonTelaCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Carrinho.png"))); // NOI18N
+        buttonTelaCarrinho.setBorder(null);
+        buttonTelaCarrinho.setBorderPainted(false);
+        buttonTelaCarrinho.setContentAreaFilled(false);
+        buttonTelaCarrinho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonTelaCarrinho.setFocusPainted(false);
+        buttonTelaCarrinho.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonTelaCarrinho.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonTelaCarrinho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonTelaCarrinhoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonTelaCarrinhoMouseExited(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1010, 390, 220, 23);
+        buttonTelaCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTelaCarrinhoActionPerformed(evt);
+            }
+        });
+        carrinho2.add(buttonTelaCarrinho);
+        buttonTelaCarrinho.setBounds(15, 10, 200, 40);
+
+        getContentPane().add(carrinho2);
+        carrinho2.setBounds(767, 345, 230, 55);
 
         buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
         buttonLogin.setBorder(null);
@@ -322,6 +384,14 @@ public class Tela_Menu extends javax.swing.JFrame {
         buttonLogin.setFocusPainted(false);
         buttonLogin.setMaximumSize(new java.awt.Dimension(86, 19));
         buttonLogin.setMinimumSize(new java.awt.Dimension(86, 19));
+        if(sessao.isUserLoggedIn())
+        {
+            buttonLogin.setVisible(false);
+        }
+        else
+        {
+            buttonLogin.setVisible(true);
+        }
         buttonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttonLoginMouseEntered(evt);
@@ -347,6 +417,14 @@ public class Tela_Menu extends javax.swing.JFrame {
         buttonCarrinho.setFocusPainted(false);
         buttonCarrinho.setMaximumSize(new java.awt.Dimension(86, 19));
         buttonCarrinho.setMinimumSize(new java.awt.Dimension(86, 19));
+        if(sessao.isUserLoggedIn())
+        {
+            buttonCarrinho.setVisible(true);
+        }
+        else
+        {
+            buttonCarrinho.setVisible(false);
+        }
         buttonCarrinho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttonCarrinhoMouseEntered(evt);
@@ -399,11 +477,12 @@ public class Tela_Menu extends javax.swing.JFrame {
 
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollbar.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        scrollbar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 0));
 
         menu.setBackground(new java.awt.Color(255, 255, 255));
+        menu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menu.setLayout(null);
 
         buttonSeta.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -430,9 +509,106 @@ public class Tela_Menu extends javax.swing.JFrame {
         menu.add(buttonSeta);
         buttonSeta.setBounds(940, 1300, 320, 90);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/TelasCompletas/Menu.png"))); // NOI18N
-        menu.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1366, 1450);
+        categoria1.setFont(poppins.deriveFont(40f));
+        categoria1.setForeground(new java.awt.Color(255, 255, 255));
+        categoria1.setText("Java");
+        menu.add(categoria1);
+        categoria1.setBounds(30, 525, 1300, 40);
+
+        scrollDispCursos1.setBorder(null);
+        scrollDispCursos1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrollDispCursos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        scrollDispCursos1.setVisible(false);
+
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        panelDispCursos1.setBackground(new java.awt.Color(69, 82, 173));
+        panelDispCursos1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout panelDispCursos1Layout = new javax.swing.GroupLayout(panelDispCursos1);
+        panelDispCursos1.setLayout(panelDispCursos1Layout);
+        panelDispCursos1Layout.setHorizontalGroup(
+            panelDispCursos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1377, Short.MAX_VALUE)
+        );
+        panelDispCursos1Layout.setVerticalGroup(
+            panelDispCursos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(panelDispCursos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDispCursos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        scrollDispCursos1.setViewportView(jPanel3);
+
+        menu.add(scrollDispCursos1);
+        scrollDispCursos1.setBounds(0, 570, 1366, 300);
+
+        scrollDispCursos.setBorder(null);
+        scrollDispCursos.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrollDispCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        scrollDispCursos.setVisible(false);
+
+        jPanel5.setBackground(new java.awt.Color(69, 82, 173));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        panelDispCursos.setBackground(new java.awt.Color(69, 82, 173));
+        panelDispCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        javax.swing.GroupLayout panelDispCursosLayout = new javax.swing.GroupLayout(panelDispCursos);
+        panelDispCursos.setLayout(panelDispCursosLayout);
+        panelDispCursosLayout.setHorizontalGroup(
+            panelDispCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1378, Short.MAX_VALUE)
+        );
+        panelDispCursosLayout.setVerticalGroup(
+            panelDispCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(panelDispCursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelDispCursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        scrollDispCursos.setViewportView(jPanel5);
+
+        menu.add(scrollDispCursos);
+        scrollDispCursos.setBounds(0, 950, 1366, 300);
+
+        categoria2.setFont(poppins.deriveFont(40f));
+        categoria2.setForeground(new java.awt.Color(255, 255, 255));
+        categoria2.setText("Python");
+        menu.add(categoria2);
+        categoria2.setBounds(30, 905, 1300, 40);
+
+        barra.setBackground(new java.awt.Color(255, 255, 255));
+        barra.setOpaque(true);
+        menu.add(barra);
+        barra.setBounds(0, 886, 1366, 2);
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoMenu.png"))); // NOI18N
+        fundo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menu.add(fundo);
+        fundo.setBounds(0, 0, 1366, 1450);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -465,7 +641,7 @@ public class Tela_Menu extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 1366, 190);
 
-        setBounds(-6, 0, 1366, 1602);
+        setBounds(-6, 0, 1366, 768);
     }// </editor-fold>//GEN-END:initComponents
 //---------------------------------------------------------------------------------------------------------------------------------
     
@@ -694,13 +870,15 @@ public class Tela_Menu extends javax.swing.JFrame {
     private void buttonCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCarrinhoActionPerformed
             // TODO add your handling code here:
         if(scrollbarCarrinho.isVisible())
-            {
-                scrollbarCarrinho.setVisible(false);
-            }
-            else
-            {
-                scrollbarCarrinho.setVisible(true);
-            }
+        {
+            scrollbarCarrinho.setVisible(false);
+            carrinho2.setVisible(false);
+        }
+        else
+        {
+            scrollbarCarrinho.setVisible(true);
+            carrinho2.setVisible(true);
+        }
     }//GEN-LAST:event_buttonCarrinhoActionPerformed
 //Fim dos comandos do botão "Carrinho"
     
@@ -724,10 +902,28 @@ public class Tela_Menu extends javax.swing.JFrame {
             // TODO add your handling code here:   
     }//GEN-LAST:event_buttonSetaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonTelaCarrinhoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoMouseEntered
         // TODO add your handling code here:
-        produtoCarrinho.addProduto(carrinho, scrollbar);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ImageIcon CarrinhoAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/CarrinhoAzul.png"));
+        buttonTelaCarrinho.setIcon(CarrinhoAzul);
+    }//GEN-LAST:event_buttonTelaCarrinhoMouseEntered
+
+    private void buttonTelaCarrinhoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoMouseExited
+        // TODO add your handling code here:
+        ImageIcon Carrinho = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Carrinho.png"));
+        buttonTelaCarrinho.setIcon(Carrinho);
+    }//GEN-LAST:event_buttonTelaCarrinhoMouseExited
+
+    private void buttonTelaCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoActionPerformed
+        try {
+            // TODO add your handling code here:
+            abrirTelaCarrinho();
+        } catch (FontFormatException ex) {
+            Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonTelaCarrinhoActionPerformed
 //Inicio dos comandos do botão "Seta"/"Cursos" 
     
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -771,12 +967,15 @@ public class Tela_Menu extends javax.swing.JFrame {
                     Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel barra;
     private javax.swing.JButton buttonCarrinho;
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonLogin;
@@ -785,18 +984,27 @@ public class Tela_Menu extends javax.swing.JFrame {
     private javax.swing.JButton buttonSobre;
     private javax.swing.JButton buttonSynapse;
     private javax.swing.JButton buttonSynapseLogo;
+    private javax.swing.JButton buttonTelaCarrinho;
     private javax.swing.JButton buttonXTelas;
     private javax.swing.JButton buttonXpesq;
     private javax.swing.JPanel carrinho;
+    private javax.swing.JPanel carrinho2;
+    private javax.swing.JLabel categoria1;
+    private javax.swing.JLabel categoria2;
     private javax.swing.JTextField fieldPesquisa;
+    private javax.swing.JLabel fundo;
     private javax.swing.JLabel fundoBarraSup;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel labelQtdCarrinho;
     private javax.swing.JPanel menu;
+    private javax.swing.JPanel panelDispCursos;
+    private javax.swing.JPanel panelDispCursos1;
+    private javax.swing.JScrollPane scrollDispCursos;
+    private javax.swing.JScrollPane scrollDispCursos1;
     private javax.swing.JScrollPane scrollbar;
     private javax.swing.JScrollPane scrollbarCarrinho;
     // End of variables declaration//GEN-END:variables

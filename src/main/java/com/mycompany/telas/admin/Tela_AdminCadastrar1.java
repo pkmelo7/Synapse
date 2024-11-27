@@ -72,6 +72,7 @@ public class Tela_AdminCadastrar1 extends javax.swing.JFrame {
         buttonVoltar = new javax.swing.JButton();
         buttonUsuarios = new javax.swing.JButton();
         buttonCursos = new javax.swing.JButton();
+        buttonXTelas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Synapse Connect");
@@ -176,6 +177,28 @@ public class Tela_AdminCadastrar1 extends javax.swing.JFrame {
         telaAdmin.add(buttonCursos);
         buttonCursos.setBounds(50, 445, 290, 90);
 
+        buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelasAdmin.png"))); // NOI18N
+        buttonXTelas.setBorder(null);
+        buttonXTelas.setBorderPainted(false);
+        buttonXTelas.setContentAreaFilled(false);
+        buttonXTelas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXTelas.setFocusPainted(false);
+        buttonXTelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseExited(evt);
+            }
+        });
+        buttonXTelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXTelasActionPerformed(evt);
+            }
+        });
+        telaAdmin.add(buttonXTelas);
+        buttonXTelas.setBounds(1280, 0, 86, 25);
+
         getContentPane().add(telaAdmin);
         telaAdmin.setBounds(0, 0, 1366, 768);
 
@@ -256,6 +279,23 @@ public class Tela_AdminCadastrar1 extends javax.swing.JFrame {
                 Logger.getLogger(Tela_AdminCadastrar1.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonVoltarActionPerformed
+
+    private void buttonXTelasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseEntered
+        // TODO add your handling code here:
+        ImageIcon XTelasVerm = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin2.png"));
+        buttonXTelas.setIcon(XTelasVerm);
+    }//GEN-LAST:event_buttonXTelasMouseEntered
+
+    private void buttonXTelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseExited
+        // TODO add your handling code here:
+        ImageIcon XTelas = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin.png"));
+        buttonXTelas.setIcon(XTelas);
+    }//GEN-LAST:event_buttonXTelasMouseExited
+
+    private void buttonXTelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXTelasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_buttonXTelasActionPerformed
 
 //---------------------------------------------------------------------------------------------------------------------------------
 
@@ -442,6 +482,7 @@ private static void typingEffectButton3(JButton button, String message)
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonUsuarios;
     private javax.swing.JButton buttonVoltar;
+    private javax.swing.JButton buttonXTelas;
     private javax.swing.JLabel messageLabel1;
     private javax.swing.JPanel telaAdmin;
     // End of variables declaration//GEN-END:variables

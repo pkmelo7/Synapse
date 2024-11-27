@@ -31,6 +31,7 @@
                 <include>images/FundosTelas/FundoMenu.png</include>
                 <include>images/FundosTelas/FundoPerfil.png</include>
                 <include>images/FundosTelas/FundoSobre.png</include>
+                <include>images/FundosTelas/bannerCursos.png</include>
                 
                 <include>images/Botoes/AplicarDesconto.png</include>
                 <include>images/Botoes/AplicarDescontoAzul.png</include>
@@ -43,6 +44,8 @@
                 <include>images/Botoes/CadastrarseSeta.png</include>
                 <include>images/Botoes/Carrinho.png</include>
                 <include>images/Botoes/CarrinhoAzul.png</include>
+                <include>images/Botoes/checkboxFAdm.png</include>
+                <include>images/Botoes/checkboxTAdm.png</include>
                 <include>images/Botoes/Conta.png</include>
                 <include>images/Botoes/ContaAzul.png</include>
                 <include>images/Botoes/Cursos.png</include>
@@ -95,6 +98,8 @@
                 <include>images/Botoes/XCompraJanela.png</include>
                 <include>images/Botoes/XCompraJanelaAzul.png</include>
                 <include>images/Botoes/XFecharTelas.png</include>
+                <include>images/Botoes/XFecharTelasAdmin.png</include>
+                <include>images/Botoes/XFecharTelasAdmin2.png</include>
                 <include>images/Botoes/XFecharTelasVerm.png</include>
 
                 <include>images/Formas/BarraPesquisa.png</include>
@@ -149,6 +154,11 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.19</version>
+    </dependency>
+    <dependency>
+        <groupId>org.netbeans.external</groupId>
+        <artifactId>AbsoluteLayout</artifactId>
+      <version>RELEASE220</version>
     </dependency>
 </dependencies>
         

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -54,7 +55,7 @@ public class Tela_Perfil extends javax.swing.JFrame {
         }
         
         //cria o método abrirTela_Menu, onde invoca a tela de menu e fecha a tela atual
-        private void abrirTelaMenu() throws FontFormatException, IOException
+        private void abrirTelaMenu() throws FontFormatException, IOException, SQLException
         {
             Tela_Menu TelaMenu = new Tela_Menu();
             this.dispose();
@@ -734,6 +735,8 @@ public class Tela_Perfil extends javax.swing.JFrame {
             } catch (FontFormatException ex) {
                 Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
+                Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonSynapseActionPerformed
