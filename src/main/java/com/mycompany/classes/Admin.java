@@ -16,6 +16,8 @@ public class Admin
 {
     Usuario usu = new Usuario(); 
     
+    
+    
     public void listarUsers(JTable table, JTextField field)
         {
             DefaultTableModel model = new DefaultTableModel

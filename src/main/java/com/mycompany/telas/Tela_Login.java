@@ -3,7 +3,9 @@
 package com.mycompany.telas;
 
 //Importações necessárias
+import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
+import com.mycompany.telas.admin.Tela_Admin1;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -51,7 +53,7 @@ public class Tela_Login extends javax.swing.JFrame
         }
         
         //cria o método abrirTela_Menu, onde invoca a tela de menu e fecha a tela atual
-        private void abrirTelaMenu() throws FontFormatException, IOException
+        private void abrirTelaMenu() throws FontFormatException, IOException, SQLException
         {
             Tela_Menu TelaMenu = new Tela_Menu();
             this.dispose();
@@ -64,6 +66,13 @@ public class Tela_Login extends javax.swing.JFrame
             Tela_Sobre Tela_Sobre = new Tela_Sobre();
             this.dispose();
             Tela_Sobre.setVisible(true);
+        }
+        
+        private void abrirTelaAdmin() throws FontFormatException, IOException
+        {
+            Tela_Admin1 adm = new Tela_Admin1();
+            this.dispose();
+            adm.setVisible(true);
         }
     //Fim da declaração de métodos
 
@@ -573,6 +582,8 @@ public class Tela_Login extends javax.swing.JFrame
                 Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonSynapseActionPerformed
     //Move o Logo "Synapse Connect" à posição final enquanto o mouse estiver em cima
@@ -695,7 +706,7 @@ public class Tela_Login extends javax.swing.JFrame
     String usu, senha;
     
     usu = fieldUser.getText();
-    senha = fieldSenha.getText();
+    senha = new String(fieldSenha.getPassword());
     
     Usuario usuario = new Usuario();
     usuario.setUser(usu);
@@ -707,20 +718,44 @@ public class Tela_Login extends javax.swing.JFrame
         
             if (resultado == 1) 
             {
-                // Se o usuário for admin com a senha admin
-                if ("admin".equals(usu) && "admin".equals(senha)) 
+                int resultadoadmin = usuario.loadAdminStatus();
+                // Verifique se o usuário tem privilégios de admin
+                if (resultadoadmin == 1)
                 {
-                    //Bem-vindo, Admin!
+                    // Setando o usuário como logado na sessão
+                    Session.setLoggedUser(usuario);  // Aqui, o usuário é registrado como logado
+                    if(Session.isUserLoggedIn())
+                    {
+                        System.out.println("Usuario logado como Admin.");
+                    }
+                    
+                    Usuario logado = Session.getLoggedUser();
+                    
+                    if(logado!=null)
+                    {
+                        System.out.println("Nome do usuario: " + logado.getNome());
+                    }
+                    abrirTelaAdmin();  // Acesse a tela de admin
                 } 
                 else 
                 {
-                    // Busca o nome do usuário
-                    String nome = usuario.getNomePorUsuario();
-                    if (nome != null) 
+                    // Setando o usuário como logado na sessão
+                    Session.setLoggedUser(usuario);  // Aqui, o usuário é registrado como logado
+                    
+                    if(Session.isUserLoggedIn())
                     {
-                        System.out.println("Lofins certp");
-                    } 
-                }
+                        System.out.println("Usuario logado como usuario comum.");
+                    }
+                    
+                    Usuario logado = Session.getLoggedUser();
+                    
+                    if(logado!=null)
+                    {
+                        System.out.println("Nome do usuario: " + logado.getNome());
+                    }
+                    
+                    abrirTelaMenu();   // Acesse a tela normal
+                    }
             } 
             else if (resultado == 2) 
             {
@@ -735,7 +770,11 @@ public class Tela_Login extends javax.swing.JFrame
         {
             Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
             javax.swing.JOptionPane.showMessageDialog(this, "Erro ao acessar o banco de dados.");
-        }
+        }   catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonEntrarActionPerformed
     //Faz o botão Entrar ficar Azul ao passar o mouse por cima
     private void buttonEntrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEntrarMouseEntered

@@ -84,7 +84,7 @@ public class Tela_Cadastro extends javax.swing.JFrame
         }
         
         //cria o método abrirTela_Menu, onde invoca a tela de menu e fecha a tela atual
-        private void abrirTelaMenu() throws FontFormatException, IOException
+        private void abrirTelaMenu() throws FontFormatException, IOException, SQLException
         {
             Tela_Menu TelaMenu = new Tela_Menu();
             this.dispose();
@@ -1308,6 +1308,8 @@ public class Tela_Cadastro extends javax.swing.JFrame
             } catch (FontFormatException ex) {
                 Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
+                Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonSynapseActionPerformed
