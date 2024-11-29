@@ -62,6 +62,7 @@ public class Tela_Cadastro extends javax.swing.JFrame
         Timer timerUserVz;
         Timer timerEmailVz;
         Timer timerSenhaVz;
+        Timer timerEmailErr;
         
         boolean acaoConcluida = false;
     //Final da declaração de variáveis
@@ -121,6 +122,35 @@ public class Tela_Cadastro extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        buttonSynapse = new javax.swing.JButton();
+        buttonSynapseLogo = new javax.swing.JButton();
+        fieldPesquisa = new javax.swing.JTextField();
+        buttonXpesq = new javax.swing.JButton();
+        buttonSobre = new javax.swing.JButton();
+        buttonCursos = new javax.swing.JButton();
+        buttonLogin = new javax.swing.JButton();
+        fieldNome = new javax.swing.JTextField();
+        labelNasc = new javax.swing.JLabel();
+        fieldNasc = new javax.swing.JFormattedTextField();
+        fieldUser = new javax.swing.JTextField();
+        fieldEmail = new javax.swing.JTextField();
+        labelSenha = new javax.swing.JLabel();
+        fieldSenha = new javax.swing.JPasswordField();
+        checkboxSenha = new javax.swing.JCheckBox();
+        buttonCadastrar = new javax.swing.JButton();
+        buttonSeta = new javax.swing.JButton();
+        buttonPR = new javax.swing.JButton();
+        buttonXTelas = new javax.swing.JButton();
+        labelTxtNasc = new javax.swing.JLabel();
+        labelEmail = new javax.swing.JLabel();
+        labelUser = new javax.swing.JLabel();
+        fundo = new javax.swing.JLabel();
+        panelEmailErrado = new javax.swing.JPanel();
+        panelEmailErrado2 = new javax.swing.JPanel();
+        labelEmailErrado = new javax.swing.JLabel();
+        buttonOkEmailErrado = new javax.swing.JButton();
+        labelContagemEmailErrado = new javax.swing.JLabel();
         panelCadastrado = new javax.swing.JPanel();
         panelCadastrado2 = new javax.swing.JPanel();
         labelCadastrado = new javax.swing.JLabel();
@@ -166,28 +196,6 @@ public class Tela_Cadastro extends javax.swing.JFrame
         labelNomeVazio = new javax.swing.JLabel();
         buttonOkNomeVazio = new javax.swing.JButton();
         labelContagemNomeVazio = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        buttonSynapse = new javax.swing.JButton();
-        buttonSynapseLogo = new javax.swing.JButton();
-        fieldPesquisa = new javax.swing.JTextField();
-        buttonXpesq = new javax.swing.JButton();
-        buttonSobre = new javax.swing.JButton();
-        buttonCursos = new javax.swing.JButton();
-        buttonLogin = new javax.swing.JButton();
-        fieldNome = new javax.swing.JTextField();
-        labelNasc = new javax.swing.JLabel();
-        fieldNasc = new javax.swing.JFormattedTextField();
-        fieldUser = new javax.swing.JTextField();
-        fieldEmail = new javax.swing.JTextField();
-        labelSenha = new javax.swing.JLabel();
-        fieldSenha = new javax.swing.JPasswordField();
-        checkboxSenha = new javax.swing.JCheckBox();
-        buttonCadastrar = new javax.swing.JButton();
-        buttonSeta = new javax.swing.JButton();
-        buttonPR = new javax.swing.JButton();
-        buttonXTelas = new javax.swing.JButton();
-        labelUser = new javax.swing.JLabel();
-        fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Synapse Connect");
@@ -198,6 +206,435 @@ public class Tela_Cadastro extends javax.swing.JFrame
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        jPanel1.setLayout(null);
+
+        buttonSynapse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/NomeLogo.png"))); // NOI18N
+        buttonSynapse.setBorder(null);
+        buttonSynapse.setBorderPainted(false);
+        buttonSynapse.setContentAreaFilled(false);
+        buttonSynapse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSynapse.setFocusPainted(false);
+        buttonSynapse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSynapseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonSynapseMouseExited(evt);
+            }
+        });
+        buttonSynapse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSynapseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonSynapse);
+        buttonSynapse.setBounds(30, 0, 260, 160);
+
+        buttonSynapseLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Formas/IconSynapse.png"))); // NOI18N
+        buttonSynapseLogo.setBorder(null);
+        buttonSynapseLogo.setBorderPainted(false);
+        buttonSynapseLogo.setContentAreaFilled(false);
+        buttonSynapseLogo.setFocusPainted(false);
+        jPanel1.add(buttonSynapseLogo);
+        buttonSynapseLogo.setBounds(10, 0, 170, 160);
+
+        fieldPesquisa.setBackground(new java.awt.Color(224, 222, 222));
+        fieldPesquisa.setFont(poppins.deriveFont(14f));
+        fieldPesquisa.setForeground(new java.awt.Color(128, 128, 128));
+        fieldPesquisa.setText("Pesquisar:");
+        fieldPesquisa.setBorder(null);
+        fieldPesquisa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldPesquisaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldPesquisaFocusLost(evt);
+            }
+        });
+        fieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldPesquisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fieldPesquisa);
+        fieldPesquisa.setBounds(380, 50, 380, 50);
+
+        buttonXpesq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/X.png"))); // NOI18N
+        buttonXpesq.setBorder(null);
+        buttonXpesq.setBorderPainted(false);
+        buttonXpesq.setContentAreaFilled(false);
+        buttonXpesq.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXpesq.setFocusPainted(false);
+        buttonXpesq.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonXpesq.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonXpesq.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonXpesqMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonXpesqMouseExited(evt);
+            }
+        });
+        buttonXpesq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXpesqActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonXpesq);
+        buttonXpesq.setBounds(780, 60, 40, 30);
+
+        buttonSobre.setFont(poppins.deriveFont(24f));
+        buttonSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Sobre.png"))); // NOI18N
+        buttonSobre.setBorder(null);
+        buttonSobre.setBorderPainted(false);
+        buttonSobre.setContentAreaFilled(false);
+        buttonSobre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSobre.setFocusPainted(false);
+        buttonSobre.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonSobre.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSobreMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonSobreMouseExited(evt);
+            }
+        });
+        buttonSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSobreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonSobre);
+        buttonSobre.setBounds(930, 60, 80, 30);
+
+        buttonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cursos.png"))); // NOI18N
+        buttonCursos.setBorder(null);
+        buttonCursos.setBorderPainted(false);
+        buttonCursos.setContentAreaFilled(false);
+        buttonCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCursos.setFocusPainted(false);
+        buttonCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonCursosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonCursosMouseExited(evt);
+            }
+        });
+        buttonCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCursosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonCursos);
+        buttonCursos.setBounds(1030, 60, 100, 30);
+
+        buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
+        buttonLogin.setBorder(null);
+        buttonLogin.setBorderPainted(false);
+        buttonLogin.setContentAreaFilled(false);
+        buttonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonLogin.setFocusPainted(false);
+        buttonLogin.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonLogin.setMinimumSize(new java.awt.Dimension(86, 19));
+        buttonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonLoginMouseExited(evt);
+            }
+        });
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonLogin);
+        buttonLogin.setBounds(1150, 50, 170, 55);
+
+        fieldNome.setBackground(new java.awt.Color(224, 222, 222));
+        fieldNome.setFont(poppins.deriveFont(14f)
+        );
+        fieldNome.setForeground(new java.awt.Color(128, 128, 128));
+        fieldNome.setText("Nome");
+        fieldNome.setBorder(null);
+        fieldNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNomeFocusLost(evt);
+            }
+        });
+        fieldNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldNomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fieldNome);
+        fieldNome.setBounds(360, 300, 380, 40);
+
+        labelNasc.setBackground(new java.awt.Color(224, 222, 222));
+        labelNasc.setFont(poppins.deriveFont(14f));
+        labelNasc.setForeground(new java.awt.Color(128, 128, 128));
+        labelNasc.setText("Nascimento");
+        labelNasc.setOpaque(true);
+        jPanel1.add(labelNasc);
+        labelNasc.setBounds(360, 367, 370, 40);
+
+        fieldNasc.setBackground(new java.awt.Color(224, 222, 222));
+        fieldNasc.setBorder(null);
+        fieldNasc.setForeground(new java.awt.Color(0, 0, 0));
+        fieldNasc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        fieldNasc.setText("jFormattedTextField1");
+        fieldNasc.setFont(poppins.deriveFont(14f)
+        );
+        fieldNasc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldNascFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNascFocusLost(evt);
+            }
+        });
+        jPanel1.add(fieldNasc);
+        fieldNasc.setBounds(360, 367, 380, 40);
+
+        fieldUser.setBackground(new java.awt.Color(224, 222, 222));
+        fieldUser.setFont(poppins.deriveFont(14f));
+        fieldUser.setForeground(new java.awt.Color(128, 128, 128));
+        fieldUser.setText("Usuario");
+        fieldUser.setBorder(null);
+        fieldUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldUserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fieldUser);
+        fieldUser.setBounds(360, 433, 380, 40);
+
+        fieldEmail.setBackground(new java.awt.Color(224, 222, 222));
+        fieldEmail.setFont(poppins.deriveFont(14f));
+        fieldEmail.setForeground(new java.awt.Color(128, 128, 128));
+        fieldEmail.setText("E-mail");
+        fieldEmail.setBorder(null);
+        jPanel1.add(fieldEmail);
+        fieldEmail.setBounds(360, 500, 380, 40);
+
+        labelSenha.setFont(poppins.deriveFont(14f));
+        labelSenha.setForeground(new java.awt.Color(128, 128, 128));
+        labelSenha.setText("Senha:");
+        jPanel1.add(labelSenha);
+        labelSenha.setBounds(360, 568, 50, 40);
+
+        fieldSenha.setBackground(new java.awt.Color(224, 222, 222));
+        fieldSenha.setFont(poppins.deriveFont(14f));
+        fieldSenha.setForeground(new java.awt.Color(128, 128, 128));
+        fieldSenha.setBorder(null);
+        fieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSenhaFocusLost(evt);
+            }
+        });
+        fieldSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldSenhaActionPerformed(evt);
+            }
+        });
+        fieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldSenhaKeyReleased(evt);
+            }
+        });
+        jPanel1.add(fieldSenha);
+        fieldSenha.setBounds(360, 568, 360, 40);
+
+        checkboxSenha.setBorder(null);
+        checkboxSenha.setContentAreaFilled(false);
+        checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        checkboxSenha.setFocusPainted(false);
+        checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaMostrar.png"))); // NOI18N
+        checkboxSenha.setVisible(false);
+        checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkboxSenhaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(checkboxSenha);
+        checkboxSenha.setBounds(720, 568, 20, 40);
+
+        buttonCadastrar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        buttonCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cadastrar.png"))); // NOI18N
+        buttonCadastrar.setBorder(null);
+        buttonCadastrar.setBorderPainted(false);
+        buttonCadastrar.setContentAreaFilled(false);
+        buttonCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCadastrar.setFocusPainted(false);
+        buttonCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonCadastrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonCadastrarMouseExited(evt);
+            }
+        });
+        buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCadastrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonCadastrar);
+        buttonCadastrar.setBounds(452, 630, 160, 50);
+
+        buttonSeta.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        buttonSeta.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Seta.png"))); // NOI18N
+        buttonSeta.setBorder(null);
+        buttonSeta.setBorderPainted(false);
+        buttonSeta.setContentAreaFilled(false);
+        buttonSeta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSeta.setFocusPainted(false);
+        buttonSeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSetaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonSetaMouseExited(evt);
+            }
+        });
+        buttonSeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSetaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonSeta);
+        buttonSeta.setBounds(855, 575, 190, 60);
+
+        buttonPR.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        buttonPR.setForeground(new java.awt.Color(255, 255, 255));
+        buttonPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/IconSynapsePreto.png"))); // NOI18N
+        buttonPR.setBorder(null);
+        buttonPR.setBorderPainted(false);
+        buttonPR.setContentAreaFilled(false);
+        buttonPR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonPR.setFocusPainted(false);
+        buttonPR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPRMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonPRMouseExited(evt);
+            }
+        });
+        buttonPR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPRActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonPR);
+        buttonPR.setBounds(1270, 655, 80, 70);
+
+        buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelas.png"))); // NOI18N
+        buttonXTelas.setBorder(null);
+        buttonXTelas.setBorderPainted(false);
+        buttonXTelas.setContentAreaFilled(false);
+        buttonXTelas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXTelas.setFocusPainted(false);
+        buttonXTelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonXTelasMouseExited(evt);
+            }
+        });
+        buttonXTelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXTelasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonXTelas);
+        buttonXTelas.setBounds(1280, 0, 86, 25);
+
+        labelTxtNasc.setForeground(new java.awt.Color(204, 0, 0));
+        jPanel1.add(labelTxtNasc);
+        labelTxtNasc.setBounds(350, 410, 260, 20);
+
+        labelEmail.setText("Formato: exemplo@dominio.com");
+        jPanel1.add(labelEmail);
+        labelEmail.setBounds(350, 543, 320, 20);
+
+        labelUser.setForeground(new java.awt.Color(204, 0, 0));
+        jPanel1.add(labelUser);
+        labelUser.setBounds(350, 480, 260, 15);
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
+        jPanel1.add(fundo);
+        fundo.setBounds(0, -17, 1370, 800);
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 1366, 768);
+
+        panelEmailErrado.setOpaque(false);
+        panelEmailErrado.setVisible(false);
+        panelEmailErrado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEmailErradoMouseClicked(evt);
+            }
+        });
+        panelEmailErrado.setLayout(null);
+
+        panelEmailErrado2.setBackground(new java.awt.Color(204, 204, 204));
+        panelEmailErrado2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
+        panelEmailErrado2.setForeground(new java.awt.Color(69, 82, 173));
+        panelEmailErrado2.setLayout(null);
+
+        labelEmailErrado.setFont(poppins.deriveFont(25f));
+        labelEmailErrado.setForeground(new java.awt.Color(69, 82, 173));
+        labelEmailErrado.setText("Email inválido, tente novamente.");
+        labelEmailErrado.setHorizontalAlignment(SwingConstants.CENTER);
+        panelEmailErrado2.add(labelEmailErrado);
+        labelEmailErrado.setBounds(7, 26, 490, 120);
+
+        buttonOkEmailErrado.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkEmailErrado.setFont(poppins.deriveFont(20f));
+        buttonOkEmailErrado.setForeground(new java.awt.Color(69, 82, 173));
+        buttonOkEmailErrado.setText("OK");
+        buttonOkEmailErrado.setBorder(null);
+        buttonOkEmailErrado.setBorderPainted(false);
+        buttonOkEmailErrado.setContentAreaFilled(false);
+        buttonOkEmailErrado.setFocusable(false);
+        buttonOkEmailErrado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkEmailErradoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkEmailErradoMouseExited(evt);
+            }
+        });
+        panelEmailErrado2.add(buttonOkEmailErrado);
+        buttonOkEmailErrado.setBounds(355, 210, 100, 40);
+
+        labelContagemEmailErrado.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagemEmailErrado.setFont(poppins.deriveFont(20f));
+        labelContagemEmailErrado.setForeground(new java.awt.Color(69, 82, 173));
+        labelContagemEmailErrado.setText("Tempo Restante: 5");
+        labelContagemEmailErrado.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelEmailErrado2.add(labelContagemEmailErrado);
+        labelContagemEmailErrado.setBounds(87, 210, 260, 40);
+
+        panelEmailErrado.add(panelEmailErrado2);
+        panelEmailErrado2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelEmailErrado);
+        panelEmailErrado.setBounds(0, 0, 1366, 768);
 
         panelCadastrado.setOpaque(false);
         panelCadastrado.setVisible(false);
@@ -685,373 +1122,6 @@ public class Tela_Cadastro extends javax.swing.JFrame
         getContentPane().add(panelNomeVazio);
         panelNomeVazio.setBounds(0, 0, 1366, 768);
 
-        jPanel1.setLayout(null);
-
-        buttonSynapse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/NomeLogo.png"))); // NOI18N
-        buttonSynapse.setBorder(null);
-        buttonSynapse.setBorderPainted(false);
-        buttonSynapse.setContentAreaFilled(false);
-        buttonSynapse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonSynapse.setFocusPainted(false);
-        buttonSynapse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSynapseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSynapseMouseExited(evt);
-            }
-        });
-        buttonSynapse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSynapseActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonSynapse);
-        buttonSynapse.setBounds(30, 0, 260, 160);
-
-        buttonSynapseLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Formas/IconSynapse.png"))); // NOI18N
-        buttonSynapseLogo.setBorder(null);
-        buttonSynapseLogo.setBorderPainted(false);
-        buttonSynapseLogo.setContentAreaFilled(false);
-        buttonSynapseLogo.setFocusPainted(false);
-        jPanel1.add(buttonSynapseLogo);
-        buttonSynapseLogo.setBounds(10, 0, 170, 160);
-
-        fieldPesquisa.setBackground(new java.awt.Color(224, 222, 222));
-        fieldPesquisa.setFont(poppins.deriveFont(14f));
-        fieldPesquisa.setForeground(new java.awt.Color(128, 128, 128));
-        fieldPesquisa.setText("Pesquisar:");
-        fieldPesquisa.setBorder(null);
-        fieldPesquisa.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldPesquisaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldPesquisaFocusLost(evt);
-            }
-        });
-        fieldPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldPesquisaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(fieldPesquisa);
-        fieldPesquisa.setBounds(380, 50, 380, 50);
-
-        buttonXpesq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/X.png"))); // NOI18N
-        buttonXpesq.setBorder(null);
-        buttonXpesq.setBorderPainted(false);
-        buttonXpesq.setContentAreaFilled(false);
-        buttonXpesq.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonXpesq.setFocusPainted(false);
-        buttonXpesq.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonXpesq.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonXpesq.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonXpesqMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonXpesqMouseExited(evt);
-            }
-        });
-        buttonXpesq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonXpesqActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonXpesq);
-        buttonXpesq.setBounds(780, 60, 40, 30);
-
-        buttonSobre.setFont(poppins.deriveFont(24f));
-        buttonSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Sobre.png"))); // NOI18N
-        buttonSobre.setBorder(null);
-        buttonSobre.setBorderPainted(false);
-        buttonSobre.setContentAreaFilled(false);
-        buttonSobre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonSobre.setFocusPainted(false);
-        buttonSobre.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonSobre.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonSobre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSobreMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSobreMouseExited(evt);
-            }
-        });
-        buttonSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSobreActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonSobre);
-        buttonSobre.setBounds(930, 60, 80, 30);
-
-        buttonCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cursos.png"))); // NOI18N
-        buttonCursos.setBorder(null);
-        buttonCursos.setBorderPainted(false);
-        buttonCursos.setContentAreaFilled(false);
-        buttonCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonCursos.setFocusPainted(false);
-        buttonCursos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonCursosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonCursosMouseExited(evt);
-            }
-        });
-        buttonCursos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCursosActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonCursos);
-        buttonCursos.setBounds(1030, 60, 100, 30);
-
-        buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
-        buttonLogin.setBorder(null);
-        buttonLogin.setBorderPainted(false);
-        buttonLogin.setContentAreaFilled(false);
-        buttonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonLogin.setFocusPainted(false);
-        buttonLogin.setMaximumSize(new java.awt.Dimension(86, 19));
-        buttonLogin.setMinimumSize(new java.awt.Dimension(86, 19));
-        buttonLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonLoginMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonLoginMouseExited(evt);
-            }
-        });
-        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonLoginActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonLogin);
-        buttonLogin.setBounds(1150, 50, 170, 55);
-
-        fieldNome.setBackground(new java.awt.Color(224, 222, 222));
-        fieldNome.setFont(poppins.deriveFont(14f)
-        );
-        fieldNome.setForeground(new java.awt.Color(128, 128, 128));
-        fieldNome.setText("Nome");
-        fieldNome.setBorder(null);
-        fieldNome.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldNomeFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldNomeFocusLost(evt);
-            }
-        });
-        fieldNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNomeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(fieldNome);
-        fieldNome.setBounds(360, 303, 380, 40);
-
-        labelNasc.setBackground(new java.awt.Color(224, 222, 222));
-        labelNasc.setFont(poppins.deriveFont(14f));
-        labelNasc.setForeground(new java.awt.Color(128, 128, 128));
-        labelNasc.setText("Nascimento");
-        labelNasc.setOpaque(true);
-        jPanel1.add(labelNasc);
-        labelNasc.setBounds(360, 363, 370, 40);
-
-        fieldNasc.setBackground(new java.awt.Color(224, 222, 222));
-        fieldNasc.setBorder(null);
-        fieldNasc.setForeground(new java.awt.Color(0, 0, 0));
-        fieldNasc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        fieldNasc.setText("jFormattedTextField1");
-        fieldNasc.setFont(poppins.deriveFont(14f)
-        );
-        fieldNasc.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldNascFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldNascFocusLost(evt);
-            }
-        });
-        jPanel1.add(fieldNasc);
-        fieldNasc.setBounds(360, 363, 380, 40);
-
-        fieldUser.setBackground(new java.awt.Color(224, 222, 222));
-        fieldUser.setFont(poppins.deriveFont(14f));
-        fieldUser.setForeground(new java.awt.Color(128, 128, 128));
-        fieldUser.setText("Usuario");
-        fieldUser.setBorder(null);
-        fieldUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldUserActionPerformed(evt);
-            }
-        });
-        jPanel1.add(fieldUser);
-        fieldUser.setBounds(360, 424, 380, 40);
-
-        fieldEmail.setBackground(new java.awt.Color(224, 222, 222));
-        fieldEmail.setFont(poppins.deriveFont(14f));
-        fieldEmail.setForeground(new java.awt.Color(128, 128, 128));
-        fieldEmail.setText("E-mail");
-        fieldEmail.setBorder(null);
-        jPanel1.add(fieldEmail);
-        fieldEmail.setBounds(360, 483, 380, 40);
-
-        labelSenha.setFont(poppins.deriveFont(14f));
-        labelSenha.setForeground(new java.awt.Color(128, 128, 128));
-        labelSenha.setText("Senha:");
-        jPanel1.add(labelSenha);
-        labelSenha.setBounds(360, 540, 50, 40);
-
-        fieldSenha.setBackground(new java.awt.Color(224, 222, 222));
-        fieldSenha.setFont(poppins.deriveFont(14f));
-        fieldSenha.setForeground(new java.awt.Color(128, 128, 128));
-        fieldSenha.setBorder(null);
-        fieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldSenhaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldSenhaFocusLost(evt);
-            }
-        });
-        fieldSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldSenhaActionPerformed(evt);
-            }
-        });
-        fieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldSenhaKeyReleased(evt);
-            }
-        });
-        jPanel1.add(fieldSenha);
-        fieldSenha.setBounds(360, 540, 360, 40);
-
-        checkboxSenha.setBorder(null);
-        checkboxSenha.setContentAreaFilled(false);
-        checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        checkboxSenha.setFocusPainted(false);
-        checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaMostrar.png"))); // NOI18N
-        checkboxSenha.setVisible(false);
-        checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxSenhaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(checkboxSenha);
-        checkboxSenha.setBounds(720, 540, 20, 40);
-
-        buttonCadastrar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        buttonCadastrar.setForeground(new java.awt.Color(255, 255, 255));
-        buttonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Cadastrar.png"))); // NOI18N
-        buttonCadastrar.setBorder(null);
-        buttonCadastrar.setBorderPainted(false);
-        buttonCadastrar.setContentAreaFilled(false);
-        buttonCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonCadastrar.setFocusPainted(false);
-        buttonCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonCadastrarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonCadastrarMouseExited(evt);
-            }
-        });
-        buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCadastrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonCadastrar);
-        buttonCadastrar.setBounds(452, 598, 160, 50);
-
-        buttonSeta.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        buttonSeta.setForeground(new java.awt.Color(255, 255, 255));
-        buttonSeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Seta.png"))); // NOI18N
-        buttonSeta.setBorder(null);
-        buttonSeta.setBorderPainted(false);
-        buttonSeta.setContentAreaFilled(false);
-        buttonSeta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonSeta.setFocusPainted(false);
-        buttonSeta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSetaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSetaMouseExited(evt);
-            }
-        });
-        buttonSeta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSetaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonSeta);
-        buttonSeta.setBounds(855, 575, 190, 60);
-
-        buttonPR.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        buttonPR.setForeground(new java.awt.Color(255, 255, 255));
-        buttonPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/IconSynapsePreto.png"))); // NOI18N
-        buttonPR.setBorder(null);
-        buttonPR.setBorderPainted(false);
-        buttonPR.setContentAreaFilled(false);
-        buttonPR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonPR.setFocusPainted(false);
-        buttonPR.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonPRMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonPRMouseExited(evt);
-            }
-        });
-        buttonPR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPRActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonPR);
-        buttonPR.setBounds(1270, 655, 80, 70);
-
-        buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelas.png"))); // NOI18N
-        buttonXTelas.setBorder(null);
-        buttonXTelas.setBorderPainted(false);
-        buttonXTelas.setContentAreaFilled(false);
-        buttonXTelas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonXTelas.setFocusPainted(false);
-        buttonXTelas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonXTelasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonXTelasMouseExited(evt);
-            }
-        });
-        buttonXTelas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonXTelasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonXTelas);
-        buttonXTelas.setBounds(1280, 0, 86, 25);
-
-        labelUser.setForeground(new java.awt.Color(204, 0, 0));
-        jPanel1.add(labelUser);
-        labelUser.setBounds(280, 680, 260, 20);
-
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastro.png"))); // NOI18N
-        jPanel1.add(fundo);
-        fundo.setBounds(0, -17, 1370, 800);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1366, 768);
-
         setBounds(-6, 0, 1366, 768);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1116,7 +1186,7 @@ public class Tela_Cadastro extends javax.swing.JFrame
                         else
                         {
                             labelUser.setText("*Usuario válido");
-                            labelUser.setForeground(new Color(0,0,0));
+                            labelUser.setForeground(new Color(0,255,8));
                         }
                     } 
                     catch (SQLException ex) 
@@ -1135,6 +1205,8 @@ public class Tela_Cadastro extends javax.swing.JFrame
         fieldEmail.setForeground(new Color(128,128,128)); // Cor mais suave para o placeholder
 
         // Inicializar o JLabel com o texto inicial de formato
+        labelEmail.setText("Formato: exemplo@dominio.com");
+        labelEmail.setForeground(new Color(153, 153, 153)); // Cor mais suave para o formato
       
         // Adicionar um ouvinte de foco para limpar e restaurar o texto de placeholder
         fieldEmail.addFocusListener(new FocusListener() 
@@ -1154,12 +1226,16 @@ public class Tela_Cadastro extends javax.swing.JFrame
                 if (fieldEmail.getText().isEmpty()) {
                     fieldEmail.setText("E-mail");
                     fieldEmail.setForeground(new Color(128,128,128)); // Cor mais suave para o placeholder
+                    labelEmail.setText("Formato: exemplo@dominio.com"); // Exibir o formato padrão
+                    labelEmail.setForeground(new Color(153, 153, 153)); // Cor suave
                 } 
                 else 
                 {
                     // Se o campo não estiver vazio, validação de formato
                     if (!validarEmail(fieldEmail.getText())) 
                     {
+                        labelEmail.setText("Formato de e-mail inválido! Use exemplo@dominio.com.");
+                        labelEmail.setForeground(Color.RED); // Cor vermelha para erro
                     } 
                     else
                     {
@@ -1169,9 +1245,13 @@ public class Tela_Cadastro extends javax.swing.JFrame
                         {
                             if(usuario.verificaEmailExiste())
                             {
+                                labelEmail.setText("*E-mail já cadastrado");
+                                labelEmail.setForeground(Color.RED);
                             }
                             else
                             {   
+                                labelEmail.setText("*E-mail válido");
+                                labelEmail.setForeground(new Color(0,255,8));
                             }
                         }
                         catch (SQLException ex) 
@@ -1476,7 +1556,14 @@ public class Tela_Cadastro extends javax.swing.JFrame
         }
         else
         {
-            email = fieldEmail.getText();
+            if (!validarEmail(fieldEmail.getText())) 
+            {
+                emailErrado();
+            }
+            else
+            {
+               email = fieldEmail.getText();
+            }   
         }
         
         if(fieldSenha.getText().equals("Senha") || fieldSenha.getText().equals(""))
@@ -1839,6 +1926,81 @@ private void usuCadastrado()
                 // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
                 tempoRestante[0] = tempoInicial; // Reinicia a contagem
                 labelContagemEmailExiste.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+    
+    private void emailErrado()
+    {
+         // Garantir que o painel esteja visível após a exclusão
+        panelEmailErrado.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelEmailErrado.revalidate();
+        panelEmailErrado.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerEmailErr != null && timerEmailErr.isRunning()) 
+        {
+            timerEmailErr.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerEmailErr = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelEmailErrado.setVisible(false);
+
+                    // Para o Timer
+                    timerEmailErr.stop();
+
+                    acaoConcluida = true;
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerEmailErr.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkEmailErrado.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerEmailErr != null) 
+                {
+                    timerEmailErr.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelEmailErrado.setVisible(false);
+
+                acaoConcluida = true;
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
             }
         });
     }
@@ -2457,10 +2619,31 @@ private void usuCadastrado()
         if (fieldNasc.getText().equals("__/__/____")) 
         {
             labelNasc.setVisible(true);
+            labelTxtNasc.setText("");
             data = null;
         }
         
+        if(!validarData(data))
+        {
+            labelTxtNasc.setText("*Data inválida, informe uma data válida.");           
+        }
+        else
+        {
+            labelTxtNasc.setText("");           
+        }
     }//GEN-LAST:event_fieldNascFocusLost
+
+    private void buttonOkEmailErradoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailErradoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkEmailErradoMouseEntered
+
+    private void buttonOkEmailErradoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailErradoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkEmailErradoMouseExited
+
+    private void panelEmailErradoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEmailErradoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelEmailErradoMouseClicked
 //Fim dos comandos do botão X para fechar a aplicação
 
     public boolean validarData(String data) 
@@ -2539,6 +2722,7 @@ private void usuCadastrado()
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonOkCadastrado;
     private javax.swing.JButton buttonOkDataErrada;
+    private javax.swing.JButton buttonOkEmailErrado;
     private javax.swing.JButton buttonOkEmailExiste;
     private javax.swing.JButton buttonOkEmailVazio;
     private javax.swing.JButton buttonOkNascVazio;
@@ -2565,6 +2749,7 @@ private void usuCadastrado()
     private javax.swing.JLabel labelCadastrado;
     private javax.swing.JLabel labelContagemCadastrado;
     private javax.swing.JLabel labelContagemDataErrada;
+    private javax.swing.JLabel labelContagemEmailErrado;
     private javax.swing.JLabel labelContagemEmailExiste;
     private javax.swing.JLabel labelContagemEmailVazio;
     private javax.swing.JLabel labelContagemNascVazio;
@@ -2573,6 +2758,8 @@ private void usuCadastrado()
     private javax.swing.JLabel labelContagemUserVazio;
     private javax.swing.JLabel labelContagemUsuExiste;
     private javax.swing.JLabel labelDataErrada;
+    private javax.swing.JLabel labelEmail;
+    private javax.swing.JLabel labelEmailErrado;
     private javax.swing.JLabel labelEmailExiste;
     private javax.swing.JLabel labelEmailVazio;
     private javax.swing.JLabel labelNasc;
@@ -2580,6 +2767,7 @@ private void usuCadastrado()
     private javax.swing.JLabel labelNomeVazio;
     private javax.swing.JLabel labelSenha;
     private javax.swing.JLabel labelSenhaVazia;
+    private javax.swing.JLabel labelTxtNasc;
     private javax.swing.JLabel labelUser;
     private javax.swing.JLabel labelUserVazio;
     private javax.swing.JLabel labelUsuExiste;
@@ -2587,6 +2775,8 @@ private void usuCadastrado()
     private javax.swing.JPanel panelCadastrado2;
     private javax.swing.JPanel panelDataErrada;
     private javax.swing.JPanel panelDataErrada2;
+    private javax.swing.JPanel panelEmailErrado;
+    private javax.swing.JPanel panelEmailErrado2;
     private javax.swing.JPanel panelEmailExiste;
     private javax.swing.JPanel panelEmailExiste2;
     private javax.swing.JPanel panelEmailVazio;

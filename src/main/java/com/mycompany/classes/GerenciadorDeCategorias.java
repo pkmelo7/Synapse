@@ -2,6 +2,7 @@ package com.mycompany.classes;
 
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -13,7 +14,7 @@ public class GerenciadorDeCategorias {
         produtoCurso = new ProdutoCurso();
     }
 
-    public void listarCursosPorCategoria(java.lang.String categoriaEscolhida, JPanel panelPrincipal, JScrollPane scrollPane) throws SQLException {
+    public void listarCursosPorCategoria(JFrame tela, java.lang.String categoriaEscolhida, JPanel panelPrincipal, JScrollPane scrollPane) throws SQLException {
         Curso cursoDAO = new Curso();
         List<Curso> cursos = cursoDAO.buscarCursosPorCategoria(categoriaEscolhida);
 
@@ -22,7 +23,9 @@ public class GerenciadorDeCategorias {
 
         // Adicionar cada curso no painel
         for (Curso curso : cursos) {
-            produtoCurso.addProduto(panelPrincipal, scrollPane, curso.getId());
+            Curso c = curso;
+            System.out.println("setando curso: "+ c.getNome());
+            produtoCurso.addProduto(tela, panelPrincipal, scrollPane, curso.getId());
         }
 
         // Atualizar o painel

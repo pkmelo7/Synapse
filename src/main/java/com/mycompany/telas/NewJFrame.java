@@ -107,9 +107,9 @@ public class NewJFrame extends javax.swing.JFrame {
         // Obter os valores dos campos
         String nome = jTextField1.getText();
         int autorId = Integer.parseInt(jTextField2.getText());
-        BigDecimal tempo = new BigDecimal(jTextField3.getText());
+        String tempo = jTextField3.getText();
         String nivel = jTextField4.getText();
-        BigDecimal preco = new BigDecimal(jTextField5.getText());
+        String preco = jTextField5.getText();
         String categoria = jTextField6.getText();
         String descricao = jTextArea1.getText();
         String caminhoImagem = jTextField7.getText();

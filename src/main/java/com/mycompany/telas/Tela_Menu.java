@@ -7,6 +7,7 @@ import com.mycompany.classes.FontePersonalizada;
 import com.mycompany.classes.GerenciadorDeCategorias;
 import com.mycompany.classes.ProdutoCarrinhoJanela;
 import com.mycompany.classes.Session;
+import com.mycompany.classes.Usuario;
 import com.mycompany.scrollbar.ScrollBarCustom;
 import com.mycompany.scrollbar.ScrollBarCustom_Cursos;
 import java.awt.Color;
@@ -23,13 +24,14 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 //Fim das importações necessárias
 
 public class Tela_Menu extends javax.swing.JFrame {
     
     //Declaração de variáveis
-        Session sessao = new Session();
+        Session sessao = new Session();        
     
         //Variáveis para o movimento do logo Synapse
         final int originalX = 10;
@@ -74,12 +76,32 @@ public class Tela_Menu extends javax.swing.JFrame {
             this.dispose();
             Login.setVisible(true);
         }
+        
+        private void abrirTelaCursos() throws FontFormatException, IOException, SQLException
+        {
+            Tela_Cursos Cursos = new Tela_Cursos();
+            this.dispose();
+            Cursos.setVisible(true);
+        }
+        
+        public static String capitalizeFirstLetter(String text) 
+        {
+            if (text == null || text.isEmpty()) 
+            {
+                return text; // Retorna o texto original se for nulo ou vazio
+            }
+            return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+        }
+
     //Fim da declaração de métodos
         
     public Tela_Menu() throws FontFormatException, IOException, SQLException {
         //cria a fonte poppins no projeto
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents(); 
+        
+        Session.outCursoSelecionado();
+        
         //Configurar scrollbar vertical como customizada
         scrollbar.setVerticalScrollBar(new ScrollBarCustom());
         scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom()); 
@@ -99,11 +121,31 @@ public class Tela_Menu extends javax.swing.JFrame {
         String cat2 = categoria2.getText();
         
         GerenciadorDeCategorias gerenciador = new GerenciadorDeCategorias();
-        gerenciador.listarCursosPorCategoria(cat1, panelDispCursos1, scrollDispCursos1);
+        gerenciador.listarCursosPorCategoria(this, cat1, panelDispCursos1, scrollDispCursos1);
         
         GerenciadorDeCategorias gerenciador2 = new GerenciadorDeCategorias();
-        gerenciador2.listarCursosPorCategoria(cat2, panelDispCursos, scrollDispCursos);
+        gerenciador2.listarCursosPorCategoria(this, cat2, panelDispCursos, scrollDispCursos);
+        
+        Usuario usu = null;
+        
+        if(sessao.isUserLoggedIn())
+        {   
+            labelPerfil.setVisible(true);
+            usu = sessao.getLoggedUser();
+            String user = usu.getUser();
+            if(user != null)
+            {
+                String nomeUser = usu.getPrimeiroNomePorUsuario(user);
+                labelPerfil.setText(capitalizeFirstLetter(nomeUser));
+            }
+        }
+        else
+        {
+            labelPerfil.setVisible(false);
+        }
     }
+        
+        
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,6 +157,10 @@ public class Tela_Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelPerfil = new javax.swing.JPanel();
+        buttonMeuPerfil = new javax.swing.JButton();
+        buttonMeusCursos = new javax.swing.JButton();
+        buttonLogout = new javax.swing.JButton();
         buttonSynapse = new javax.swing.JButton();
         buttonSynapseLogo = new javax.swing.JButton();
         fieldPesquisa = new javax.swing.JTextField();
@@ -127,6 +173,8 @@ public class Tela_Menu extends javax.swing.JFrame {
         carrinho = new javax.swing.JPanel();
         carrinho2 = new javax.swing.JPanel();
         buttonTelaCarrinho = new javax.swing.JButton();
+        labelPerfil = new javax.swing.JLabel();
+        buttonPerfil = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
         buttonCarrinho = new javax.swing.JButton();
         fundoBarraSup = new javax.swing.JLabel();
@@ -158,6 +206,80 @@ public class Tela_Menu extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        panelPerfil.setBackground(new java.awt.Color(255, 255, 255));
+        panelPerfil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
+        panelPerfil.setVisible(false);
+        panelPerfil.setLayout(null);
+
+        buttonMeuPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/MeuPerfil.png"))); // NOI18N
+        buttonMeuPerfil.setBorder(null);
+        buttonMeuPerfil.setBorderPainted(false);
+        buttonMeuPerfil.setContentAreaFilled(false);
+        buttonMeuPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonMeuPerfil.setFocusPainted(false);
+        buttonMeuPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonMeuPerfilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonMeuPerfilMouseExited(evt);
+            }
+        });
+        buttonMeuPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMeuPerfilActionPerformed(evt);
+            }
+        });
+        panelPerfil.add(buttonMeuPerfil);
+        buttonMeuPerfil.setBounds(10, 13, 210, 40);
+
+        buttonMeusCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/MeusCursos.png"))); // NOI18N
+        buttonMeusCursos.setBorder(null);
+        buttonMeusCursos.setBorderPainted(false);
+        buttonMeusCursos.setContentAreaFilled(false);
+        buttonMeusCursos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonMeusCursos.setFocusPainted(false);
+        buttonMeusCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonMeusCursosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonMeusCursosMouseExited(evt);
+            }
+        });
+        buttonMeusCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMeusCursosActionPerformed(evt);
+            }
+        });
+        panelPerfil.add(buttonMeusCursos);
+        buttonMeusCursos.setBounds(10, 60, 210, 40);
+
+        buttonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Logout.png"))); // NOI18N
+        buttonLogout.setBorder(null);
+        buttonLogout.setBorderPainted(false);
+        buttonLogout.setContentAreaFilled(false);
+        buttonLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonLogout.setFocusPainted(false);
+        buttonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonLogoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonLogoutMouseExited(evt);
+            }
+        });
+        buttonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLogoutActionPerformed(evt);
+            }
+        });
+        panelPerfil.add(buttonLogout);
+        buttonLogout.setBounds(10, 107, 210, 40);
+
+        getContentPane().add(panelPerfil);
+        panelPerfil.setBounds(1120, 110, 230, 210);
 
         buttonSynapse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/NomeLogo.png"))); // NOI18N
         buttonSynapse.setBorder(null);
@@ -375,6 +497,45 @@ public class Tela_Menu extends javax.swing.JFrame {
 
         getContentPane().add(carrinho2);
         carrinho2.setBounds(767, 345, 230, 55);
+
+        labelPerfil.setBackground(new java.awt.Color(102, 255, 102));
+        labelPerfil.setFont(poppins.deriveFont(16f));
+        labelPerfil.setForeground(new java.awt.Color(0, 0, 0));
+        labelPerfil.setHorizontalAlignment(SwingConstants.CENTER);
+        getContentPane().add(labelPerfil);
+        labelPerfil.setBounds(1190, 58, 110, 37);
+
+        buttonPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Conta.png"))); // NOI18N
+        buttonPerfil.setBorder(null);
+        buttonPerfil.setBorderPainted(false);
+        buttonPerfil.setContentAreaFilled(false);
+        buttonPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonPerfil.setFocusPainted(false);
+        buttonPerfil.setMaximumSize(new java.awt.Dimension(86, 19));
+        buttonPerfil.setMinimumSize(new java.awt.Dimension(86, 19));
+        if(sessao.isUserLoggedIn())
+        {
+            buttonPerfil.setVisible(true);
+        }
+        else
+        {
+            buttonPerfil.setVisible(false);
+        }
+        buttonPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPerfilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonPerfilMouseExited(evt);
+            }
+        });
+        buttonPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPerfilActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonPerfil);
+        buttonPerfil.setBounds(1150, 52, 170, 50);
 
         buttonLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/Login.png"))); // NOI18N
         buttonLogin.setBorder(null);
@@ -763,7 +924,16 @@ public class Tela_Menu extends javax.swing.JFrame {
 //Início dos comandos do botão "Cursos"
     //<null>
     private void buttonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCursosActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaCursos();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonCursosActionPerformed
     //Faz o botão Cursos ficar Azul ao passar o mouse por cima
     private void buttonCursosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCursosMouseEntered
@@ -899,7 +1069,16 @@ public class Tela_Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSetaMouseExited
     //<null>
     private void buttonSetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetaActionPerformed
-            // TODO add your handling code here:   
+            try {
+                // TODO add your handling code here:
+                abrirTelaCursos();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSetaActionPerformed
 
     private void buttonTelaCarrinhoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTelaCarrinhoMouseEntered
@@ -924,6 +1103,88 @@ public class Tela_Menu extends javax.swing.JFrame {
             Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonTelaCarrinhoActionPerformed
+
+    private void buttonPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPerfilMouseEntered
+        // TODO add your handling code here:
+        ImageIcon PerfilAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/ContaAzul.png"));
+        buttonPerfil.setIcon(PerfilAzul);
+        labelPerfil.setForeground(new Color(69,82,173));
+    }//GEN-LAST:event_buttonPerfilMouseEntered
+
+    private void buttonPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPerfilMouseExited
+        // TODO add your handling code here:
+        ImageIcon PerfilAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Conta.png"));
+        buttonPerfil.setIcon(PerfilAzul);
+        labelPerfil.setForeground(new Color(0,0,0));
+    }//GEN-LAST:event_buttonPerfilMouseExited
+
+    private void buttonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPerfilActionPerformed
+        if(panelPerfil.isVisible())
+        {
+            panelPerfil.setVisible(false);
+        }
+        else
+        {
+            panelPerfil.setVisible(true);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPerfilActionPerformed
+
+    private void buttonMeuPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMeuPerfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonMeuPerfilActionPerformed
+
+    private void buttonMeuPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMeuPerfilMouseEntered
+        // TODO add your handling code here:
+        ImageIcon PerfilAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/MeuPerfilAzul.png"));
+        buttonMeuPerfil.setIcon(PerfilAzul);
+    }//GEN-LAST:event_buttonMeuPerfilMouseEntered
+
+    private void buttonMeuPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMeuPerfilMouseExited
+        // TODO add your handling code here:
+        ImageIcon Perfil = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/MeuPerfil.png"));
+        buttonMeuPerfil.setIcon(Perfil);
+    }//GEN-LAST:event_buttonMeuPerfilMouseExited
+
+    private void buttonMeusCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMeusCursosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonMeusCursosActionPerformed
+
+    private void buttonMeusCursosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMeusCursosMouseEntered
+        // TODO add your handling code here:
+        ImageIcon MeusCursosAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/MeusCursosAzul.png"));
+        buttonMeusCursos.setIcon(MeusCursosAzul);
+    }//GEN-LAST:event_buttonMeusCursosMouseEntered
+
+    private void buttonMeusCursosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMeusCursosMouseExited
+        // TODO add your handling code here:
+        ImageIcon MeusCursos = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/MeusCursos.png"));
+        buttonMeusCursos.setIcon(MeusCursos);
+    }//GEN-LAST:event_buttonMeusCursosMouseExited
+
+    private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
+        // TODO add your handling code here:
+        Session.logout(); 
+        buttonCarrinho.setVisible(false);
+        buttonPerfil.setVisible(false);
+        buttonLogin.setVisible(true);
+        labelPerfil.setVisible(false);
+        scrollbarCarrinho.setVisible(false);
+        panelPerfil.setVisible(false);
+        carrinho2.setVisible(false);
+    }//GEN-LAST:event_buttonLogoutActionPerformed
+
+    private void buttonLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseEntered
+        // TODO add your handling code here:
+        ImageIcon LogoutAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/LogoutAzul.png"));
+        buttonLogout.setIcon(LogoutAzul);
+    }//GEN-LAST:event_buttonLogoutMouseEntered
+
+    private void buttonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseExited
+        // TODO add your handling code here:
+        ImageIcon Logout = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/Logout.png"));
+        buttonLogout.setIcon(Logout);
+    }//GEN-LAST:event_buttonLogoutMouseExited
 //Inicio dos comandos do botão "Seta"/"Cursos" 
     
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -979,7 +1240,11 @@ public class Tela_Menu extends javax.swing.JFrame {
     private javax.swing.JButton buttonCarrinho;
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonLogin;
+    private javax.swing.JButton buttonLogout;
+    private javax.swing.JButton buttonMeuPerfil;
+    private javax.swing.JButton buttonMeusCursos;
     private javax.swing.JButton buttonPR;
+    private javax.swing.JButton buttonPerfil;
     private javax.swing.JButton buttonSeta;
     private javax.swing.JButton buttonSobre;
     private javax.swing.JButton buttonSynapse;
@@ -999,10 +1264,12 @@ public class Tela_Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel labelPerfil;
     private javax.swing.JLabel labelQtdCarrinho;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel panelDispCursos;
     private javax.swing.JPanel panelDispCursos1;
+    private javax.swing.JPanel panelPerfil;
     private javax.swing.JScrollPane scrollDispCursos;
     private javax.swing.JScrollPane scrollDispCursos1;
     private javax.swing.JScrollPane scrollbar;

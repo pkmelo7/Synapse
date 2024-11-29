@@ -17,9 +17,9 @@ CREATE TABLE Curso (
     nome VARCHAR(45) NOT NULL,
     autor_id INT NOT NULL,
     FOREIGN KEY (autor_id) REFERENCES User(id) ON DELETE CASCADE,
-    tempo DECIMAL(4, 2) NOT NULL,
+    tempo VARCHAR(6) NOT NULL,
     nivel VARCHAR(30) NOT NULL,
-    preco DECIMAL(7,2) NOT NULL,
+    preco VARCHAR(10) NOT NULL,
     categoria VARCHAR(45) NOT NULL,
     descricao VARCHAR(500)
     );
@@ -29,6 +29,7 @@ SELECT * FROM curso;
 CREATE TABLE imagens (
     curso_id INT PRIMARY KEY NOT NULL,
     FOREIGN KEY (curso_id) REFERENCES curso(id) ON DELETE CASCADE,
-    imagem LONGBLOB NOT NULL);
+    imagem LONGBLOB NOT NULL
+    );
     
 SELECT * FROM imagens;

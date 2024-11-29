@@ -48,6 +48,13 @@ public class Tela_AdminCadastrar1 extends javax.swing.JFrame {
             CadastraUser.setVisible(true);
             this.dispose();
         }
+        
+        public void abrirCadastrarCurso() throws FontFormatException, IOException
+        {
+            Tela_AdminCadastrarCurso CadastraCurso = new Tela_AdminCadastrarCurso();
+            CadastraCurso.setVisible(true);
+            this.dispose();
+        }
    
     //Fim da declaração de métodos
         
@@ -249,7 +256,14 @@ public class Tela_AdminCadastrar1 extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCursosMouseExited
     //<null>
     private void buttonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCursosActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirCadastrarCurso();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_AdminCadastrar1.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_AdminCadastrar1.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }//GEN-LAST:event_buttonCursosActionPerformed
 //Fim dos comandos do botao Cursos
