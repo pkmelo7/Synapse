@@ -21,7 +21,10 @@
                 <include>fonts/Poppins-Bold.ttf</include>
                 
                 <include>images/FundosTelas/Default.png</include>
+                <include>images/FundosTelas/ExbCurso.png</include>
                 <include>images/FundosTelas/FundoCadastrarAdmin.png</include>
+                <include>images/FundosTelas/FundoCadastrarCurso.png</include>
+                <include>images/FundosTelas/FundoCadastrarCurso2.png</include>
                 <include>images/FundosTelas/FundoCadastro.png</include>
                 <include>images/FundosTelas/FundoCarrinho.png</include>
                 <include>images/FundosTelas/FundoCrudAdmin.png</include>
@@ -32,7 +35,9 @@
                 <include>images/FundosTelas/FundoPerfil.png</include>
                 <include>images/FundosTelas/FundoSobre.png</include>
                 <include>images/FundosTelas/bannerCursos.png</include>
-                
+                             
+                <include>images/Botoes/addCarrinho.png</include>
+                <include>images/Botoes/addCarrinhoAzul.png</include>
                 <include>images/Botoes/AplicarDesconto.png</include>
                 <include>images/Botoes/AplicarDescontoAzul.png</include>
                 <include>images/Botoes/Cadastrar.png</include>
@@ -72,8 +77,16 @@
                 <include>images/Botoes/Listar2.png</include>
                 <include>images/Botoes/Login.png</include>
                 <include>images/Botoes/LoginAzul.png</include>
+                <include>images/Botoes/Logout.png</include>
+                <include>images/Botoes/LogoutAzul.png</include>
+                <include>images/Botoes/MeuPerfil.png</include>
+                <include>images/Botoes/MeuPerfilAzul.png</include>
+                <include>images/Botoes/MeusCursos.png</include>
+                <include>images/Botoes/MeusCursosAzul.png</include>
                 <include>images/Botoes/Next.png</include>
                 <include>images/Botoes/Next2.png</include>
+                <include>images/Botoes/prosseguirAdm.png</include>
+                <include>images/Botoes/prosseguirAdm2.png</include>
                 <include>images/Botoes/Sacola.png</include>
                 <include>images/Botoes/SacolaAzul.png</include>
                 <include>images/Botoes/SalvarAlt.png</include>
@@ -105,6 +118,7 @@
                 <include>images/Formas/BarraPesquisa.png</include>
                 <include>images/Formas/BarraSup.png</include>
                 <include>images/Formas/BotaoCurso.png</include>
+                <include>images/Formas/fotocursoDefault.png</include>
                 <include>images/Formas/defaultfoto.png</include>
                 <include>images/Formas/defaultfotoJanela.png</include>
                 <include>images/Formas/DesenhoComputador.png</include>
@@ -127,6 +141,7 @@
                 <include>images/TelasCompletas/Menu.png</include>
                 <include>images/TelasCompletas/Perfil.png</include>
                 <include>images/TelasCompletas/Sobre.png</include>
+                <include>images/TelasCompletas/TelaCurso.png</include>
                 <include>images/TelasCompletas/PageAdminCadastro.png</include>
                 <include>images/TelasCompletas/PageAdminListar.png</include>
                 

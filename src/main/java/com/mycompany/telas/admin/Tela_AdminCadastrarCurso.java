@@ -4,45 +4,61 @@ package com.mycompany.telas.admin;
 
 //Importações necessárias
 import com.mycompany.classes.Admin;
+import com.mycompany.classes.Curso;
+import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
-import com.mycompany.telas.admin.Tela_AdminCadastrar1;
+import com.mycompany.scrollbar.ScrollBarCustom_Admin;
+import com.mycompany.telas.NewJFrame;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.DocumentFilter;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 //Fim das importações necessárias
 
 public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
     
     //Declaração de variáveis 
+        Session sessao = new Session();
+    
         //variavel para uso da fonte digital7
         Font digital7;
         GraphicsEnvironment GE = GraphicsEnvironment.getLocalGraphicsEnvironment();
         
-        //Variável para determinar se o checkbox que torna a senha visivel esta ativo ou nao
-        boolean showing = false;
+         //Variaveis para configurar a fonte como poppins
+        Font poppins;
         
         //Variavel para trazer o icone do projeto
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png")); 
@@ -50,17 +66,12 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         Usuario usuario = new Usuario();
         Admin adm = new Admin();
         
-        MaskFormatter mask;
+        String user;
         
-        Timer timerUsu;
-        Timer timerData;
-        Timer timerUsuEx;
-        Timer timerEmailEx;
+        MaskFormatter maskTempo;
+        MaskFormatter maskValor;
+        
         Timer timerNomeVz;
-        Timer timerNascVz;
-        Timer timerUserVz;
-        Timer timerEmailVz;
-        Timer timerSenhaVz;
         
         boolean acaoConcluida = false;
     //Final da declaração de variáveis
@@ -74,25 +85,81 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
             this.dispose();
         }
    
+        
     //Fim da declaração de métodos
         
     public Tela_AdminCadastrarCurso() throws FontFormatException, IOException {
-        //cria a fonte digital7 no projeto
+        //cria as fontes do projeto
+        this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         this.digital7 = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/digital-7.ttf"));
         initComponents();
-        configurarCampoEmail();
-        configurarCampoUser();
+        
+        buttonXTelas.repaint();
+        buttonXTelas.revalidate();
+        
+        scrollDescricao.setVerticalScrollBar(new ScrollBarCustom_Admin());
+        
+        configurarCampoAutor();
         
         try
         {
-            mask = new MaskFormatter("##/##/####");
-            mask.setPlaceholderCharacter('_');
-            fieldNasc.setFormatterFactory(new DefaultFormatterFactory(mask));
+            maskTempo = new MaskFormatter("##.##'h'");
+            maskTempo.setPlaceholderCharacter('_');
+            fieldTempo.setFormatterFactory(new DefaultFormatterFactory(maskTempo));
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        
+            ((AbstractDocument) textAreaDescricao.getDocument()).setDocumentFilter(new DocumentFilter() {
+            private final int LIMITE = 500; // Limite máximo de caracteres
+
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (fb.getDocument().getLength() + string.length() <= LIMITE) {
+                    super.insertString(fb, offset, string, attr);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Opcional: emite um som de aviso
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (fb.getDocument().getLength() - length + text.length() <= LIMITE) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Opcional: emite um som de aviso
+                }
+            }
+        });
+            
+            int limiteCaracteres = 500;
+            
+            textAreaDescricao.getDocument().addDocumentListener(new DocumentListener() 
+            {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    atualizarContador();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    atualizarContador();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    atualizarContador();
+                }
+
+                private void atualizarContador() 
+                {
+                    int caracteresDigitados = textAreaDescricao.getText().length();
+                    contadorLabel.setText(caracteresDigitados + "/" + limiteCaracteres);
+                }
+            });
+
     }
     
     /**
@@ -105,23 +172,30 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonXTelas = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
+        buttonXTelas = new javax.swing.JButton();
         messageLabel1 = new javax.swing.JLabel();
         telaAdmin = new javax.swing.JPanel();
         buttonVoltar = new javax.swing.JButton();
         buttonCadastrar = new javax.swing.JButton();
         fieldNome = new javax.swing.JTextField();
-        labelTxtNasc = new javax.swing.JLabel();
-        labelNasc = new javax.swing.JLabel();
-        fieldNasc = new javax.swing.JFormattedTextField();
-        fieldUser = new javax.swing.JTextField();
-        fieldEmail = new javax.swing.JTextField();
-        labelSenha = new javax.swing.JLabel();
-        checkboxSenha = new javax.swing.JCheckBox();
-        fieldSenha = new javax.swing.JPasswordField();
-        labelUser = new javax.swing.JLabel();
-        labelEmail = new javax.swing.JLabel();
+        labelIsAutor = new javax.swing.JLabel();
+        buttonNao = new javax.swing.JButton();
+        buttonSim = new javax.swing.JButton();
+        labelIdAutor = new javax.swing.JLabel();
+        fieldIdAutor = new javax.swing.JFormattedTextField();
+        labelTxtIdAutor = new javax.swing.JLabel();
+        labelValor = new javax.swing.JLabel();
+        fieldValor = new javax.swing.JFormattedTextField();
+        labelTempo = new javax.swing.JLabel();
+        fieldTempo = new javax.swing.JFormattedTextField();
+        fieldNivel = new javax.swing.JTextField();
+        fieldCategoria = new javax.swing.JTextField();
+        contadorLabel = new javax.swing.JLabel();
+        fieldCaminho = new javax.swing.JTextField();
+        scrollDescricao = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        textAreaDescricao = new javax.swing.JTextArea();
         fundo = new javax.swing.JLabel();
         panelNomeVazio = new javax.swing.JPanel();
         panelNomeVazio2 = new javax.swing.JPanel();
@@ -139,6 +213,9 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        panel.setBackground(new java.awt.Color(0, 0, 0));
+        panel.setLayout(null);
 
         buttonXTelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XFecharTelasAdmin.png"))); // NOI18N
         buttonXTelas.setBorder(null);
@@ -159,21 +236,19 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
                 buttonXTelasActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonXTelas);
+        panel.add(buttonXTelas);
         buttonXTelas.setBounds(1280, 0, 86, 25);
-
-        panel.setBackground(new java.awt.Color(0, 0, 0));
-        panel.setLayout(null);
 
         messageLabel1.setBackground(new java.awt.Color(0, 0, 0));
         messageLabel1.setFont(digital7.deriveFont(100f));
         messageLabel1.setForeground(new java.awt.Color(0, 255, 8));
         messageLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         messageLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        String message = "Cadastro de usuarios";
+        messageLabel1.setVerticalAlignment(SwingConstants.TOP);
+        String message = "Cadastro de cursos";
         typingEffect(messageLabel1, message, buttonVoltar, telaAdmin);
         panel.add(messageLabel1);
-        messageLabel1.setBounds(0, 0, 1366, 201);
+        messageLabel1.setBounds(0, 0, 1366, 120);
 
         telaAdmin.setBackground(new java.awt.Color(0, 0, 0));
         telaAdmin.setForeground(new java.awt.Color(0, 0, 0));
@@ -209,7 +284,7 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         buttonCadastrar.setBackground(new java.awt.Color(0, 0, 0));
         buttonCadastrar.setFont(digital7.deriveFont(75f));
         buttonCadastrar.setForeground(new java.awt.Color(0, 255, 8));
-        buttonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/CadastrarAdmin.png"))); // NOI18N
+        buttonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/prosseguirAdm.png"))); // NOI18N
         buttonCadastrar.setBorder(null);
         buttonCadastrar.setBorderPainted(false);
         buttonCadastrar.setContentAreaFilled(false);
@@ -229,12 +304,12 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
             }
         });
         telaAdmin.add(buttonCadastrar);
-        buttonCadastrar.setBounds(1044, 632, 200, 70);
+        buttonCadastrar.setBounds(1044, 675, 200, 70);
 
         fieldNome.setBackground(new java.awt.Color(0, 0, 0));
-        fieldNome.setFont(digital7.deriveFont(25f));
+        fieldNome.setFont(poppins.deriveFont(20f));
         fieldNome.setForeground(new java.awt.Color(0, 178, 6));
-        fieldNome.setText("Nome");
+        fieldNome.setText("Nome do Curso");
         fieldNome.setBorder(null);
         fieldNome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -245,106 +320,245 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
             }
         });
         telaAdmin.add(fieldNome);
-        fieldNome.setBounds(190, 217, 1030, 50);
+        fieldNome.setBounds(190, 127, 1030, 50);
 
-        labelTxtNasc.setForeground(new java.awt.Color(204, 0, 0));
-        telaAdmin.add(labelTxtNasc);
-        labelTxtNasc.setBounds(190, 360, 260, 20);
+        labelIsAutor.setFont(digital7.deriveFont(37f));
+        labelIsAutor.setForeground(new java.awt.Color(0, 255, 8));
+        labelIsAutor.setText("Voce e o autor?");
+        telaAdmin.add(labelIsAutor);
+        labelIsAutor.setBounds(130, 200, 240, 70);
 
-        labelNasc.setBackground(new java.awt.Color(0, 0, 0));
-        labelNasc.setFont(digital7.deriveFont(25f));
-        labelNasc.setForeground(new java.awt.Color(0, 178, 6));
-        labelNasc.setText("Nascimento");
-        labelNasc.setOpaque(true);
-        telaAdmin.add(labelNasc);
-        labelNasc.setBounds(190, 303, 370, 50);
-
-        fieldNasc.setBackground(new java.awt.Color(0, 0, 0));
-        fieldNasc.setBorder(null);
-        fieldNasc.setForeground(new java.awt.Color(0, 255, 8));
-        fieldNasc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        fieldNasc.setToolTipText("");
-        fieldNasc.setFont(digital7.deriveFont(25f));
-        fieldNasc.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldNascFocusGained(evt);
+        buttonNao.setBackground(new java.awt.Color(0, 0, 0));
+        buttonNao.setFont(digital7.deriveFont(30f));
+        buttonNao.setForeground(new java.awt.Color(0, 255, 8));
+        buttonNao.setText("> Nao");
+        buttonNao.setBorder(null);
+        buttonNao.setBorderPainted(false);
+        buttonNao.setContentAreaFilled(false);
+        buttonNao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonNao.setFocusPainted(false);
+        buttonNao.setHorizontalAlignment(SwingConstants.LEFT);
+        buttonNao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonNaoMouseEntered(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldNascFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonNaoMouseExited(evt);
             }
         });
-        telaAdmin.add(fieldNasc);
-        fieldNasc.setBounds(190, 303, 1030, 50);
-
-        fieldUser.setBackground(new java.awt.Color(0, 0, 0));
-        fieldUser.setFont(digital7.deriveFont(25f));
-        fieldUser.setForeground(new java.awt.Color(0, 178, 6));
-        fieldUser.setText("Usuario");
-        fieldUser.setBorder(null);
-        telaAdmin.add(fieldUser);
-        fieldUser.setBounds(190, 388, 1030, 50);
-
-        fieldEmail.setBackground(new java.awt.Color(0, 0, 0));
-        fieldEmail.setFont(digital7.deriveFont(25f));
-        fieldEmail.setForeground(new java.awt.Color(0, 178, 6));
-        fieldEmail.setText("E-mail");
-        fieldEmail.setBorder(null);
-        telaAdmin.add(fieldEmail);
-        fieldEmail.setBounds(190, 473, 1030, 50);
-
-        labelSenha.setBackground(new java.awt.Color(0, 0, 0));
-        labelSenha.setFont(digital7.deriveFont(25f));
-        labelSenha.setForeground(new java.awt.Color(0, 178, 6));
-        labelSenha.setText("Senha");
-        telaAdmin.add(labelSenha);
-        labelSenha.setBounds(190, 559, 150, 50);
-
-        checkboxSenha.setBackground(new java.awt.Color(0, 0, 0));
-        checkboxSenha.setFont(digital7.deriveFont(25f));
-        checkboxSenha.setForeground(new java.awt.Color(0, 255, 8));
-        checkboxSenha.setBorder(null);
-        checkboxSenha.setContentAreaFilled(false);
-        checkboxSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        checkboxSenha.setFocusPainted(false);
-        checkboxSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/SenhaMostrarAdmin.png"))); // NOI18N
-        checkboxSenha.setVisible(false);
-        checkboxSenha.addActionListener(new java.awt.event.ActionListener() {
+        buttonNao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxSenhaActionPerformed(evt);
+                buttonNaoActionPerformed(evt);
             }
         });
-        telaAdmin.add(checkboxSenha);
-        checkboxSenha.setBounds(1200, 559, 20, 50);
+        telaAdmin.add(buttonNao);
+        buttonNao.setBounds(380, 243, 80, 30);
 
-        fieldSenha.setBackground(new java.awt.Color(0, 0, 0));
-        fieldSenha.setFont(digital7.deriveFont(25f));
-        fieldSenha.setForeground(new java.awt.Color(0, 255, 8));
-        fieldSenha.setBorder(null);
-        fieldSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+        buttonSim.setBackground(new java.awt.Color(0, 0, 0));
+        buttonSim.setFont(digital7.deriveFont(30f));
+        buttonSim.setForeground(new java.awt.Color(0, 255, 8));
+        buttonSim.setText("> Sim");
+        buttonSim.setBorder(null);
+        buttonSim.setBorderPainted(false);
+        buttonSim.setContentAreaFilled(false);
+        buttonSim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSim.setFocusPainted(false);
+        buttonSim.setHorizontalAlignment(SwingConstants.LEFT);
+        buttonSim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSimMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonSimMouseExited(evt);
+            }
+        });
+        buttonSim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSimActionPerformed(evt);
+            }
+        });
+        telaAdmin.add(buttonSim);
+        buttonSim.setBounds(380, 200, 80, 30);
+
+        labelIdAutor.setBackground(new java.awt.Color(0, 0, 0));
+        labelIdAutor.setFont(poppins.deriveFont(20f));
+        labelIdAutor.setForeground(new java.awt.Color(0, 178, 6));
+        labelIdAutor.setText("User do Autor");
+        labelIdAutor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        labelIdAutor.setOpaque(true);
+        labelIdAutor.setVisible(false);
+        telaAdmin.add(labelIdAutor);
+        labelIdAutor.setBounds(190, 208, 160, 50);
+
+        fieldIdAutor.setBackground(new java.awt.Color(0, 0, 0));
+        fieldIdAutor.setBorder(null);
+        fieldIdAutor.setForeground(new java.awt.Color(0, 255, 8));
+        fieldIdAutor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        fieldIdAutor.setFont(poppins.deriveFont(18f));
+        fieldIdAutor.setVisible(false);
+        fieldIdAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldIdAutorActionPerformed(evt);
+            }
+        });
+        telaAdmin.add(fieldIdAutor);
+        fieldIdAutor.setBounds(190, 208, 160, 50);
+        telaAdmin.add(labelTxtIdAutor);
+        labelTxtIdAutor.setBounds(170, 270, 210, 15);
+
+        labelValor.setBackground(new java.awt.Color(0, 0, 0));
+        labelValor.setFont(poppins.deriveFont(18f));
+        labelValor.setForeground(new java.awt.Color(0, 178, 6));
+        labelValor.setText("Valor");
+        labelValor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        labelValor.setOpaque(true);
+        telaAdmin.add(labelValor);
+        labelValor.setBounds(1000, 208, 220, 50);
+
+        fieldValor.setBackground(new java.awt.Color(0, 0, 0));
+        fieldValor.setBorder(null);
+        fieldValor.setForeground(new java.awt.Color(0, 255, 8));
+        fieldValor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        fieldValor.setToolTipText("");
+        fieldValor.setFont(poppins.deriveFont(18f));
+        fieldValor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldSenhaFocusGained(evt);
+                fieldValorFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldSenhaFocusLost(evt);
+                fieldValorFocusLost(evt);
             }
         });
-        fieldSenha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldSenhaKeyReleased(evt);
+        telaAdmin.add(fieldValor);
+        fieldValor.setBounds(1000, 208, 220, 50);
+
+        labelTempo.setBackground(new java.awt.Color(0, 0, 0));
+        labelTempo.setFont(poppins.deriveFont(20f));
+        labelTempo.setForeground(new java.awt.Color(0, 178, 6));
+        labelTempo.setText("Tempo Total do Curso");
+        labelTempo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        labelTempo.setOpaque(true);
+        telaAdmin.add(labelTempo);
+        labelTempo.setBounds(540, 208, 320, 50);
+
+        fieldTempo.setBackground(new java.awt.Color(0, 0, 0));
+        fieldTempo.setBorder(null);
+        fieldTempo.setForeground(new java.awt.Color(0, 255, 8));
+        fieldTempo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        fieldTempo.setToolTipText("");
+        fieldTempo.setFont(poppins.deriveFont(18f));
+        fieldTempo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldTempoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldTempoFocusLost(evt);
             }
         });
-        telaAdmin.add(fieldSenha);
-        fieldSenha.setBounds(190, 559, 1030, 50);
+        telaAdmin.add(fieldTempo);
+        fieldTempo.setBounds(540, 208, 320, 50);
 
-        labelUser.setForeground(new java.awt.Color(204, 0, 0));
-        telaAdmin.add(labelUser);
-        labelUser.setBounds(190, 446, 260, 20);
+        fieldNivel.setBackground(new java.awt.Color(0, 0, 0));
+        fieldNivel.setFont(poppins.deriveFont(18f));
+        fieldNivel.setForeground(new java.awt.Color(0, 178, 6));
+        fieldNivel.setText("Nivel do Curso");
+        fieldNivel.setBorder(null);
+        fieldNivel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldNivelFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNivelFocusLost(evt);
+            }
+        });
+        telaAdmin.add(fieldNivel);
+        fieldNivel.setBounds(190, 297, 450, 50);
 
-        labelEmail.setText("Formato: exemplo@dominio.com");
-        telaAdmin.add(labelEmail);
-        labelEmail.setBounds(190, 526, 320, 30);
+        fieldCategoria.setBackground(new java.awt.Color(0, 0, 0));
+        fieldCategoria.setFont(poppins.deriveFont(18f));
+        fieldCategoria.setForeground(new java.awt.Color(0, 178, 6));
+        fieldCategoria.setText("Categoria do Curso");
+        fieldCategoria.setBorder(null);
+        fieldCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldCategoriaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldCategoriaFocusLost(evt);
+            }
+        });
+        telaAdmin.add(fieldCategoria);
+        fieldCategoria.setBounds(750, 297, 470, 50);
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarAdmin.png"))); // NOI18N
+        contadorLabel.setForeground(new java.awt.Color(204, 204, 204));
+        contadorLabel.setText("0/500");
+        telaAdmin.add(contadorLabel);
+        contadorLabel.setBounds(1245, 540, 110, 20);
+
+        fieldCaminho.setBackground(new java.awt.Color(0, 0, 0));
+        fieldCaminho.setFont(poppins.deriveFont(18f));
+        fieldCaminho.setForeground(new java.awt.Color(0, 178, 6));
+        fieldCaminho.setText("Caminho da imagem do curso");
+        fieldCaminho.setBorder(null);
+        fieldCaminho.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldCaminhoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldCaminhoFocusLost(evt);
+            }
+        });
+        fieldCaminho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldCaminhoActionPerformed(evt);
+            }
+        });
+        telaAdmin.add(fieldCaminho);
+        fieldCaminho.setBounds(190, 591, 1030, 50);
+
+        scrollDescricao.setBackground(new java.awt.Color(0, 0, 0));
+        scrollDescricao.setBorder(null);
+        scrollDescricao.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        textAreaDescricao.setBackground(new java.awt.Color(0, 0, 0));
+        textAreaDescricao.setColumns(20);
+        textAreaDescricao.setFont(poppins.deriveFont(18f));
+        textAreaDescricao.setForeground(new java.awt.Color(0, 178, 6));
+        textAreaDescricao.setRows(5);
+        textAreaDescricao.setText("Descrição (opcional)");
+        textAreaDescricao.setBorder(null);
+        textAreaDescricao.setLineWrap(true);
+        textAreaDescricao.setEditable(true);
+        textAreaDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textAreaDescricaoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textAreaDescricaoFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textAreaDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(textAreaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
+        );
+
+        scrollDescricao.setViewportView(jPanel1);
+
+        telaAdmin.add(scrollDescricao);
+        scrollDescricao.setBounds(182, 392, 1040, 165);
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarCurso.png"))); // NOI18N
         telaAdmin.add(fundo);
         fundo.setBounds(0, 0, 1366, 768);
 
@@ -416,113 +630,66 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
     //altera o texto pra frente ao passar o mouse por cima do botao
     private void buttonCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarMouseEntered
         // TODO add your handling code here:
-        ImageIcon Cadastrar2 = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/CadastrarAdmin2.png"));
-        buttonCadastrar.setIcon(Cadastrar2);
+        ImageIcon prosseguir2 = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/prosseguirAdm2.png"));
+        buttonCadastrar.setIcon(prosseguir2);
     }//GEN-LAST:event_buttonCadastrarMouseEntered
     //altera o texto de volta para a posicao padrao ao tirar o mouse de cima do botao
     private void buttonCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarMouseExited
         // TODO add your handling code here:
-        ImageIcon Cadastrar = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/CadastrarAdmin.png"));
-        buttonCadastrar.setIcon(Cadastrar);
+        ImageIcon prosseguir = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/prosseguirAdm.png"));
+        buttonCadastrar.setIcon(prosseguir);
     }//GEN-LAST:event_buttonCadastrarMouseExited
     //<null>
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
         // TODO add your handling code here:
-        String nome = null;
-        String nasc = null;
-        String usu = null; 
-        String email = null;
-        String senha = null;
-        
-        if(fieldNome.getText().equals("Nome") || fieldNome.getText().equals(""))
-        {
-            nomeVazio();
-        }
-        else
-        {
-            nome = fieldNome.getText();
-        }
-        
-        if(fieldNasc.getText().equals(""))
-        {
-            
-        }
-        else
-        {
-            if (!validarData(fieldNasc.getText())) 
-            {
-                
+        // Obter os valores dos campos
+        String nome = fieldNome.getText();
+        int autorId = 0;
+            try {
+                autorId = usuario.getIdPorUsuario(user);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_AdminCadastrarCurso.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else
-            {
-               nasc = fieldNasc.getText();
-            }
-        }
-        
-        if(fieldUser.getText().equals("Usuario") || fieldUser.getText().equals(""))
-        {
-            
-        }
-        else
-        {
-            usu = fieldUser.getText();
-        }
-        
-        if(fieldEmail.getText().equals("E-mail") || fieldEmail.getText().equals(""))
-        {
-            
-        }
-        else
-        {
-            email = fieldEmail.getText();
-        }
-        
-        if(fieldSenha.getText().equals("Senha") || fieldSenha.getText().equals(""))
-        {
-            
-        }
-        else
-        {
-            senha = fieldSenha.getText();
-        }
-        
-        usuario.setNome(nome);
-        usuario.setDtnasc(nasc);
-        usuario.setUser(usu);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        
+        String tempo = fieldTempo.getText();
+        String nivel = fieldNivel.getText();
+        String preco = fieldValor.getText();
+        String categoria = fieldCategoria.getText();
+        String descricao = textAreaDescricao.getText();
+        String caminhoImagem = fieldCaminho.getText();
+    
+        // Criação do objeto Curso
+        Curso curso = new Curso();
+        curso.setNome(nome);
+        if (autorId>0)
+        curso.setAutorId(autorId);
+        curso.setTempo(tempo);
+        curso.setNivel(nivel);
+        curso.setPreco(preco);
+        curso.setCategoria(categoria);
+        curso.setDescricao(descricao);
+    
         try 
         {
-            // Verifica se o usuário ou email já existem
-            if (usuario.verificaUserExiste()) 
+            // Cadastrar o curso e obter o ID gerado
+            int cursoId = curso.cadastraCurso();
+
+            if (cursoId != -1) 
             {
+               // Inserir a imagem associada ao curso
+                Curso cursoHelper = new Curso(); // Supondo que `inserirImagem` esteja em `Curso`
+                cursoHelper.inserirImagem(caminhoImagem, cursoId);
                 
-            }
-            else if(usuario.verificaEmailExiste())
-            {
-                
+               /////////////////////abir tela inserir conteudos
             }
             else 
             {
-                // Cadastra o novo usuário
-                if (usuario.cadastraUser()) 
-                {
-                   
-                }
-                else
-                {
-                    System.out.println("Erro ao cadastar");
-                }
+                System.out.println("Erro ao cadastrar curso.");
             }
         }
-        catch (SQLException e) 
+        catch (SQLException ex) 
         {
-            e.printStackTrace();
-            System.out.println("Erro ao acessar o banco de dados.");
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-             
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void nomeVazio()
@@ -604,14 +771,12 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
     {
         fieldNome.setText("Nome");
         fieldNome.setForeground(new Color(0,178,6));
-        fieldNasc.setText("");
-        labelNasc.setVisible(true);
-        fieldUser.setText("Usuario");
-        fieldUser.setForeground(new Color(0,178,6));
-        labelUser.setText("");
-        fieldEmail.setText("E-mail");
-        fieldSenha.setText("");
-        labelSenha.setText("Senha");
+        fieldTempo.setText("");
+        labelTempo.setVisible(true);
+        fieldNivel.setText("Nivel do Curso");
+        fieldNivel.setForeground(new Color(0,178,6));
+        fieldCategoria.setText("Categoria do Curso");
+        textAreaDescricao.setText("Descricao");
     }
 
 //Fim dos comandos do botao Cursos
@@ -644,7 +809,7 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
 
     private void fieldNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNomeFocusGained
         // TODO add your handling code here:
-        if (fieldNome.getText().equals("Nome")) {
+        if (fieldNome.getText().equals("Nome do Curso")) {
             fieldNome.setText("");
             fieldNome.setForeground(new Color(0,255,8));
         }
@@ -654,47 +819,50 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (fieldNome.getText().isEmpty()) {
             fieldNome.setForeground(new Color(0,178,6));
-            fieldNome.setText("Nome");
+            fieldNome.setText("Nome do Curso");
         }
     }//GEN-LAST:event_fieldNomeFocusLost
      
-    private void configurarCampoUser() {
+    private void configurarCampoAutor() {
        // Adicionar um ouvinte de foco para limpar e restaurar o texto de placeholder
-        fieldUser.addFocusListener(new FocusListener() 
+        fieldIdAutor.addFocusListener(new FocusListener() 
         {
             public void focusGained(FocusEvent e) 
             {
                 // Quando o campo recebe foco, limpar o texto (se for o placeholder)
-                if (fieldUser.getText().equals("Usuario")) 
+                if (labelIdAutor.isVisible()) 
                 {
-                    fieldUser.setText("");
-                    fieldUser.setForeground(new Color(0, 255, 8)); // Cor verde, por exemplo
+                    fieldIdAutor.setText("");
+                    labelIdAutor.setVisible(false);
+                    fieldIdAutor.setForeground(new Color(0, 255, 8)); // Cor verde, por exemplo
                 }
             }
 
             public void focusLost(FocusEvent e) 
             {
-                if (fieldUser.getText().isEmpty()) 
+                if (fieldIdAutor.getText().isEmpty()) 
                 {
-                    fieldUser.setForeground(new Color(0,178,6));
-                    fieldUser.setText("Usuario");
-                    labelUser.setText("");
+                    labelTxtIdAutor.setText("");
+                    labelIdAutor.setVisible(true);
                 }
                 else
                 {  
-                    String usu = fieldUser.getText();
-                    usuario.setUser(usu);
+                    String usu = fieldIdAutor.getText();
+                    Usuario verifUsu = new Usuario();
+                    verifUsu.setUser(usu);
+                    System.out.println(verifUsu.getUser());
                     try 
                     {
-                        if(usuario.verificaUserExiste())
+                        if(verifUsu.verificaUserExiste())
                         {
-                            labelUser.setText("*Usuario já cadastrado");
-                            labelUser.setForeground(Color.red);
+                            labelTxtIdAutor.setText("*Usuario válido");
+                            labelTxtIdAutor.setForeground(new Color(0,255,8));
+                            user = fieldIdAutor.getText();
                         }
                         else
                         {
-                            labelUser.setText("*Usuario válido");
-                            labelUser.setForeground(new Color(0,255,8));
+                            labelTxtIdAutor.setText("*Usuario não encontrado");
+                            labelTxtIdAutor.setForeground(Color.red);
                         }
                     } 
                     catch (SQLException ex) 
@@ -706,152 +874,20 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         });
     }
     
-    private void configurarCampoEmail() 
-    {
-        // Texto placeholder
-        fieldEmail.setText("E-mail");
-        fieldEmail.setForeground(new Color(0,178,6)); // Cor mais suave para o placeholder
-
-        // Inicializar o JLabel com o texto inicial de formato
-        labelEmail.setText("Formato: exemplo@dominio.com");
-        labelEmail.setForeground(new Color(153, 153, 153)); // Cor mais suave para o formato
-      
-        // Adicionar um ouvinte de foco para limpar e restaurar o texto de placeholder
-        fieldEmail.addFocusListener(new FocusListener() 
-        {
-            public void focusGained(FocusEvent e) 
-            {
-                // Quando o campo recebe foco, limpar o texto (se for o placeholder)
-                if (fieldEmail.getText().equals("E-mail")) 
-                {
-                    fieldEmail.setText("");
-                    fieldEmail.setForeground(new Color(0, 255, 8)); // Cor verde, por exemplo
-                }
-            }
-
-            public void focusLost(FocusEvent e) {
-                // Se o campo estiver vazio, restaurar o texto de placeholder
-                if (fieldEmail.getText().isEmpty()) {
-                    fieldEmail.setText("E-mail");
-                    fieldEmail.setForeground(new Color(0,178,6)); // Cor mais suave para o placeholder
-                    labelEmail.setText("Formato: exemplo@dominio.com"); // Exibir o formato padrão
-                    labelEmail.setForeground(new Color(153, 153, 153)); // Cor suave
-                } 
-                else 
-                {
-                    // Se o campo não estiver vazio, validação de formato
-                    if (!validarEmail(fieldEmail.getText())) 
-                    {
-                        labelEmail.setText("Formato de e-mail inválido! Use exemplo@dominio.com.");
-                        labelEmail.setForeground(Color.RED); // Cor vermelha para erro
-                    } 
-                    else
-                    {
-                        String email = fieldEmail.getText();
-                        usuario.setEmail(email);
-                        try 
-                        {
-                            if(usuario.verificaEmailExiste())
-                            {
-                                labelEmail.setText("*E-mail já cadastrado");
-                                labelEmail.setForeground(Color.RED);
-                            }
-                            else
-                            {   
-                                labelEmail.setText("*E-mail válido");
-                                labelEmail.setForeground(new Color(0,255,8));
-                            }
-                        }
-                        catch (SQLException ex) 
-                        {
-                            Logger.getLogger(Tela_AdminCadastrarCurso.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            }
-        });
-    }
- 
-    private boolean validarEmail(String email)
-    {
-        return email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}");
-    }
-    
-    
-    private void fieldSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSenhaFocusGained
+    private void fieldTempoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldTempoFocusGained
         // TODO add your handling code here:
-        if (labelSenha.getText().equals("Senha")) {
-            labelSenha.setText("");
-            fieldSenha.setForeground(new Color(0,255,8));
-        }
-    }//GEN-LAST:event_fieldSenhaFocusGained
+        labelTempo.setVisible(false);
+    }//GEN-LAST:event_fieldTempoFocusGained
 
-    private void fieldSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSenhaFocusLost
+    private void fieldTempoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldTempoFocusLost
         // TODO add your handling code here:
-        if (labelSenha.getText().isEmpty() || fieldSenha.getText().isEmpty()) {
-            labelSenha.setForeground(new Color(0,178,6));
-            labelSenha.setText("Senha");
-        }
-    }//GEN-LAST:event_fieldSenhaFocusLost
-
-    private void fieldSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldSenhaKeyReleased
-        // TODO add your handling code here:
-        if (fieldSenha.getPassword().length > 0)
-        {
-            labelSenha.setText(" ");
-            checkboxSenha.setVisible(true);
-            Icon MostrarSenha = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/SenhaMostrarAdmin.png"));
-            checkboxSenha.setIcon(MostrarSenha);
-        }
-        else
-        {
-            checkboxSenha.setVisible(false);
-        }
-    }//GEN-LAST:event_fieldSenhaKeyReleased
-
-    private void checkboxSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxSenhaActionPerformed
-        // TODO add your handling code here:
-        Icon OcultarSenha = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/SenhaOcultarAdmin.png"));
-        Icon MostrarSenha = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/SenhaMostrarAdmin.png"));
-
-        if(showing)
-        {
-            fieldSenha.setEchoChar('*');
-            checkboxSenha.setIcon(MostrarSenha);
-        }
-        else
-        {
-            fieldSenha.setEchoChar((char) 0);
-            checkboxSenha.setIcon(OcultarSenha);
-        }
-        showing = !showing;
-    }//GEN-LAST:event_checkboxSenhaActionPerformed
-
-    private void fieldNascFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNascFocusGained
-        // TODO add your handling code here:
-        labelNasc.setVisible(false);
-    }//GEN-LAST:event_fieldNascFocusGained
-
-    private void fieldNascFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNascFocusLost
-        // TODO add your handling code here:
-        String data = fieldNasc.getText();
+        String data = fieldTempo.getText();
         
-        if (fieldNasc.getText().equals("__/__/____")) 
+        if (fieldTempo.getText().equals("__.__h")) 
         {
-            labelNasc.setVisible(true);
-            labelTxtNasc.setText("");
-            data = null;
+            labelTempo.setVisible(true);
         }
-        
-        if(!validarData(data))
-        {
-            labelTxtNasc.setText("*Data inválida, informe uma data válida.");           
-        }
-        else
-        {
-            labelTxtNasc.setText("");           
-        }
-    }//GEN-LAST:event_fieldNascFocusLost
+    }//GEN-LAST:event_fieldTempoFocusLost
 
     private void buttonOkNomeVazioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNomeVazioMouseEntered
         // TODO add your handling code here:
@@ -883,6 +919,170 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonXTelasActionPerformed
+
+    private void fieldValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldValorFocusGained
+        // TODO add your handling code here:
+        labelValor.setVisible(false);
+    }//GEN-LAST:event_fieldValorFocusGained
+
+    private void fieldValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldValorFocusLost
+        // TODO add your handling code here:
+        if (fieldValor.getText().isEmpty()) 
+        {
+            labelValor.setVisible(true);
+        }
+    }//GEN-LAST:event_fieldValorFocusLost
+
+    private void fieldCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCaminhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldCaminhoActionPerformed
+
+    private void fieldIdAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdAutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldIdAutorActionPerformed
+
+    private void fieldNivelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNivelFocusGained
+        // TODO add your handling code here:
+         if (fieldNivel.getText().equals("Nivel do Curso")) {
+            fieldNivel.setText("");
+            fieldNivel.setForeground(new Color(0,255,8));
+        }
+    }//GEN-LAST:event_fieldNivelFocusGained
+
+    private void fieldNivelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNivelFocusLost
+        // TODO add your handling code here:
+        if (fieldNivel.getText().isEmpty()) {
+            fieldNivel.setForeground(new Color(0,178,6));
+            fieldNivel.setText("Nivel do Curso");
+        }
+    }//GEN-LAST:event_fieldNivelFocusLost
+
+    private void fieldCategoriaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCategoriaFocusGained
+        // TODO add your handling code here:
+        if (fieldCategoria.getText().equals("Categoria do Curso")) {
+            fieldCategoria.setText("");
+            fieldCategoria.setForeground(new Color(0,255,8));
+        }
+    }//GEN-LAST:event_fieldCategoriaFocusGained
+
+    private void fieldCategoriaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCategoriaFocusLost
+        // TODO add your handling code here:
+        if (fieldCategoria.getText().isEmpty()) {
+            fieldCategoria.setForeground(new Color(0,178,6));
+            fieldCategoria.setText("Categoria do Curso");
+        }
+    }//GEN-LAST:event_fieldCategoriaFocusLost
+
+    private void fieldCaminhoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCaminhoFocusGained
+        // TODO add your handling code here:
+         if (fieldCaminho.getText().equals("Caminho da imagem do curso")) {
+            fieldCaminho.setText("");
+            fieldCaminho.setForeground(new Color(0,255,8));
+        }
+    }//GEN-LAST:event_fieldCaminhoFocusGained
+
+    private void fieldCaminhoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCaminhoFocusLost
+        // TODO add your handling code here:
+        if (fieldCaminho.getText().isEmpty()) {
+            fieldCaminho.setForeground(new Color(0,178,6));
+            fieldCaminho.setText("Caminho da imagem do curso");
+        }
+    }//GEN-LAST:event_fieldCaminhoFocusLost
+
+    private void textAreaDescricaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusGained
+        // TODO add your handling code here:
+        if (textAreaDescricao.getText().equals("Descrição (opcional)")) {
+            textAreaDescricao.setText("");
+            textAreaDescricao.setForeground(new Color(0,255,8));
+        }
+    }//GEN-LAST:event_textAreaDescricaoFocusGained
+
+    private void textAreaDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusLost
+        // TODO add your handling code here:
+        if (textAreaDescricao.getText().isEmpty()) {
+            textAreaDescricao.setForeground(new Color(0,178,6));
+            textAreaDescricao.setText("Descrição (opcional)");
+            contadorLabel.setText("0/500");
+        }
+    }//GEN-LAST:event_textAreaDescricaoFocusLost
+
+    private void buttonNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNaoActionPerformed
+        // TODO add your handling code here:
+        labelIsAutor.setVisible(false);
+        buttonSim.setVisible(false);
+        buttonNao.setVisible(false);
+        labelIdAutor.setVisible(true);
+        fieldIdAutor.setVisible(true);
+        
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/FundosTelas/FundoCadastrarCurso2.png"));
+        fundo.setIcon(icon);
+        
+        messageLabel1.repaint();
+        messageLabel1.revalidate();
+        buttonXTelas.repaint();
+        buttonXTelas.revalidate();
+    }//GEN-LAST:event_buttonNaoActionPerformed
+
+    private void buttonSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimActionPerformed
+        // TODO add your handling code here:
+        labelIsAutor.setVisible(false);
+        buttonSim.setVisible(false);
+        buttonNao.setVisible(false);
+        fieldIdAutor.setVisible(true);        
+        
+        Usuario usu = null;
+        
+        if(sessao.isUserLoggedIn())
+        {   
+            usu = sessao.getLoggedUser();
+            String user = usu.getUser();
+            if(user != null)
+            {
+                fieldIdAutor.setText(user);
+                
+                ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/FundosTelas/FundoCadastrarCurso2.png"));
+                fundo.setIcon(icon);
+                messageLabel1.repaint();
+                messageLabel1.revalidate();
+                buttonXTelas.repaint();
+                buttonXTelas.revalidate();
+            }
+            else
+            {
+                System.out.println("não foi possivel buscar o usuario logado.");
+            }
+        }
+        else
+        {
+            System.out.println("usuario nao logado.");
+        }
+        
+        
+    }//GEN-LAST:event_buttonSimActionPerformed
+
+    private void buttonSimMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSimMouseEntered
+        // TODO add your handling code here:
+        if(buttonSim.getText().equals("> Sim"))
+            buttonSim.setText(">  Sim");
+    }//GEN-LAST:event_buttonSimMouseEntered
+
+    private void buttonSimMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSimMouseExited
+        // TODO add your handling code here:
+        if(buttonSim.getText().equals(">  Sim"))
+            buttonSim.setText("> Sim");
+    }//GEN-LAST:event_buttonSimMouseExited
+
+    private void buttonNaoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNaoMouseEntered
+        // TODO add your handling code here:
+        if(buttonNao.getText().equals("> Nao"))
+            buttonNao.setText(">  Nao");
+    }//GEN-LAST:event_buttonNaoMouseEntered
+
+    private void buttonNaoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNaoMouseExited
+        // TODO add your handling code here:
+        if(buttonNao.getText().equals(">  Nao"))
+            buttonNao.setText("> Nao");
+    }//GEN-LAST:event_buttonNaoMouseExited
 
     public boolean validarData(String data) 
     {
@@ -1264,27 +1464,34 @@ private static void typingEffect(JButton button, String message)
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCadastrar;
+    private javax.swing.JButton buttonNao;
     private javax.swing.JButton buttonOkNomeVazio;
+    private javax.swing.JButton buttonSim;
     private javax.swing.JButton buttonVoltar;
     private javax.swing.JButton buttonXTelas;
-    private javax.swing.JCheckBox checkboxSenha;
-    private javax.swing.JTextField fieldEmail;
-    private javax.swing.JFormattedTextField fieldNasc;
+    private javax.swing.JLabel contadorLabel;
+    private javax.swing.JTextField fieldCaminho;
+    private javax.swing.JTextField fieldCategoria;
+    private javax.swing.JFormattedTextField fieldIdAutor;
+    private javax.swing.JTextField fieldNivel;
     private javax.swing.JTextField fieldNome;
-    private javax.swing.JPasswordField fieldSenha;
-    private javax.swing.JTextField fieldUser;
+    private javax.swing.JFormattedTextField fieldTempo;
+    private javax.swing.JFormattedTextField fieldValor;
     private javax.swing.JLabel fundo;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelContagemNomeVazio;
-    private javax.swing.JLabel labelEmail;
-    private javax.swing.JLabel labelNasc;
+    private javax.swing.JLabel labelIdAutor;
+    private javax.swing.JLabel labelIsAutor;
     private javax.swing.JLabel labelNomeVazio;
-    private javax.swing.JLabel labelSenha;
-    private javax.swing.JLabel labelTxtNasc;
-    private javax.swing.JLabel labelUser;
+    private javax.swing.JLabel labelTempo;
+    private javax.swing.JLabel labelTxtIdAutor;
+    private javax.swing.JLabel labelValor;
     private javax.swing.JLabel messageLabel1;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelNomeVazio;
     private javax.swing.JPanel panelNomeVazio2;
+    private javax.swing.JScrollPane scrollDescricao;
     private javax.swing.JPanel telaAdmin;
+    private javax.swing.JTextArea textAreaDescricao;
     // End of variables declaration//GEN-END:variables
 }

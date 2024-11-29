@@ -2,11 +2,14 @@
 
 package com.mycompany.classes;
 
+import com.mycompany.telas.Tela_ExbCurso;
+import com.mycompany.telas.Tela_Menu;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,11 +21,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,7 +43,7 @@ public class ProdutoCurso
     //Declaração de variaveis   
     
         Curso Curso = new Curso();
-    
+            
         //Tamanhos do botao que possui a foto do curso
         private static final int FOTO_WIDTH = 355;
         private static final int FOTO_HEIGHT = 230;
@@ -60,9 +67,9 @@ public class ProdutoCurso
         
 //----------------------------------------------------------------------------------------------------------------------------------
         
-        public void addProduto(JPanel panelCursos, JScrollPane scrollPane, int idCurso) throws SQLException 
+        public void addProduto(JFrame tela, JPanel panelCursos, JScrollPane scrollPane, int idCurso) throws SQLException 
         {
-            JButton foto = addFoto(panelCursos, idCurso);
+            JButton foto = addFoto(tela, panelCursos, idCurso, idCurso);
             JLabel nomeCurso = addNome(panelCursos, idCurso);
 
             nomesCurso.add(nomeCurso);
@@ -115,7 +122,7 @@ public class ProdutoCurso
         public JLabel addNome(JPanel panel, int idCurso) throws SQLException 
         {
             // Carregar a fonte personalizada
-            Font poppins = FontePersonalizada.getFonte(30f); // Obtém a fonte com tamanho 40
+            Font poppins = FontePersonalizada.getFonte(30f); // Obtém a fonte com tamanho
 
             FontePersonalizada fp = new FontePersonalizada();
             fp.carregarFonte();
@@ -142,8 +149,14 @@ public class ProdutoCurso
             return nomeCurso;
         }
 
+        private void abrirTelaExbCurso(JFrame tela) throws FontFormatException, IOException, SQLException
+        {
+            Tela_ExbCurso Carrinho = new Tela_ExbCurso();
+            Carrinho.setVisible(true);
+            tela.dispose();
+        }
         
-        public JButton addFoto(JPanel panel, int idImagem) 
+        public JButton addFoto(JFrame tela, JPanel panel, int idImagem, int idCurso) 
         {
             JButton curso = new JButton();
             curso.setBackground(new java.awt.Color(102, 255, 0));
@@ -162,6 +175,8 @@ public class ProdutoCurso
                 else
                 {
                     System.out.println("Imagem nao encontrada para o ID: "+ idImagem);
+                    ImageIcon iconDefault = new ImageIcon(getClass().getClassLoader().getResource("images/Formas/fotocursoDefault.png"));
+                    curso.setIcon(new RoundImageIcon(iconDefault));
                 }
             }
             
@@ -177,6 +192,21 @@ public class ProdutoCurso
                 @Override
                 public void actionPerformed(ActionEvent e) 
                 {
+                    try {
+                        Session.setCursoSelecionado(Curso.listarCursoporId(idCurso));
+                        System.out.println("curso setado!!!");
+                        
+                        abrirTelaExbCurso(tela);
+                        
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProdutoCurso.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (FontFormatException ex) {
+                        Logger.getLogger(ProdutoCurso.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ProdutoCurso.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     
                 }
             });

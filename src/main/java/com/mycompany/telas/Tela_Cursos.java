@@ -7,6 +7,7 @@ import com.mycompany.classes.FontePersonalizada;
 import com.mycompany.classes.GerenciadorDeCategorias;
 import com.mycompany.classes.ProdutoCarrinhoJanela;
 import com.mycompany.classes.ProdutoCurso;
+import com.mycompany.classes.Session;
 import com.mycompany.scrollbar.ScrollBarCustom;
 import com.mycompany.scrollbar.ScrollBarCustom_Cursos;
 import java.awt.Color;
@@ -80,7 +81,10 @@ public class Tela_Cursos extends javax.swing.JFrame {
     public Tela_Cursos() throws FontFormatException, IOException, SQLException {
         //cria a fonte poppins no projeto
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
-        initComponents(); 
+        initComponents();
+        
+        Session.outCursoSelecionado();
+        
         //Configurar scrollbar vertical como customizada
         scrollbar.setVerticalScrollBar(new ScrollBarCustom());
         scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom());
@@ -100,10 +104,10 @@ public class Tela_Cursos extends javax.swing.JFrame {
         String cat2 = categoria2.getText();
         
         GerenciadorDeCategorias gerenciador = new GerenciadorDeCategorias();
-        gerenciador.listarCursosPorCategoria(cat1, panelDispCursos1, scrollDispCursos1);
+        gerenciador.listarCursosPorCategoria(this, cat1, panelDispCursos1, scrollDispCursos1);
         
         GerenciadorDeCategorias gerenciador2 = new GerenciadorDeCategorias();
-        gerenciador2.listarCursosPorCategoria(cat2, panelDispCursos, scrollDispCursos);
+        gerenciador2.listarCursosPorCategoria(this, cat2, panelDispCursos, scrollDispCursos);
         
         
     }
@@ -516,13 +520,6 @@ public class Tela_Cursos extends javax.swing.JFrame {
     //<null>
     private void buttonSynapseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSynapseActionPerformed
         // TODO add your handling code here:
-        FontePersonalizada fp = new FontePersonalizada();
-            fp.carregarFonte();
-            try {
-                pc.addProduto(panelDispCursos, scrollDispCursos, 1);
-            } catch (SQLException ex) {
-                Logger.getLogger(Tela_Cursos.class.getName()).log(Level.SEVERE, null, ex);
-            }
     }//GEN-LAST:event_buttonSynapseActionPerformed
     //Move o Logo "Synapse Connect" à posição final enquanto o mouse estiver em cima
     private void buttonSynapseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSynapseMouseEntered
@@ -587,14 +584,6 @@ public class Tela_Cursos extends javax.swing.JFrame {
         // TODO add your handling code here:
         fieldPesquisa.setForeground(Color.GRAY);
         fieldPesquisa.setText("Pesquisar:");
-        
-        FontePersonalizada fp2 = new FontePersonalizada();
-        fp2.carregarFonte();
-            try {
-                pc2.addProduto(panelDispCursos1, scrollDispCursos1, 2);
-            } catch (SQLException ex) {
-                Logger.getLogger(Tela_Cursos.class.getName()).log(Level.SEVERE, null, ex);
-            }
     }//GEN-LAST:event_buttonXpesqActionPerformed
     //Faz o botão de X para o field "Pesquisar" ficar Azul ao passar o mouse por cima
     private void buttonXpesqMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXpesqMouseEntered

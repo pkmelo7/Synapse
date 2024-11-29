@@ -61,6 +61,7 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         Timer timerUserVz;
         Timer timerEmailVz;
         Timer timerSenhaVz;
+        Timer timerEmailErr;
         
         boolean acaoConcluida = false;
         
@@ -125,6 +126,11 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         labelUserVazio = new javax.swing.JLabel();
         buttonOkUserVazio = new javax.swing.JButton();
         labelContagemUserVazio = new javax.swing.JLabel();
+        panelEmailErrado = new javax.swing.JPanel();
+        panelEmailErrado2 = new javax.swing.JPanel();
+        labelEmailErrado = new javax.swing.JLabel();
+        buttonOkEmailErrado = new javax.swing.JButton();
+        labelContagemEmailErrado = new javax.swing.JLabel();
         panelEmailVazio = new javax.swing.JPanel();
         panelEmailVazio2 = new javax.swing.JPanel();
         labelEmailVazio = new javax.swing.JLabel();
@@ -373,6 +379,60 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
 
         getContentPane().add(panelUserVazio);
         panelUserVazio.setBounds(0, 0, 1366, 768);
+
+        panelEmailErrado.setOpaque(false);
+        panelEmailErrado.setVisible(false);
+        panelEmailErrado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEmailErradoMouseClicked(evt);
+            }
+        });
+        panelEmailErrado.setLayout(null);
+
+        panelEmailErrado2.setBackground(new java.awt.Color(0, 0, 0));
+        panelEmailErrado2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 8), 1, true));
+        panelEmailErrado2.setForeground(new java.awt.Color(0, 255, 8));
+        panelEmailErrado2.setLayout(null);
+
+        labelEmailErrado.setFont(digital7.deriveFont(25f));
+        labelEmailErrado.setForeground(new java.awt.Color(0, 255, 8));
+        labelEmailErrado.setText("Email invalido, tente novamente.");
+        labelEmailErrado.setHorizontalAlignment(SwingConstants.CENTER);
+        panelEmailErrado2.add(labelEmailErrado);
+        labelEmailErrado.setBounds(7, 26, 490, 120);
+
+        buttonOkEmailErrado.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkEmailErrado.setFont(digital7.deriveFont(20f));
+        buttonOkEmailErrado.setForeground(new java.awt.Color(0, 255, 8));
+        buttonOkEmailErrado.setText("OK");
+        buttonOkEmailErrado.setBorder(null);
+        buttonOkEmailErrado.setBorderPainted(false);
+        buttonOkEmailErrado.setContentAreaFilled(false);
+        buttonOkEmailErrado.setFocusable(false);
+        buttonOkEmailErrado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkEmailErradoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkEmailErradoMouseExited(evt);
+            }
+        });
+        panelEmailErrado2.add(buttonOkEmailErrado);
+        buttonOkEmailErrado.setBounds(355, 210, 100, 40);
+
+        labelContagemEmailErrado.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagemEmailErrado.setFont(digital7.deriveFont(20f));
+        labelContagemEmailErrado.setForeground(new java.awt.Color(0, 255, 8));
+        labelContagemEmailErrado.setText("Tempo Restante: 5");
+        labelContagemEmailErrado.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelEmailErrado2.add(labelContagemEmailErrado);
+        labelContagemEmailErrado.setBounds(87, 210, 260, 40);
+
+        panelEmailErrado.add(panelEmailErrado2);
+        panelEmailErrado2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelEmailErrado);
+        panelEmailErrado.setBounds(0, 0, 1366, 768);
 
         panelEmailVazio.setOpaque(false);
         panelEmailVazio.setVisible(false);
@@ -1017,13 +1077,21 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
             usu = fieldUser.getText();
         }
         
+        
         if(fieldEmail.getText().equals("E-mail") || fieldEmail.getText().equals(""))
         {
             emailVazio();
         }
         else
         {
-            email = fieldEmail.getText();
+            if (!validarEmail(fieldEmail.getText())) 
+            {
+                emailErrado();
+            }
+            else
+            {
+               email = fieldEmail.getText();
+            }   
         }
         
         if(fieldSenha.getText().equals("Senha") || fieldSenha.getText().equals(""))
@@ -1472,6 +1540,81 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
                 // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
                 tempoRestante[0] = tempoInicial; // Reinicia a contagem
                 labelContagemEmailExiste.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+    
+    private void emailErrado()
+    {
+         // Garantir que o painel esteja visível após a exclusão
+        panelEmailErrado.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelEmailErrado.revalidate();
+        panelEmailErrado.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerEmailErr != null && timerEmailErr.isRunning()) 
+        {
+            timerEmailErr.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerEmailErr = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelEmailErrado.setVisible(false);
+
+                    // Para o Timer
+                    timerEmailErr.stop();
+
+                    acaoConcluida = true;
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerEmailErr.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkEmailErrado.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerEmailErr != null) 
+                {
+                    timerEmailErr.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelEmailErrado.setVisible(false);
+
+                acaoConcluida = true;
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
             }
         });
     }
@@ -1935,7 +2078,7 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
                 {  
                     String usu = fieldUser.getText();
                     usuario.setUser(usu);
-                    try 
+                    try
                     {
                         if(usuario.verificaUserExiste())
                         {
@@ -2278,6 +2421,18 @@ public class Tela_AdminCadastrarUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_panelCadastradoAdmMouseClicked
 
+    private void buttonOkEmailErradoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailErradoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkEmailErradoMouseEntered
+
+    private void buttonOkEmailErradoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailErradoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkEmailErradoMouseExited
+
+    private void panelEmailErradoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEmailErradoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelEmailErradoMouseClicked
+
     public boolean validarData(String data) 
     {
         try {
@@ -2533,6 +2688,7 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JButton buttonOkCadastrado;
     private javax.swing.JButton buttonOkCadastradoAdm;
     private javax.swing.JButton buttonOkDataErrada;
+    private javax.swing.JButton buttonOkEmailErrado;
     private javax.swing.JButton buttonOkEmailExiste;
     private javax.swing.JButton buttonOkEmailVazio;
     private javax.swing.JButton buttonOkNascVazio;
@@ -2555,6 +2711,7 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JLabel labelContagemCadastrado;
     private javax.swing.JLabel labelContagemCadastradoAdm;
     private javax.swing.JLabel labelContagemDataErrada;
+    private javax.swing.JLabel labelContagemEmailErrado;
     private javax.swing.JLabel labelContagemEmailExiste;
     private javax.swing.JLabel labelContagemEmailVazio;
     private javax.swing.JLabel labelContagemNascVazio;
@@ -2564,6 +2721,7 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JLabel labelContagemUsuExiste;
     private javax.swing.JLabel labelDataErrada;
     private javax.swing.JLabel labelEmail;
+    private javax.swing.JLabel labelEmailErrado;
     private javax.swing.JLabel labelEmailExiste;
     private javax.swing.JLabel labelEmailVazio;
     private javax.swing.JLabel labelNasc;
@@ -2583,6 +2741,8 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JPanel panelCadastradoAdm2;
     private javax.swing.JPanel panelDataErrada;
     private javax.swing.JPanel panelDataErrada2;
+    private javax.swing.JPanel panelEmailErrado;
+    private javax.swing.JPanel panelEmailErrado2;
     private javax.swing.JPanel panelEmailExiste;
     private javax.swing.JPanel panelEmailExiste2;
     private javax.swing.JPanel panelEmailVazio;

@@ -279,6 +279,105 @@ public class Usuario {
             }
         }
         
+        public String getNomePorId(int id) throws SQLException 
+        {
+            String sql = "SELECT nome FROM user WHERE id = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) 
+                {
+                    return rs.getString("nome"); // Retorna o nome se encontrado
+                } 
+                else
+                {
+                    return null; // Retorna null se o usuário não for encontrado
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        
+        public int getIdPorUsuario(String usu) throws SQLException 
+        {
+            String sql = "SELECT id FROM user WHERE usuario = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setString(1, usu); // Substitua por seu método que retorna o nome do usuário
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("id"); // Retorna o ID encontrado
+                } else {
+                    throw new SQLException("Usuário não encontrado"); // Lança exceção se o usuário não for encontrado
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw e; // Propaga a exceção para o método chamador
+            }
+        }
+        
+        public String getUserPorId(int id) throws SQLException 
+        {
+            String sql = "SELECT usuario FROM user WHERE id = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setInt(1, id); // Substitua por seu método que retorna o nome do usuário
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getString("usuario"); // Retorna o ID encontrado
+                } else {
+                    throw new SQLException("Usuário não encontrado"); // Lança exceção se o usuário não for encontrado
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw e; // Propaga a exceção para o método chamador
+            }
+        }
+        
+        public String getPrimeiroNomePorUsuario(java.lang.String usu) throws SQLException 
+        {
+            String sql = "SELECT SUBSTRING_INDEX(nome, ' ', 1) AS primeiro_nome FROM user WHERE usuario = ?";
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try (Connection conn = cf.obtemConexao();
+                 PreparedStatement ps = conn.prepareStatement(sql)) 
+            {
+                ps.setString(1, usu);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) 
+                {
+                    return rs.getString("primeiro_nome"); // Retorna o primeiro nome se encontrado
+                } 
+                else
+                {
+                    return null; // Retorna null se o usuário não for encontrado
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+
+        
         public boolean isAdmin() {
         return isAdmin;
     }

@@ -16,8 +16,77 @@ public class Admin
 {
     Usuario usu = new Usuario(); 
     
+    public void listarCursos(JTable table, JTextField field) throws SQLException
+        {
+            DefaultTableModel model = new DefaultTableModel
+            (new String[]{"ID", "Nome", "Id do Autor", "Tempo", "Nivel", "Valor", "Categoria"}, 0)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;  // Impede a edição de qualquer célula
+            }
+        };
+            
+            String sql;
+
+            if (field.getText().equals(""))
+            {
+                sql = "SELECT * FROM curso";
+            }
+            else
+            {
+                sql = "SELECT * FROM curso WHERE id LIKE ? OR nome LIKE ? OR autor_id LIKE ? OR tempo LIKE ? OR nivel LIKE ? OR preco LIKE ? OR categoria LIKE ?";
+            }
     
-    
+            ConnectionFactory factory = new ConnectionFactory();
+
+            try (Connection c = factory.obtemConexao())
+            {
+                PreparedStatement ps = c.prepareStatement(sql);
+
+                if (!"".equals(field.getText())) 
+                {
+                    String searchText = "%" + field.getText() + "%";
+
+                    ps.setString(1, searchText);
+                    ps.setString(2, searchText);
+                    ps.setString(3, searchText);
+                    ps.setString(4, searchText);
+                    ps.setString(5, searchText);
+                    ps.setString(6, searchText);
+                    ps.setString(7, searchText);
+                }
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next())
+                {   
+                    String txtcodigo = rs.getString("id");
+                    String txtnome = rs.getString("nome");
+                    String txtautor = rs.getString("autor_id");
+                    String txttempo = rs.getString("tempo");
+                    String txtnivel = rs.getString("nivel");
+                    String txtpreco = rs.getString("preco");
+                    String txtcategoria = rs.getString("categoria");
+                    
+                    model.addRow(new Object[]{txtcodigo, txtnome, txtautor, txttempo, txtnivel, txtpreco, txtcategoria});
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            table.setModel(model);
+            
+            table.getColumnModel().getColumn(0).setPreferredWidth(30);  
+            table.getColumnModel().getColumn(1).setPreferredWidth(200); 
+            table.getColumnModel().getColumn(2).setPreferredWidth(50); 
+            table.getColumnModel().getColumn(3).setPreferredWidth(100); 
+            table.getColumnModel().getColumn(4).setPreferredWidth(240);
+            table.getColumnModel().getColumn(5).setPreferredWidth(100);
+        }
+                   
     public void listarUsers(JTable table, JTextField field)
         {
             DefaultTableModel model = new DefaultTableModel
@@ -291,6 +360,32 @@ private String getEmailFromDatabase(String id) throws SQLException {
                 return false;
             }
         }
+    
+    public boolean removeCurso(JTable table, Object coluna)
+    {
+        String sql = "DELETE FROM curso WHERE id = ?";
+        
+        ConnectionFactory cf = new ConnectionFactory();
+   
+        try 
+            (
+                Connection conn = cf.obtemConexao();
+                PreparedStatement ps = conn.prepareStatement(sql);
+            ) 
+                {
+                    ps.setObject(1, coluna); 
+                    System.out.println(sql);
+
+                    int affectedRows = ps.executeUpdate(); 
+                    return affectedRows > 0;
+                }   
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                System.out.println("ERRO. Não foi possível remover.");
+                return false;
+            }
+    }
     
 //--------------------------------------------------------------------------------------------------------------
     

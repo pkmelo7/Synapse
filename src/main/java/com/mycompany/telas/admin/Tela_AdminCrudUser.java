@@ -94,6 +94,11 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonXTelas = new javax.swing.JButton();
+        panelEdit = new javax.swing.JPanel();
+        panelEdit2 = new javax.swing.JPanel();
+        labelEdit = new javax.swing.JLabel();
+        buttonOkEdit = new javax.swing.JButton();
+        labelContagemEdit = new javax.swing.JLabel();
         panelExcluir = new javax.swing.JPanel();
         panelExcluir2 = new javax.swing.JPanel();
         labelExcluir = new javax.swing.JLabel();
@@ -146,6 +151,60 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
         });
         getContentPane().add(buttonXTelas);
         buttonXTelas.setBounds(1280, 0, 86, 25);
+
+        panelEdit.setOpaque(false);
+        panelEdit.setVisible(false);
+        panelEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEditMouseClicked(evt);
+            }
+        });
+        panelEdit.setLayout(null);
+
+        panelEdit2.setBackground(new java.awt.Color(0, 0, 0));
+        panelEdit2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 8), 1, true));
+        panelEdit2.setForeground(new java.awt.Color(0, 255, 8));
+        panelEdit2.setLayout(null);
+
+        labelEdit.setFont(digital7.deriveFont(30f));
+        labelEdit.setForeground(new java.awt.Color(0, 255, 8));
+        labelEdit.setText("Usuario editado com sucesso.");
+        labelEdit.setHorizontalAlignment(SwingConstants.CENTER);
+        panelEdit2.add(labelEdit);
+        labelEdit.setBounds(7, 26, 490, 120);
+
+        buttonOkEdit.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkEdit.setFont(digital7.deriveFont(20f));
+        buttonOkEdit.setForeground(new java.awt.Color(0, 255, 8));
+        buttonOkEdit.setText("OK");
+        buttonOkEdit.setBorder(null);
+        buttonOkEdit.setBorderPainted(false);
+        buttonOkEdit.setContentAreaFilled(false);
+        buttonOkEdit.setFocusable(false);
+        buttonOkEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkEditMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkEditMouseExited(evt);
+            }
+        });
+        panelEdit2.add(buttonOkEdit);
+        buttonOkEdit.setBounds(355, 210, 100, 40);
+
+        labelContagemEdit.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagemEdit.setFont(digital7.deriveFont(20f));
+        labelContagemEdit.setForeground(new java.awt.Color(0, 255, 8));
+        labelContagemEdit.setText("Tempo Restante: 5");
+        labelContagemEdit.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelEdit2.add(labelContagemEdit);
+        labelContagemEdit.setBounds(87, 210, 260, 40);
+
+        panelEdit.add(panelEdit2);
+        panelEdit2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelEdit);
+        panelEdit.setBounds(0, 0, 1366, 768);
 
         panelExcluir.setOpaque(false);
         panelExcluir.setVisible(false);
@@ -685,15 +744,93 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
         buttonSalvarAlt.setIcon(Salvar);
     }//GEN-LAST:event_buttonSalvarAltMouseExited
 
+    Timer timerEdit;
+    
     private void buttonSalvarAltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarAltActionPerformed
         // TODO add your handling code here:
         buttonSalvarAlt.setVisible(false);
         buttonEditar.setVisible(true);
         
-        adm.salvarAlteracoesUser(table);
-        
         adm.listarUsers(table, fieldPesquisa);
         isEditing = false;
+
+        // Verifica se a remoção foi bem-sucedida
+        if (adm.salvarAlteracoesUser(table)) 
+        {
+            // Garantir que o painel esteja visível após a exclusão
+            panelEdit.setVisible(true);
+
+            // Revalide o layout para garantir que o painel seja renderizado corretamente
+            panelEdit.revalidate();
+            panelEdit.repaint();
+
+            // Definir tempo inicial da contagem regressiva
+            final int tempoInicial = 5;
+            final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+            // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+            if (timerEdit != null && timerEdit.isRunning()) 
+            {
+                timerEdit.stop();  // Para o Timer atual, se já estiver em execução
+            }
+
+            // Criar o Timer para a contagem regressiva
+            timerEdit = new Timer(1000, new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    // Atualiza o texto da contagem regressiva
+                    if (tempoRestante[0] > 0) 
+                    {
+                        tempoRestante[0]--;
+                        labelContagemEdit.setText("Tempo restante: " + tempoRestante[0]);
+                    } 
+                    else
+                    {
+                        // Quando a contagem chega a 0, reinicia o tempo
+                        tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                        labelContagemEdit.setText("Tempo restante: " + tempoRestante[0]);
+
+                        // Atualizar a lista de usuários
+                        adm.listarUsers(table, fieldPesquisa);
+
+                        // Esconde o painel após a contagem
+                        panelEdit.setVisible(false);
+
+                        // Para o Timer
+                        timerEdit.stop();
+                    }
+                }
+            });
+
+            // Inicia o Timer de contagem regressiva
+            timerEdit.start();
+
+            // Ação do botão "OK" para fechar o painel antes do tempo
+            buttonOkEdit.addActionListener(new ActionListener() 
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    // Para o Timer imediatamente
+                    if (timerEdit != null) 
+                    {
+                        timerEdit.stop();
+                    }
+
+                    // Atualizar a lista de usuários
+                    adm.listarUsers(table, fieldPesquisa);
+
+                    // Esconde o painel imediatamente
+                    panelEdit.setVisible(false);
+
+                    // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                    tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                    labelContagemEdit.setText("Tempo restante: " + tempoRestante[0]);
+                }
+            });
+        }
     }//GEN-LAST:event_buttonSalvarAltActionPerformed
 
     private void buttonOkExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkExcluirMouseEntered
@@ -727,6 +864,20 @@ public class Tela_AdminCrudUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonXTelasActionPerformed
+
+    private void buttonOkEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEditMouseEntered
+        // TODO add your handling code here:
+        buttonOkEdit.setFont(digital7.deriveFont(25f));
+    }//GEN-LAST:event_buttonOkEditMouseEntered
+
+    private void buttonOkEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEditMouseExited
+        // TODO add your handling code here:
+        buttonOkEdit.setFont(digital7.deriveFont(20f));
+    }//GEN-LAST:event_buttonOkEditMouseExited
+
+    private void panelEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEditMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelEditMouseClicked
 //---------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -920,6 +1071,7 @@ private static void typingEffectButton2(JButton button, String message)
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JButton buttonListar;
+    private javax.swing.JButton buttonOkEdit;
     private javax.swing.JButton buttonOkExcluir;
     private javax.swing.JButton buttonSalvarAlt;
     private javax.swing.JButton buttonVoltar;
@@ -930,8 +1082,12 @@ private static void typingEffectButton2(JButton button, String message)
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel label;
     private javax.swing.JLabel labelContagem;
+    private javax.swing.JLabel labelContagemEdit;
+    private javax.swing.JLabel labelEdit;
     private javax.swing.JLabel labelExcluir;
     private javax.swing.JLabel labelPesquisa;
+    private javax.swing.JPanel panelEdit;
+    private javax.swing.JPanel panelEdit2;
     private javax.swing.JPanel panelExcluir;
     private javax.swing.JPanel panelExcluir2;
     private javax.swing.JScrollPane scrollbar;

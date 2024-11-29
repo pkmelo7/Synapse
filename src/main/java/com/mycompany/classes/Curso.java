@@ -25,9 +25,9 @@ public class Curso
     private int id;
     private String nome;
     private int autorId;
-    private BigDecimal tempo;
+    private String tempo;
     private String nivel;
-    private BigDecimal preco;
+    private String preco;
     private String categoria;
     private String descricao;
     private ImageIcon fotoCurso; 
@@ -46,9 +46,9 @@ public class Curso
         {
             ps.setString(1, getNome());        // nome do curso
             ps.setInt(2, getAutorId());        // id do autor (relacionamento com a tabela User)
-            ps.setBigDecimal(3, getTempo());   // tempo do curso (DECIMAL)
+            ps.setString(3, getTempo());   // tempo do curso (DECIMAL)
             ps.setString(4, getNivel());       // nível do curso (ex: "Básico", "Avançado")
-            ps.setBigDecimal(5, getPreco());   // preço do curso (DECIMAL)
+            ps.setString(5, getPreco());   // preço do curso (DECIMAL)
             ps.setString(6, getCategoria());   // categoria do curso (ex: "Tecnologia", "Negócios")
             ps.setString(7, getDescricao());   // descrição do curso
 
@@ -72,6 +72,41 @@ public class Curso
         return -1;
     }
     
+    public Curso listarCursoporId(int id) throws SQLException
+    {
+        ConnectionFactory cf = new ConnectionFactory();
+        
+        String sql = "SELECT * FROM curso WHERE id = ?";
+        
+        try (Connection conn = cf.obtemConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            rs.next();
+            
+            Curso c = new Curso();
+                c.setId(rs.getInt("id"));
+                c.setNome(rs.getString("nome"));
+                c.setAutorId(rs.getInt("autor_id"));
+            c.setTempo(rs.getString("tempo")); 
+                c.setNivel(rs.getString("nivel"));
+                c.setPreco(rs.getString("preco"));
+                c.setCategoria(rs.getString("categoria"));
+                Curso cursoTemp = new Curso();
+                c.setFotoCurso(cursoTemp.exibirImagemIcon(rs.getInt("id")));
+                
+                System.out.println("Curso listado: "+c.getNome());
+                
+                return c;
+                } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     public List<Curso> buscarCursosPorCategoria(java.lang.String categoria) 
     {
         List<Curso> cursos = new ArrayList<>();
@@ -91,9 +126,9 @@ public class Curso
                 curso.setId(rs.getInt("id"));
                 curso.setNome(rs.getString("nome"));
                 curso.setAutorId(rs.getInt("autor_id"));
-            curso.setTempo(rs.getBigDecimal("tempo")); 
+            curso.setTempo(rs.getString("tempo")); 
                 curso.setNivel(rs.getString("nivel"));
-                curso.setPreco(rs.getBigDecimal("preco"));
+                curso.setPreco(rs.getString("preco"));
                 curso.setCategoria(rs.getString("categoria"));
                 Curso cursoTemp = new Curso();
                 curso.setFotoCurso(cursoTemp.exibirImagemIcon(rs.getInt("id")));
@@ -193,6 +228,51 @@ public class Curso
         return null;
     }
     
+    public ImageIcon exibirImagemIconCursoExb(int idCurso) 
+    {   
+        String sql = "SELECT imagem FROM imagens WHERE curso_id = ?";
+
+        ConnectionFactory cf = new ConnectionFactory();
+        
+        try 
+            (
+                Connection conn = cf.obtemConexao();
+                PreparedStatement ps = conn.prepareStatement(sql);
+            ) 
+        {
+
+            ps.setInt(1, idCurso);
+
+            try (ResultSet resultado = ps.executeQuery()) {
+                if (resultado.next()) {
+                    byte[] dadosImagem = resultado.getBytes("imagem");
+
+                    if (dadosImagem != null) {
+                        // Converter os dados binários em um objeto de imagem
+                        ByteArrayInputStream bais = new ByteArrayInputStream(dadosImagem);
+                        Image imagem = ImageIO.read(bais);
+
+                        if (imagem != null) {
+                            // Redimensionar a imagem para caber no JFrame
+                            Image imagemRedimensionada = imagem.getScaledInstance(350, 240, Image.SCALE_SMOOTH);
+                            return new ImageIcon(imagemRedimensionada);
+                        } else {
+                            System.out.println("Erro ao converter os dados em imagem.");
+                        }
+                    } else {
+                        System.out.println("Nenhuma imagem encontrada para o ID fornecido.");
+                    }
+                } else {
+                    System.out.println("Nenhum registro encontrado.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
     public String getNomeporId(int idCurso) throws SQLException
     {
         String sql = "SELECT nome FROM curso WHERE id = ?";
@@ -222,7 +302,38 @@ public class Curso
                 e.printStackTrace();
                 throw e;
             }
-    }
+        }
+    
+    public String getDescricaoporId(int idCurso) throws SQLException
+    {
+        String sql = "SELECT descricao FROM curso WHERE id = ?";
+
+        ConnectionFactory cf = new ConnectionFactory();
+
+        try 
+        (
+            Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql);
+        ) 
+        {
+                ps.setInt(1, idCurso);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) 
+                {
+                    return rs.getString("descricao"); // Retorna o nome se encontrado
+                } 
+                else
+                {
+                    return null; // Retorna null se o curso não for encontrado
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+                throw e;
+            }
+        }
     
     public String getNome() {
         return nome;
@@ -240,13 +351,6 @@ public class Curso
         this.autorId = autorId;
     }
 
-    public BigDecimal getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(BigDecimal tempo) {
-        this.tempo = tempo;
-    }
 
     public String getNivel() {
         return nivel;
@@ -254,14 +358,6 @@ public class Curso
 
     public void setNivel(String nivel) {
         this.nivel = nivel;
-    }
-
-    public BigDecimal getPreco() {
-        return preco;
-    }
-
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
     }
 
     public String getCategoria() {
@@ -294,6 +390,22 @@ public class Curso
 
     public void setFotoCurso(ImageIcon fotoCurso) {
         this.fotoCurso = fotoCurso;
+    }
+
+    public String getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
+    }
+
+    public String getPreco() {
+        return preco;
+    }
+
+    public void setPreco(String preco) {
+        this.preco = preco;
     }
     
 }
