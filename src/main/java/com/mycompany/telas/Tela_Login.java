@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 //Fim das importações necessárias
 
@@ -34,6 +35,10 @@ public class Tela_Login extends javax.swing.JFrame
     
         //Variável para determinar se o checkbox que torna a senha visivel esta ativo ou nao
         boolean showing = false;
+        
+        Timer timerAlerta;
+                
+        boolean acaoConcluida = false;
     
         //Variaveis para configurar a fonte como poppins
         Font poppins;
@@ -61,7 +66,7 @@ public class Tela_Login extends javax.swing.JFrame
         }
         
         //cria o método abrirTela_Sobre, onde invoca a tela de sobre e fecha a tela de cadastro
-        private void abrirTela_Sobre() throws FontFormatException, IOException
+        private void abrirTela_Sobre() throws FontFormatException, IOException, SQLException
         {
             Tela_Sobre Tela_Sobre = new Tela_Sobre();
             this.dispose();
@@ -73,6 +78,13 @@ public class Tela_Login extends javax.swing.JFrame
             Tela_Admin1 adm = new Tela_Admin1();
             this.dispose();
             adm.setVisible(true);
+        }
+        
+        private void abrirTelaCursos() throws FontFormatException, IOException, SQLException
+        {
+            Tela_Cursos Cursos = new Tela_Cursos();
+            this.dispose();
+            Cursos.setVisible(true);
         }
     //Fim da declaração de métodos
 
@@ -92,6 +104,12 @@ public class Tela_Login extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelAlerta = new javax.swing.JPanel();
+        panelAlerta2 = new javax.swing.JPanel();
+        labelAlerta = new javax.swing.JLabel();
+        buttonOkAlerta = new javax.swing.JButton();
+        labelContagem = new javax.swing.JLabel();
+        fundoAlerta = new javax.swing.JLabel();
         telaLogin = new javax.swing.JPanel();
         buttonSynapse = new javax.swing.JButton();
         buttonSynapseLogo = new javax.swing.JButton();
@@ -108,6 +126,7 @@ public class Tela_Login extends javax.swing.JFrame
         buttonEntrar = new javax.swing.JButton();
         buttonPR = new javax.swing.JButton();
         buttonXTelas = new javax.swing.JButton();
+        labelUser = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,6 +138,62 @@ public class Tela_Login extends javax.swing.JFrame
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        panelAlerta.setOpaque(false);
+        panelAlerta.setVisible(false);
+        panelAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAlertaMouseClicked(evt);
+            }
+        });
+        panelAlerta.setLayout(null);
+
+        panelAlerta2.setBackground(new java.awt.Color(204, 204, 204));
+        panelAlerta2.setForeground(new java.awt.Color(69, 82, 173));
+        panelAlerta2.setLayout(null);
+
+        labelAlerta.setFont(poppins.deriveFont(20f));
+        labelAlerta.setForeground(new java.awt.Color(69, 82, 173));
+        labelAlerta.setHorizontalAlignment(SwingConstants.CENTER);
+        panelAlerta2.add(labelAlerta);
+        labelAlerta.setBounds(7, 66, 490, 100);
+
+        buttonOkAlerta.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkAlerta.setFont(poppins.deriveFont(20f));
+        buttonOkAlerta.setForeground(new java.awt.Color(69, 82, 173));
+        buttonOkAlerta.setText("OK");
+        buttonOkAlerta.setBorder(null);
+        buttonOkAlerta.setBorderPainted(false);
+        buttonOkAlerta.setContentAreaFilled(false);
+        buttonOkAlerta.setFocusable(false);
+        buttonOkAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseExited(evt);
+            }
+        });
+        panelAlerta2.add(buttonOkAlerta);
+        buttonOkAlerta.setBounds(355, 210, 100, 40);
+
+        labelContagem.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagem.setFont(poppins.deriveFont(20f));
+        labelContagem.setForeground(new java.awt.Color(69, 82, 173));
+        labelContagem.setText("Tempo Restante: 5");
+        labelContagem.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelAlerta2.add(labelContagem);
+        labelContagem.setBounds(87, 210, 260, 40);
+
+        fundoAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/janelaAlerta.png"))); // NOI18N
+        panelAlerta2.add(fundoAlerta);
+        fundoAlerta.setBounds(0, 0, 500, 280);
+
+        panelAlerta.add(panelAlerta2);
+        panelAlerta2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelAlerta);
+        panelAlerta.setBounds(0, 0, 1366, 768);
 
         telaLogin.setLayout(null);
 
@@ -429,6 +504,10 @@ public class Tela_Login extends javax.swing.JFrame
         telaLogin.add(buttonXTelas);
         buttonXTelas.setBounds(1280, 0, 86, 25);
 
+        labelUser.setForeground(new java.awt.Color(204, 0, 0));
+        telaLogin.add(labelUser);
+        labelUser.setBounds(650, 432, 260, 15);
+
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoLogin.png"))); // NOI18N
         telaLogin.add(fundo);
         fundo.setBounds(0, -17, 1370, 800);
@@ -632,6 +711,8 @@ public class Tela_Login extends javax.swing.JFrame
                 Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonSobreActionPerformed
     //Faz o botão Sobre ficar Azul ao passar o mouse por cima
@@ -653,7 +734,16 @@ public class Tela_Login extends javax.swing.JFrame
 //Início dos comandos do botão "Cursos"
     //<null>
     private void buttonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCursosActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                abrirTelaCursos();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonCursosActionPerformed
     //Faz o botão Cursos ficar Azul ao passar o mouse por cima
     private void buttonCursosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCursosMouseEntered
@@ -703,10 +793,27 @@ public class Tela_Login extends javax.swing.JFrame
     //<null>
     private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
         // TODO add your handling code here:
-    String usu, senha;
+    String usu = null, senha = null;
     
-    usu = fieldUser.getText();
-    senha = new String(fieldSenha.getPassword());
+    if(fieldUser.getText().equals("Usuário") || fieldUser.getText().equals(""))
+    {
+        labelAlerta.setText("Usuario vazio, por favor preencha.");
+        mensagemErro();
+    }
+    else
+    {
+        usu = fieldUser.getText();
+    }
+    
+    if(fieldSenha.getText().equals("Senha") || fieldSenha.getText().equals(""))
+    {
+        labelAlerta.setText("Senha vazia, por favor preencha.");
+        mensagemErro();
+    }
+    else
+    {
+        senha = fieldSenha.getText();
+    }
     
     Usuario usuario = new Usuario();
     usuario.setUser(usu);
@@ -724,46 +831,32 @@ public class Tela_Login extends javax.swing.JFrame
                 {
                     // Setando o usuário como logado na sessão
                     Session.setLoggedUser(usuario);  // Aqui, o usuário é registrado como logado
-                    if(Session.isUserLoggedIn())
-                    {
-                        System.out.println("Usuario logado como Admin.");
-                    }
-                    
-                    Usuario logado = Session.getLoggedUser();
-                    
-                    if(logado!=null)
-                    {
-                        System.out.println("Nome do usuario: " + logado.getNome());
-                    }
                     abrirTelaAdmin();  // Acesse a tela de admin
                 } 
                 else 
                 {
                     // Setando o usuário como logado na sessão
                     Session.setLoggedUser(usuario);  // Aqui, o usuário é registrado como logado
-                    
-                    if(Session.isUserLoggedIn())
-                    {
-                        System.out.println("Usuario logado como usuario comum.");
-                    }
-                    
-                    Usuario logado = Session.getLoggedUser();
-                    
-                    if(logado!=null)
-                    {
-                        System.out.println("Nome do usuario: " + logado.getNome());
-                    }
-                    
                     abrirTelaMenu();   // Acesse a tela normal
-                    }
+                }
             } 
             else if (resultado == 2) 
             {
-                // Senha incorreta
+                labelAlerta.setText("Senha incorreta, tente novamente.");
+                mensagemErro();
             } 
             else 
             {
-                // Usuário não cadastrado
+                if(fieldUser.getText().equals("Usuário") || fieldUser.getText().equals(""))
+                {
+                    labelAlerta.setText("Usuario vazio, por favor preencha.");
+                    mensagemErro();
+                }
+                else
+                {
+                    labelAlerta.setText("Usuario não cadastrado, por favor cadastre-se.");
+                    mensagemErro2();
+                }
             }
         } 
         catch (SQLException ex) 
@@ -789,6 +882,173 @@ public class Tela_Login extends javax.swing.JFrame
         buttonEntrar.setIcon(Cadastrar);
     }//GEN-LAST:event_buttonEntrarMouseExited
 //Fim dos comandos do botão "Entrar"
+    
+    private void mensagemErro()
+    {        
+         // Garantir que o painel esteja visível após a exclusão
+        panelAlerta.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelAlerta.revalidate();
+        panelAlerta.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerAlerta != null && timerAlerta.isRunning()) 
+        {
+            timerAlerta.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerAlerta = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelAlerta.setVisible(false);
+
+                    // Para o Timer
+                    timerAlerta.stop();
+
+                    acaoConcluida = true;
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerAlerta.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkAlerta.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerAlerta != null) 
+                {
+                    timerAlerta.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelAlerta.setVisible(false);
+
+                acaoConcluida = true;
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+    
+     private void mensagemErro2()
+    {        
+         // Garantir que o painel esteja visível após a exclusão
+        panelAlerta.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelAlerta.revalidate();
+        panelAlerta.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerAlerta != null && timerAlerta.isRunning()) 
+        {
+            timerAlerta.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerAlerta = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelAlerta.setVisible(false);
+
+                    // Para o Timer
+                    timerAlerta.stop();
+
+                    acaoConcluida = true;
+                    
+                    try {
+                        abrirTela_Cadastro();
+                    } catch (FontFormatException ex) {
+                        Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerAlerta.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkAlerta.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerAlerta != null) 
+                {
+                    timerAlerta.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelAlerta.setVisible(false);
+
+                acaoConcluida = true;
+                
+                try {
+                    abrirTela_Cadastro();
+                } catch (FontFormatException ex) {
+                    Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Tela_Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+
 
 //---------------------------------------------------------------------------------------------------------------------------------
 
@@ -859,6 +1119,18 @@ public class Tela_Login extends javax.swing.JFrame
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonXTelasActionPerformed
+
+    private void buttonOkAlertaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkAlertaMouseEntered
+
+    private void buttonOkAlertaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonOkAlertaMouseExited
+
+    private void panelAlertaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAlertaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAlertaMouseClicked
 //Fim dos comandos do botão X para fechar a aplicação
 
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -909,6 +1181,7 @@ public class Tela_Login extends javax.swing.JFrame
     private javax.swing.JButton buttonCadastrarse;
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonEntrar;
+    private javax.swing.JButton buttonOkAlerta;
     private javax.swing.JButton buttonPR;
     private javax.swing.JButton buttonSeta;
     private javax.swing.JButton buttonSobre;
@@ -921,7 +1194,13 @@ public class Tela_Login extends javax.swing.JFrame
     private javax.swing.JPasswordField fieldSenha;
     private javax.swing.JTextField fieldUser;
     private javax.swing.JLabel fundo;
+    private javax.swing.JLabel fundoAlerta;
+    private javax.swing.JLabel labelAlerta;
+    private javax.swing.JLabel labelContagem;
     private javax.swing.JLabel labelSenha;
+    private javax.swing.JLabel labelUser;
+    private javax.swing.JPanel panelAlerta;
+    private javax.swing.JPanel panelAlerta2;
     private javax.swing.JPanel telaLogin;
     // End of variables declaration//GEN-END:variables
 }

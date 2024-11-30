@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -46,6 +47,13 @@ public class Tela_AdminCrud1 extends javax.swing.JFrame {
         {
             Tela_AdminCrudUser CrudUser = new Tela_AdminCrudUser();
             CrudUser.setVisible(true);
+            this.dispose();
+        }
+        
+        public void abrirCrudCursos() throws FontFormatException, IOException, SQLException
+        {
+            Tela_AdminCrudCursos CrudCursos = new Tela_AdminCrudCursos();
+            CrudCursos.setVisible(true);
             this.dispose();
         }
    
@@ -258,8 +266,16 @@ public class Tela_AdminCrud1 extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCursosMouseExited
     //<null>
     private void buttonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCursosActionPerformed
-        // TODO add your handling code here:
-        
+            try {
+                // TODO add your handling code here:
+                abrirCrudCursos();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_AdminCrud1.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_AdminCrud1.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_AdminCrud1.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonCursosActionPerformed
 //Fim dos comandos do botao Cursos
     

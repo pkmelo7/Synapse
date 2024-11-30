@@ -172,7 +172,34 @@ public class Usuario {
                 throw e;
             }
         }
+        
+        public boolean validaAcessoCurso(int idUsuario, int idCurso) throws SQLException
+        {
+            String sql = "SELECT * FROM acesso WHERE usuario_id = ? AND curso_id = ?";
 
+            ConnectionFactory cf = new ConnectionFactory();
+
+            try 
+            (
+                Connection conn = cf.obtemConexao();
+                PreparedStatement ps = conn.prepareStatement(sql);
+            )
+            {
+                ps.setInt(1, idUsuario);
+                ps.setInt(2, idCurso);
+                ResultSet rs = ps.executeQuery();
+                System.out.println("Acesso encontrado");
+                return rs.next();
+            } 
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                System.out.println("Acesso não encontrado.");
+                return false;
+            }
+        }
+    //metodo para verificar se o usuario ja existe no banco de dados
+        //busca por user
     //metodo para verificar se o usuario ja existe no banco de dados
         //busca por user
         public boolean verificaUserExiste() throws SQLException 

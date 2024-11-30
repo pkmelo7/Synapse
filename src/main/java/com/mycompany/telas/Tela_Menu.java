@@ -56,14 +56,14 @@ public class Tela_Menu extends javax.swing.JFrame {
         
     //Declaração de métodos
         //cria o método abrirTela_Carrinho, onde invoca a tela de carrinho e fecha a tela atual
-        private void abrirTelaCarrinho() throws FontFormatException, IOException
+        private void abrirTelaCarrinho() throws FontFormatException, IOException, SQLException
         {
             Tela_Carrinho Carrinho = new Tela_Carrinho();
             this.dispose();
             Carrinho.setVisible(true);
         }
         //cria o método abrirTela_Sobre, onde invoca a tela de sobre e fecha a tela atual
-        private void abrirTelaSobre() throws FontFormatException, IOException
+        private void abrirTelaSobre() throws FontFormatException, IOException, SQLException
         {
             Tela_Sobre Sobre = new Tela_Sobre();
             this.dispose();
@@ -903,7 +903,9 @@ public class Tela_Menu extends javax.swing.JFrame {
             Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (SQLException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonSobreActionPerformed
     //Faz o botão Sobre ficar Azul ao passar o mouse por cima
     private void buttonSobreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSobreMouseEntered
@@ -1101,7 +1103,9 @@ public class Tela_Menu extends javax.swing.JFrame {
             Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Tela_Sobre.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   catch (SQLException ex) {
+                Logger.getLogger(Tela_Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonTelaCarrinhoActionPerformed
 
     private void buttonPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPerfilMouseEntered
