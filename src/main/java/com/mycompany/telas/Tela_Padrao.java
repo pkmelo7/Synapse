@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -37,14 +38,15 @@ public class Tela_Padrao extends javax.swing.JFrame {
     ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/icon.png")); 
     Tela_Login Tela_Login = new Tela_Login();
     Tela_Cadastro Tela_Cadastro = new Tela_Cadastro();
-    Tela_Sobre Tela_Sobre = new Tela_Sobre();
     //Final da declaração de variáveis
+    Tela_Sobre Tela_Sobre;
     
     //Declaração de métodos
     
     //Fim da declaração de métodos
         
-    public Tela_Padrao() throws FontFormatException, IOException {
+    public Tela_Padrao() throws FontFormatException, IOException, SQLException {
+        this.Tela_Sobre = new Tela_Sobre();
       
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents();        }
@@ -889,6 +891,8 @@ public class Tela_Padrao extends javax.swing.JFrame {
                 } catch (FontFormatException ex) {
                     Logger.getLogger(Tela_Padrao.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
+                    Logger.getLogger(Tela_Padrao.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(Tela_Padrao.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

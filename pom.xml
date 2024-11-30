@@ -35,7 +35,13 @@
                 <include>images/FundosTelas/FundoPerfil.png</include>
                 <include>images/FundosTelas/FundoSobre.png</include>
                 <include>images/FundosTelas/bannerCursos.png</include>
+                <include>images/FundosTelas/janelaAlerta.png</include>
+                <include>images/FundosTelas/janelaAlertaAdmin.png</include>
                              
+                <include>images/Botoes/acessarConteudo.png</include>
+                <include>images/Botoes/acessarConteudoAzul.png</include>
+                <include>images/Botoes/acessoLogin.png</include>
+                <include>images/Botoes/acessoLoginAzul.png</include>
                 <include>images/Botoes/addCarrinho.png</include>
                 <include>images/Botoes/addCarrinhoAzul.png</include>
                 <include>images/Botoes/AplicarDesconto.png</include>

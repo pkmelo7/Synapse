@@ -48,7 +48,7 @@ public class Tela_Perfil extends javax.swing.JFrame {
         Tela_Login.setVisible(true);
     }
         //cria o método abrirTela_Sobre, onde invoca a tela de sobre e fecha a tela atual
-        private void abrirTela_Sobre() throws FontFormatException, IOException{
+        private void abrirTela_Sobre() throws FontFormatException, IOException, SQLException{
             Tela_Sobre Tela_Sobre = new Tela_Sobre();
             this.dispose();
             Tela_Sobre.setVisible(true);
@@ -785,6 +785,8 @@ public class Tela_Perfil extends javax.swing.JFrame {
             } catch (FontFormatException ex) {
                 Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
+                Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(Tela_Perfil.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonSobreActionPerformed

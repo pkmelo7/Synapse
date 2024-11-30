@@ -53,16 +53,9 @@ public class Tela_Cadastro extends javax.swing.JFrame
         
         MaskFormatter mask;
         
-        Timer timerUsu;
-        Timer timerData;
-        Timer timerUsuEx;
-        Timer timerEmailEx;
-        Timer timerNomeVz;
-        Timer timerNascVz;
-        Timer timerUserVz;
-        Timer timerEmailVz;
-        Timer timerSenhaVz;
-        Timer timerEmailErr;
+        Timer timerAlerta;
+        
+        boolean cadastrado = false;
         
         boolean acaoConcluida = false;
     //Final da declaração de variáveis
@@ -77,7 +70,7 @@ public class Tela_Cadastro extends javax.swing.JFrame
         }
         
         //cria o método abrirTela_Sobre, onde invoca a tela de sobre e fecha a tela de cadastro
-        private void abrirTela_Sobre() throws FontFormatException, IOException
+        private void abrirTela_Sobre() throws FontFormatException, IOException, SQLException
         {
             Tela_Sobre Tela_Sobre = new Tela_Sobre();
             this.dispose();
@@ -90,6 +83,13 @@ public class Tela_Cadastro extends javax.swing.JFrame
             Tela_Menu TelaMenu = new Tela_Menu();
             this.dispose();
             TelaMenu.setVisible(true);
+        }
+        
+        private void abrirTelaCursos() throws FontFormatException, IOException, SQLException
+        {
+            Tela_Cursos TelaCursos = new Tela_Cursos();
+            this.dispose();
+            TelaCursos.setVisible(true);
         }
     //Fim da declaração de métodos
     
@@ -122,6 +122,12 @@ public class Tela_Cadastro extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelAlerta = new javax.swing.JPanel();
+        panelAlerta2 = new javax.swing.JPanel();
+        labelAlerta = new javax.swing.JLabel();
+        buttonOkAlerta = new javax.swing.JButton();
+        labelContagem = new javax.swing.JLabel();
+        fundoAlerta = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonSynapse = new javax.swing.JButton();
         buttonSynapseLogo = new javax.swing.JButton();
@@ -146,56 +152,6 @@ public class Tela_Cadastro extends javax.swing.JFrame
         labelEmail = new javax.swing.JLabel();
         labelUser = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
-        panelEmailErrado = new javax.swing.JPanel();
-        panelEmailErrado2 = new javax.swing.JPanel();
-        labelEmailErrado = new javax.swing.JLabel();
-        buttonOkEmailErrado = new javax.swing.JButton();
-        labelContagemEmailErrado = new javax.swing.JLabel();
-        panelCadastrado = new javax.swing.JPanel();
-        panelCadastrado2 = new javax.swing.JPanel();
-        labelCadastrado = new javax.swing.JLabel();
-        buttonOkCadastrado = new javax.swing.JButton();
-        labelContagemCadastrado = new javax.swing.JLabel();
-        panelDataErrada = new javax.swing.JPanel();
-        panelDataErrada2 = new javax.swing.JPanel();
-        labelDataErrada = new javax.swing.JLabel();
-        buttonOkDataErrada = new javax.swing.JButton();
-        labelContagemDataErrada = new javax.swing.JLabel();
-        panelUsuExiste = new javax.swing.JPanel();
-        panelUsuExiste2 = new javax.swing.JPanel();
-        labelUsuExiste = new javax.swing.JLabel();
-        buttonOkUsuExiste = new javax.swing.JButton();
-        labelContagemUsuExiste = new javax.swing.JLabel();
-        panelEmailExiste = new javax.swing.JPanel();
-        panelEmailExiste2 = new javax.swing.JPanel();
-        labelEmailExiste = new javax.swing.JLabel();
-        buttonOkEmailExiste = new javax.swing.JButton();
-        labelContagemEmailExiste = new javax.swing.JLabel();
-        panelSenhaVazia = new javax.swing.JPanel();
-        panelSenhaVazia2 = new javax.swing.JPanel();
-        labelSenhaVazia = new javax.swing.JLabel();
-        buttonOkSenhaVazia = new javax.swing.JButton();
-        labelContagemSenhaVazia = new javax.swing.JLabel();
-        panelEmailVazio = new javax.swing.JPanel();
-        panelEmailVazio2 = new javax.swing.JPanel();
-        labelEmailVazio = new javax.swing.JLabel();
-        buttonOkEmailVazio = new javax.swing.JButton();
-        labelContagemEmailVazio = new javax.swing.JLabel();
-        panelUserVazio = new javax.swing.JPanel();
-        panelUserVazio2 = new javax.swing.JPanel();
-        labelUserVazio = new javax.swing.JLabel();
-        buttonOkUserVazio = new javax.swing.JButton();
-        labelContagemUserVazio = new javax.swing.JLabel();
-        panelNascVazio = new javax.swing.JPanel();
-        panelNascVazio2 = new javax.swing.JPanel();
-        labelNascVazio = new javax.swing.JLabel();
-        buttonOkNascVazio = new javax.swing.JButton();
-        labelContagemNascVazio = new javax.swing.JLabel();
-        panelNomeVazio = new javax.swing.JPanel();
-        panelNomeVazio2 = new javax.swing.JPanel();
-        labelNomeVazio = new javax.swing.JLabel();
-        buttonOkNomeVazio = new javax.swing.JButton();
-        labelContagemNomeVazio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Synapse Connect");
@@ -206,6 +162,62 @@ public class Tela_Cadastro extends javax.swing.JFrame
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        panelAlerta.setOpaque(false);
+        panelAlerta.setVisible(false);
+        panelAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAlertaMouseClicked(evt);
+            }
+        });
+        panelAlerta.setLayout(null);
+
+        panelAlerta2.setBackground(new java.awt.Color(204, 204, 204));
+        panelAlerta2.setForeground(new java.awt.Color(69, 82, 173));
+        panelAlerta2.setLayout(null);
+
+        labelAlerta.setFont(poppins.deriveFont(20f));
+        labelAlerta.setForeground(new java.awt.Color(69, 82, 173));
+        labelAlerta.setHorizontalAlignment(SwingConstants.CENTER);
+        panelAlerta2.add(labelAlerta);
+        labelAlerta.setBounds(7, 66, 490, 100);
+
+        buttonOkAlerta.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkAlerta.setFont(poppins.deriveFont(20f));
+        buttonOkAlerta.setForeground(new java.awt.Color(69, 82, 173));
+        buttonOkAlerta.setText("OK");
+        buttonOkAlerta.setBorder(null);
+        buttonOkAlerta.setBorderPainted(false);
+        buttonOkAlerta.setContentAreaFilled(false);
+        buttonOkAlerta.setFocusable(false);
+        buttonOkAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseExited(evt);
+            }
+        });
+        panelAlerta2.add(buttonOkAlerta);
+        buttonOkAlerta.setBounds(355, 210, 100, 40);
+
+        labelContagem.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagem.setFont(poppins.deriveFont(20f));
+        labelContagem.setForeground(new java.awt.Color(69, 82, 173));
+        labelContagem.setText("Tempo Restante: 5");
+        labelContagem.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelAlerta2.add(labelContagem);
+        labelContagem.setBounds(87, 210, 260, 40);
+
+        fundoAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/janelaAlerta.png"))); // NOI18N
+        panelAlerta2.add(fundoAlerta);
+        fundoAlerta.setBounds(0, 0, 500, 280);
+
+        panelAlerta.add(panelAlerta2);
+        panelAlerta2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelAlerta);
+        panelAlerta.setBounds(0, 0, 1366, 768);
 
         jPanel1.setLayout(null);
 
@@ -582,546 +594,6 @@ public class Tela_Cadastro extends javax.swing.JFrame
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1366, 768);
 
-        panelEmailErrado.setOpaque(false);
-        panelEmailErrado.setVisible(false);
-        panelEmailErrado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelEmailErradoMouseClicked(evt);
-            }
-        });
-        panelEmailErrado.setLayout(null);
-
-        panelEmailErrado2.setBackground(new java.awt.Color(204, 204, 204));
-        panelEmailErrado2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelEmailErrado2.setForeground(new java.awt.Color(69, 82, 173));
-        panelEmailErrado2.setLayout(null);
-
-        labelEmailErrado.setFont(poppins.deriveFont(25f));
-        labelEmailErrado.setForeground(new java.awt.Color(69, 82, 173));
-        labelEmailErrado.setText("Email inválido, tente novamente.");
-        labelEmailErrado.setHorizontalAlignment(SwingConstants.CENTER);
-        panelEmailErrado2.add(labelEmailErrado);
-        labelEmailErrado.setBounds(7, 26, 490, 120);
-
-        buttonOkEmailErrado.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkEmailErrado.setFont(poppins.deriveFont(20f));
-        buttonOkEmailErrado.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkEmailErrado.setText("OK");
-        buttonOkEmailErrado.setBorder(null);
-        buttonOkEmailErrado.setBorderPainted(false);
-        buttonOkEmailErrado.setContentAreaFilled(false);
-        buttonOkEmailErrado.setFocusable(false);
-        buttonOkEmailErrado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkEmailErradoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkEmailErradoMouseExited(evt);
-            }
-        });
-        panelEmailErrado2.add(buttonOkEmailErrado);
-        buttonOkEmailErrado.setBounds(355, 210, 100, 40);
-
-        labelContagemEmailErrado.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemEmailErrado.setFont(poppins.deriveFont(20f));
-        labelContagemEmailErrado.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemEmailErrado.setText("Tempo Restante: 5");
-        labelContagemEmailErrado.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelEmailErrado2.add(labelContagemEmailErrado);
-        labelContagemEmailErrado.setBounds(87, 210, 260, 40);
-
-        panelEmailErrado.add(panelEmailErrado2);
-        panelEmailErrado2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelEmailErrado);
-        panelEmailErrado.setBounds(0, 0, 1366, 768);
-
-        panelCadastrado.setOpaque(false);
-        panelCadastrado.setVisible(false);
-        panelCadastrado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelCadastradoMouseClicked(evt);
-            }
-        });
-        panelCadastrado.setLayout(null);
-
-        panelCadastrado2.setBackground(new java.awt.Color(204, 204, 204));
-        panelCadastrado2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelCadastrado2.setForeground(new java.awt.Color(0, 255, 8));
-        panelCadastrado2.setLayout(null);
-
-        labelCadastrado.setFont(poppins.deriveFont(20f));
-        labelCadastrado.setForeground(new java.awt.Color(69, 82, 173));
-        labelCadastrado.setText("Usuario cadastrado com sucesso.");
-        labelCadastrado.setHorizontalAlignment(SwingConstants.CENTER);
-        panelCadastrado2.add(labelCadastrado);
-        labelCadastrado.setBounds(7, 26, 490, 120);
-
-        buttonOkCadastrado.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkCadastrado.setFont(poppins.deriveFont(20f));
-        buttonOkCadastrado.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkCadastrado.setText("OK");
-        buttonOkCadastrado.setBorder(null);
-        buttonOkCadastrado.setBorderPainted(false);
-        buttonOkCadastrado.setContentAreaFilled(false);
-        buttonOkCadastrado.setFocusable(false);
-        buttonOkCadastrado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkCadastradoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkCadastradoMouseExited(evt);
-            }
-        });
-        panelCadastrado2.add(buttonOkCadastrado);
-        buttonOkCadastrado.setBounds(355, 210, 100, 40);
-
-        labelContagemCadastrado.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemCadastrado.setFont(poppins.deriveFont(20f));
-        labelContagemCadastrado.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemCadastrado.setText("Tempo Restante: 5");
-        labelContagemCadastrado.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelCadastrado2.add(labelContagemCadastrado);
-        labelContagemCadastrado.setBounds(87, 210, 260, 40);
-
-        panelCadastrado.add(panelCadastrado2);
-        panelCadastrado2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelCadastrado);
-        panelCadastrado.setBounds(0, 0, 1366, 768);
-
-        panelDataErrada.setOpaque(false);
-        panelDataErrada.setVisible(false);
-        panelDataErrada.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelDataErradaMouseClicked(evt);
-            }
-        });
-        panelDataErrada.setLayout(null);
-
-        panelDataErrada2.setBackground(new java.awt.Color(204, 204, 204));
-        panelDataErrada2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelDataErrada2.setForeground(new java.awt.Color(0, 255, 8));
-        panelDataErrada2.setLayout(null);
-
-        labelDataErrada.setFont(poppins.deriveFont(25f));
-        labelDataErrada.setForeground(new java.awt.Color(69, 82, 173));
-        labelDataErrada.setText("Data invalida, tente novamente.");
-        labelDataErrada.setHorizontalAlignment(SwingConstants.CENTER);
-        panelDataErrada2.add(labelDataErrada);
-        labelDataErrada.setBounds(7, 26, 490, 120);
-
-        buttonOkDataErrada.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkDataErrada.setFont(poppins.deriveFont(20f));
-        buttonOkDataErrada.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkDataErrada.setText("OK");
-        buttonOkDataErrada.setBorder(null);
-        buttonOkDataErrada.setBorderPainted(false);
-        buttonOkDataErrada.setContentAreaFilled(false);
-        buttonOkDataErrada.setFocusable(false);
-        buttonOkDataErrada.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkDataErradaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkDataErradaMouseExited(evt);
-            }
-        });
-        panelDataErrada2.add(buttonOkDataErrada);
-        buttonOkDataErrada.setBounds(355, 210, 100, 40);
-
-        labelContagemDataErrada.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemDataErrada.setFont(poppins.deriveFont(20f));
-        labelContagemDataErrada.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemDataErrada.setText("Tempo Restante: 5");
-        labelContagemDataErrada.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelDataErrada2.add(labelContagemDataErrada);
-        labelContagemDataErrada.setBounds(87, 210, 260, 40);
-
-        panelDataErrada.add(panelDataErrada2);
-        panelDataErrada2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelDataErrada);
-        panelDataErrada.setBounds(0, 0, 1366, 768);
-
-        panelUsuExiste.setOpaque(false);
-        panelUsuExiste.setVisible(false);
-        panelUsuExiste.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelUsuExisteMouseClicked(evt);
-            }
-        });
-        panelUsuExiste.setLayout(null);
-
-        panelUsuExiste2.setBackground(new java.awt.Color(204, 204, 204));
-        panelUsuExiste2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelUsuExiste2.setForeground(new java.awt.Color(0, 255, 8));
-        panelUsuExiste2.setLayout(null);
-
-        labelUsuExiste.setFont(poppins.deriveFont(25f));
-        labelUsuExiste.setForeground(new java.awt.Color(69, 82, 173));
-        labelUsuExiste.setText("Usuario ja cadastrado, tente novamente.");
-        labelUsuExiste.setHorizontalAlignment(SwingConstants.CENTER);
-        panelUsuExiste2.add(labelUsuExiste);
-        labelUsuExiste.setBounds(7, 26, 490, 120);
-
-        buttonOkUsuExiste.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkUsuExiste.setFont(poppins.deriveFont(20f));
-        buttonOkUsuExiste.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkUsuExiste.setText("OK");
-        buttonOkUsuExiste.setBorder(null);
-        buttonOkUsuExiste.setBorderPainted(false);
-        buttonOkUsuExiste.setContentAreaFilled(false);
-        buttonOkUsuExiste.setFocusable(false);
-        buttonOkUsuExiste.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkUsuExisteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkUsuExisteMouseExited(evt);
-            }
-        });
-        panelUsuExiste2.add(buttonOkUsuExiste);
-        buttonOkUsuExiste.setBounds(355, 210, 100, 40);
-
-        labelContagemUsuExiste.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemUsuExiste.setFont(poppins.deriveFont(20f));
-        labelContagemUsuExiste.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemUsuExiste.setText("Tempo Restante: 5");
-        labelContagemUsuExiste.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelUsuExiste2.add(labelContagemUsuExiste);
-        labelContagemUsuExiste.setBounds(87, 210, 260, 40);
-
-        panelUsuExiste.add(panelUsuExiste2);
-        panelUsuExiste2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelUsuExiste);
-        panelUsuExiste.setBounds(0, 0, 1366, 768);
-
-        panelEmailExiste.setOpaque(false);
-        panelEmailExiste.setVisible(false);
-        panelEmailExiste.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelEmailExisteMouseClicked(evt);
-            }
-        });
-        panelEmailExiste.setLayout(null);
-
-        panelEmailExiste2.setBackground(new java.awt.Color(204, 204, 204));
-        panelEmailExiste2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelEmailExiste2.setForeground(new java.awt.Color(0, 255, 8));
-        panelEmailExiste2.setLayout(null);
-
-        labelEmailExiste.setFont(poppins.deriveFont(22f));
-        labelEmailExiste.setForeground(new java.awt.Color(69, 82, 173));
-        labelEmailExiste.setText("E-mail ja cadastrado, tente novamente.");
-        labelEmailExiste.setHorizontalAlignment(SwingConstants.CENTER);
-        panelEmailExiste2.add(labelEmailExiste);
-        labelEmailExiste.setBounds(7, 26, 490, 120);
-
-        buttonOkEmailExiste.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkEmailExiste.setFont(poppins.deriveFont(20f));
-        buttonOkEmailExiste.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkEmailExiste.setText("OK");
-        buttonOkEmailExiste.setBorder(null);
-        buttonOkEmailExiste.setBorderPainted(false);
-        buttonOkEmailExiste.setContentAreaFilled(false);
-        buttonOkEmailExiste.setFocusable(false);
-        buttonOkEmailExiste.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkEmailExisteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkEmailExisteMouseExited(evt);
-            }
-        });
-        panelEmailExiste2.add(buttonOkEmailExiste);
-        buttonOkEmailExiste.setBounds(355, 210, 100, 40);
-
-        labelContagemEmailExiste.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemEmailExiste.setFont(poppins.deriveFont(20f));
-        labelContagemEmailExiste.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemEmailExiste.setText("Tempo Restante: 5");
-        labelContagemEmailExiste.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelEmailExiste2.add(labelContagemEmailExiste);
-        labelContagemEmailExiste.setBounds(87, 210, 260, 40);
-
-        panelEmailExiste.add(panelEmailExiste2);
-        panelEmailExiste2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelEmailExiste);
-        panelEmailExiste.setBounds(0, 0, 1366, 768);
-
-        panelSenhaVazia.setOpaque(false);
-        panelSenhaVazia.setVisible(false);
-        panelSenhaVazia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelSenhaVaziaMouseClicked(evt);
-            }
-        });
-        panelSenhaVazia.setLayout(null);
-
-        panelSenhaVazia2.setBackground(new java.awt.Color(204, 204, 204));
-        panelSenhaVazia2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelSenhaVazia2.setForeground(new java.awt.Color(0, 255, 8));
-        panelSenhaVazia2.setLayout(null);
-
-        labelSenhaVazia.setFont(poppins.deriveFont(25f));
-        labelSenhaVazia.setForeground(new java.awt.Color(69, 82, 173));
-        labelSenhaVazia.setText("Senha vazia, por favor preencha.");
-        labelSenhaVazia.setHorizontalAlignment(SwingConstants.CENTER);
-        panelSenhaVazia2.add(labelSenhaVazia);
-        labelSenhaVazia.setBounds(7, 26, 490, 120);
-
-        buttonOkSenhaVazia.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkSenhaVazia.setFont(poppins.deriveFont(20f));
-        buttonOkSenhaVazia.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkSenhaVazia.setText("OK");
-        buttonOkSenhaVazia.setBorder(null);
-        buttonOkSenhaVazia.setBorderPainted(false);
-        buttonOkSenhaVazia.setContentAreaFilled(false);
-        buttonOkSenhaVazia.setFocusable(false);
-        buttonOkSenhaVazia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkSenhaVaziaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkSenhaVaziaMouseExited(evt);
-            }
-        });
-        panelSenhaVazia2.add(buttonOkSenhaVazia);
-        buttonOkSenhaVazia.setBounds(355, 210, 100, 40);
-
-        labelContagemSenhaVazia.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemSenhaVazia.setFont(poppins.deriveFont(20f));
-        labelContagemSenhaVazia.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemSenhaVazia.setText("Tempo Restante: 5");
-        labelContagemSenhaVazia.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelSenhaVazia2.add(labelContagemSenhaVazia);
-        labelContagemSenhaVazia.setBounds(87, 210, 260, 40);
-
-        panelSenhaVazia.add(panelSenhaVazia2);
-        panelSenhaVazia2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelSenhaVazia);
-        panelSenhaVazia.setBounds(0, 0, 1366, 768);
-
-        panelEmailVazio.setOpaque(false);
-        panelEmailVazio.setVisible(false);
-        panelEmailVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelEmailVazioMouseClicked(evt);
-            }
-        });
-        panelEmailVazio.setLayout(null);
-
-        panelEmailVazio2.setBackground(new java.awt.Color(204, 204, 204));
-        panelEmailVazio2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelEmailVazio2.setForeground(new java.awt.Color(0, 255, 8));
-        panelEmailVazio2.setLayout(null);
-
-        labelEmailVazio.setFont(poppins.deriveFont(25f));
-        labelEmailVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelEmailVazio.setText("Email vazio, por favor preencha.");
-        labelEmailVazio.setHorizontalAlignment(SwingConstants.CENTER);
-        panelEmailVazio2.add(labelEmailVazio);
-        labelEmailVazio.setBounds(7, 26, 490, 120);
-
-        buttonOkEmailVazio.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkEmailVazio.setFont(poppins.deriveFont(20f));
-        buttonOkEmailVazio.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkEmailVazio.setText("OK");
-        buttonOkEmailVazio.setBorder(null);
-        buttonOkEmailVazio.setBorderPainted(false);
-        buttonOkEmailVazio.setContentAreaFilled(false);
-        buttonOkEmailVazio.setFocusable(false);
-        buttonOkEmailVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkEmailVazioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkEmailVazioMouseExited(evt);
-            }
-        });
-        panelEmailVazio2.add(buttonOkEmailVazio);
-        buttonOkEmailVazio.setBounds(355, 210, 100, 40);
-
-        labelContagemEmailVazio.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemEmailVazio.setFont(poppins.deriveFont(20f));
-        labelContagemEmailVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemEmailVazio.setText("Tempo Restante: 5");
-        labelContagemEmailVazio.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelEmailVazio2.add(labelContagemEmailVazio);
-        labelContagemEmailVazio.setBounds(87, 210, 260, 40);
-
-        panelEmailVazio.add(panelEmailVazio2);
-        panelEmailVazio2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelEmailVazio);
-        panelEmailVazio.setBounds(0, 0, 1366, 768);
-
-        panelUserVazio.setOpaque(false);
-        panelUserVazio.setVisible(false);
-        panelUserVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelUserVazioMouseClicked(evt);
-            }
-        });
-        panelUserVazio.setLayout(null);
-
-        panelUserVazio2.setBackground(new java.awt.Color(204, 204, 204));
-        panelUserVazio2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelUserVazio2.setForeground(new java.awt.Color(0, 255, 8));
-        panelUserVazio2.setLayout(null);
-
-        labelUserVazio.setFont(poppins.deriveFont(25f));
-        labelUserVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelUserVazio.setText("Usuario vazio, por favor preencha.");
-        labelUserVazio.setHorizontalAlignment(SwingConstants.CENTER);
-        panelUserVazio2.add(labelUserVazio);
-        labelUserVazio.setBounds(7, 26, 490, 120);
-
-        buttonOkUserVazio.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkUserVazio.setFont(poppins.deriveFont(20f));
-        buttonOkUserVazio.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkUserVazio.setText("OK");
-        buttonOkUserVazio.setBorder(null);
-        buttonOkUserVazio.setBorderPainted(false);
-        buttonOkUserVazio.setContentAreaFilled(false);
-        buttonOkUserVazio.setFocusable(false);
-        buttonOkUserVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkUserVazioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkUserVazioMouseExited(evt);
-            }
-        });
-        panelUserVazio2.add(buttonOkUserVazio);
-        buttonOkUserVazio.setBounds(355, 210, 100, 40);
-
-        labelContagemUserVazio.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemUserVazio.setFont(poppins.deriveFont(20f));
-        labelContagemUserVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemUserVazio.setText("Tempo Restante: 5");
-        labelContagemUserVazio.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelUserVazio2.add(labelContagemUserVazio);
-        labelContagemUserVazio.setBounds(87, 210, 260, 40);
-
-        panelUserVazio.add(panelUserVazio2);
-        panelUserVazio2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelUserVazio);
-        panelUserVazio.setBounds(0, 0, 1366, 768);
-
-        panelNascVazio.setOpaque(false);
-        panelNascVazio.setVisible(false);
-        panelNascVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelNascVazioMouseClicked(evt);
-            }
-        });
-        panelNascVazio.setLayout(null);
-
-        panelNascVazio2.setBackground(new java.awt.Color(204, 204, 204));
-        panelNascVazio2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelNascVazio2.setForeground(new java.awt.Color(0, 255, 8));
-        panelNascVazio2.setLayout(null);
-
-        labelNascVazio.setFont(poppins.deriveFont(25f));
-        labelNascVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelNascVazio.setText("Nascimento vazio, por favor preencha.");
-        labelNascVazio.setHorizontalAlignment(SwingConstants.CENTER);
-        panelNascVazio2.add(labelNascVazio);
-        labelNascVazio.setBounds(7, 26, 490, 120);
-
-        buttonOkNascVazio.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkNascVazio.setFont(poppins.deriveFont(20f));
-        buttonOkNascVazio.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkNascVazio.setText("OK");
-        buttonOkNascVazio.setBorder(null);
-        buttonOkNascVazio.setBorderPainted(false);
-        buttonOkNascVazio.setContentAreaFilled(false);
-        buttonOkNascVazio.setFocusable(false);
-        buttonOkNascVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkNascVazioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkNascVazioMouseExited(evt);
-            }
-        });
-        panelNascVazio2.add(buttonOkNascVazio);
-        buttonOkNascVazio.setBounds(355, 210, 100, 40);
-
-        labelContagemNascVazio.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemNascVazio.setFont(poppins.deriveFont(20f));
-        labelContagemNascVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemNascVazio.setText("Tempo Restante: 5");
-        labelContagemNascVazio.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelNascVazio2.add(labelContagemNascVazio);
-        labelContagemNascVazio.setBounds(87, 210, 260, 40);
-
-        panelNascVazio.add(panelNascVazio2);
-        panelNascVazio2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelNascVazio);
-        panelNascVazio.setBounds(0, 0, 1366, 768);
-
-        panelNomeVazio.setOpaque(false);
-        panelNomeVazio.setVisible(false);
-        panelNomeVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelNomeVazioMouseClicked(evt);
-            }
-        });
-        panelNomeVazio.setLayout(null);
-
-        panelNomeVazio2.setBackground(new java.awt.Color(204, 204, 204));
-        panelNomeVazio2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
-        panelNomeVazio2.setForeground(new java.awt.Color(0, 0, 0));
-        panelNomeVazio2.setLayout(null);
-
-        labelNomeVazio.setFont(poppins.deriveFont(25f));
-        labelNomeVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelNomeVazio.setText("Nome vazio, por favor preencha.");
-        labelNomeVazio.setHorizontalAlignment(SwingConstants.CENTER);
-        panelNomeVazio2.add(labelNomeVazio);
-        labelNomeVazio.setBounds(7, 26, 490, 120);
-
-        buttonOkNomeVazio.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkNomeVazio.setFont(poppins.deriveFont(20f));
-        buttonOkNomeVazio.setForeground(new java.awt.Color(69, 82, 173));
-        buttonOkNomeVazio.setText("OK");
-        buttonOkNomeVazio.setBorder(null);
-        buttonOkNomeVazio.setBorderPainted(false);
-        buttonOkNomeVazio.setContentAreaFilled(false);
-        buttonOkNomeVazio.setFocusable(false);
-        buttonOkNomeVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkNomeVazioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkNomeVazioMouseExited(evt);
-            }
-        });
-        panelNomeVazio2.add(buttonOkNomeVazio);
-        buttonOkNomeVazio.setBounds(355, 210, 100, 40);
-
-        labelContagemNomeVazio.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemNomeVazio.setFont(poppins.deriveFont(20f));
-        labelContagemNomeVazio.setForeground(new java.awt.Color(69, 82, 173));
-        labelContagemNomeVazio.setText("Tempo Restante: 5");
-        labelContagemNomeVazio.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelNomeVazio2.add(labelContagemNomeVazio);
-        labelContagemNomeVazio.setBounds(87, 210, 260, 40);
-
-        panelNomeVazio.add(panelNomeVazio2);
-        panelNomeVazio2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelNomeVazio);
-        panelNomeVazio.setBounds(0, 0, 1366, 768);
-
         setBounds(-6, 0, 1366, 768);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1439,6 +911,8 @@ public class Tela_Cadastro extends javax.swing.JFrame
                 Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonSobreActionPerformed
     //Faz o botão Sobre ficar Azul ao passar o mouse por cima
@@ -1460,7 +934,17 @@ public class Tela_Cadastro extends javax.swing.JFrame
 //Início dos comandos do botão "Cursos"
     //<null>
     private void buttonCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCursosActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+
+                abrirTelaCursos();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonCursosActionPerformed
     //Faz o botão Cursos ficar Azul ao passar o mouse por cima
     private void buttonCursosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCursosMouseEntered
@@ -1518,22 +1002,25 @@ public class Tela_Cadastro extends javax.swing.JFrame
         
         if(fieldNome.getText().equals("Nome") || fieldNome.getText().equals(""))
         {
-            nomeVazio();
+            labelAlerta.setText("Nome vazio, por favor preencha.");
+            mensagemErro();
         }
         else
         {
             nome = fieldNome.getText();
         }
         
-        if(fieldNasc.getText().equals(""))
+        if(fieldNasc.getText().equals("") || labelNasc.isVisible())
         {
-            nascVazio();
+            labelAlerta.setText("Nascimento vazio, por favor preencha.");
+            mensagemErro();
         }
         else
         {
             if (!validarData(fieldNasc.getText())) 
             {
-                dataErrada();
+                labelAlerta.setText("Data inválida, tente novamente.");
+                mensagemErro();
             }
             else
             {
@@ -1543,7 +1030,8 @@ public class Tela_Cadastro extends javax.swing.JFrame
         
         if(fieldUser.getText().equals("Usuario") || fieldUser.getText().equals(""))
         {
-            userVazio();
+            labelAlerta.setText("Usuario vazio, por favor preencha.");
+            mensagemErro();
         }
         else
         {
@@ -1552,13 +1040,15 @@ public class Tela_Cadastro extends javax.swing.JFrame
         
         if(fieldEmail.getText().equals("E-mail") || fieldEmail.getText().equals(""))
         {
-            emailVazio();
+            labelAlerta.setText("Email vazio, por favor preencha.");
+            mensagemErro();
         }
         else
         {
             if (!validarEmail(fieldEmail.getText())) 
             {
-                emailErrado();
+                labelAlerta.setText("Email inválido, tente novamente.");
+                mensagemErro();
             }
             else
             {
@@ -1568,7 +1058,8 @@ public class Tela_Cadastro extends javax.swing.JFrame
         
         if(fieldSenha.getText().equals("Senha") || fieldSenha.getText().equals(""))
         {
-            senhaVazia();
+            labelAlerta.setText("Senha vazia, por favor preencha.");
+            mensagemErro();
         }
         else
         {
@@ -1586,18 +1077,22 @@ public class Tela_Cadastro extends javax.swing.JFrame
             // Verifica se o usuário ou email já existem
             if (usuario.verificaUserExiste()) 
             {
-                usuExiste();
+                labelAlerta.setText("Usuario já cadastrado, tente novamente.");
+                mensagemErro();
             }
             else if(usuario.verificaEmailExiste())
             {
-                emailExiste();
+                labelAlerta.setText("E-mail ja cadastrado, tente novamente.");
+                mensagemErro();
             }
             else 
             {
                 // Cadastra o novo usuário
                 if (usuario.cadastraUser()) 
                 {
-                   usuCadastrado();
+                    cadastrado = true;
+                    labelAlerta.setText("Usuario cadastrado com sucesso.");
+                    mensagemErro2();
                 }
                 else
                 {
@@ -1614,27 +1109,27 @@ public class Tela_Cadastro extends javax.swing.JFrame
              
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
-private void usuCadastrado()
-    {
+private void mensagemErro()
+    {        
          // Garantir que o painel esteja visível após a exclusão
-        panelCadastrado.setVisible(true);
+        panelAlerta.setVisible(true);
 
         // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelCadastrado.revalidate();
-        panelCadastrado.repaint();
+        panelAlerta.revalidate();
+        panelAlerta.repaint();
 
         // Definir tempo inicial da contagem regressiva
         final int tempoInicial = 5;
         final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
 
         // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerUsu != null && timerUsu.isRunning()) 
+        if (timerAlerta != null && timerAlerta.isRunning()) 
         {
-            timerUsu.stop();  // Para o Timer atual, se já estiver em execução
+            timerAlerta.stop();  // Para o Timer atual, se já estiver em execução
         }
 
         // Criar o Timer para a contagem regressiva
-        timerUsu = new Timer(1000, new ActionListener() 
+        timerAlerta = new Timer(1000, new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent e) 
@@ -1643,22 +1138,137 @@ private void usuCadastrado()
                 if (tempoRestante[0] > 0) 
                 {
                     tempoRestante[0]--;
-                    labelContagemCadastrado.setText("Tempo restante: " + tempoRestante[0]);
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
                 } 
                 else
                 {
                     // Quando a contagem chega a 0, reinicia o tempo
                     tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemCadastrado.setText("Tempo restante: " + tempoRestante[0]);
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
 
                     // Esconde o painel após a contagem
-                    panelCadastrado.setVisible(false);
+                    panelAlerta.setVisible(false);
 
                     // Para o Timer
-                    timerUsu.stop();
+                    timerAlerta.stop();
+
+                    acaoConcluida = true;
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerAlerta.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkAlerta.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerAlerta != null) 
+                {
+                    timerAlerta.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelAlerta.setVisible(false);
+
+                acaoConcluida = true;
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+    
+    private void mensagemErro2()
+    {        
+         // Garantir que o painel esteja visível após a exclusão
+        panelAlerta.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelAlerta.revalidate();
+        panelAlerta.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerAlerta != null && timerAlerta.isRunning()) 
+        {
+            timerAlerta.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerAlerta = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelAlerta.setVisible(false);
+
+                    // Para o Timer
+                    timerAlerta.stop();
 
                     acaoConcluida = true;
                     
+                    if(cadastrado != false)
+                    {
+                        try {
+                            abrirTela_Login();
+                        } catch (FontFormatException ex) {
+                            Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("usuario nao cadastrado");
+                    }
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerAlerta.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkAlerta.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerAlerta != null) 
+                {
+                    timerAlerta.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelAlerta.setVisible(false);
+
+                acaoConcluida = true;
+                
+                if(cadastrado != false)
+                {
                     try {
                         abrirTela_Login();
                     } catch (FontFormatException ex) {
@@ -1667,719 +1277,18 @@ private void usuCadastrado()
                         Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerUsu.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkCadastrado.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerUsu != null) 
-                {
-                    timerUsu.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelCadastrado.setVisible(false);
-
-                acaoConcluida = true;
-                
-                try {
-                    abrirTela_Login();
-                } catch (FontFormatException ex) {
-                    Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(Tela_Cadastro.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemCadastrado.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void dataErrada()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelDataErrada.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelDataErrada.revalidate();
-        panelDataErrada.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerData != null && timerData.isRunning()) 
-        {
-            timerData.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerData = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemDataErrada.setText("Tempo restante: " + tempoRestante[0]);
-                } 
                 else
                 {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemDataErrada.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelDataErrada.setVisible(false);
-
-                    // Para o Timer
-                    timerData.stop();
-
-                    acaoConcluida = true;
+                    System.out.println("usuario nao cadastrado");
                 }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerData.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkDataErrada.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerData != null) 
-                {
-                    timerData.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelDataErrada.setVisible(false);
-
-                acaoConcluida = true;
 
                 // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
                 tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemDataErrada.setText("Tempo restante: " + tempoRestante[0]);
+                labelContagem.setText("Tempo restante: " + tempoRestante[0]);
             }
         });
     }
-    
-    private void usuExiste()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelUsuExiste.setVisible(true);
 
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelUsuExiste.revalidate();
-        panelUsuExiste.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerUsuEx != null && timerUsuEx.isRunning()) 
-        {
-            timerUsuEx.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerUsuEx = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemUsuExiste.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemUsuExiste.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelUsuExiste.setVisible(false);
-
-                    // Para o Timer
-                    timerUsuEx.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerUsuEx.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkUsuExiste.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerUsuEx != null) 
-                {
-                    timerUsuEx.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelUsuExiste.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemUsuExiste.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void emailExiste()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelEmailExiste.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelEmailExiste.revalidate();
-        panelEmailExiste.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerEmailEx != null && timerEmailEx.isRunning()) 
-        {
-            timerEmailEx.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerEmailEx = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemEmailExiste.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemEmailExiste.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelEmailExiste.setVisible(false);
-
-                    // Para o Timer
-                    timerEmailEx.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerEmailEx.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkEmailExiste.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerEmailEx != null) 
-                {
-                    timerEmailEx.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelEmailExiste.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemEmailExiste.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void emailErrado()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelEmailErrado.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelEmailErrado.revalidate();
-        panelEmailErrado.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerEmailErr != null && timerEmailErr.isRunning()) 
-        {
-            timerEmailErr.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerEmailErr = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelEmailErrado.setVisible(false);
-
-                    // Para o Timer
-                    timerEmailErr.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerEmailErr.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkEmailErrado.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerEmailErr != null) 
-                {
-                    timerEmailErr.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelEmailErrado.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemEmailErrado.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void nomeVazio()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelNomeVazio.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelNomeVazio.revalidate();
-        panelNomeVazio.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerNomeVz != null && timerNomeVz.isRunning()) 
-        {
-            timerNomeVz.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerNomeVz = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemNomeVazio.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemNomeVazio.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelNomeVazio.setVisible(false);
-
-                    // Para o Timer
-                    timerNomeVz.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerNomeVz.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkNomeVazio.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerNomeVz != null) 
-                {
-                    timerNomeVz.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelNomeVazio.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemNomeVazio.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void nascVazio()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelNascVazio.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelNascVazio.revalidate();
-        panelNascVazio.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerNascVz != null && timerNascVz.isRunning()) 
-        {
-            timerNascVz.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerNascVz = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemNascVazio.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemNascVazio.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelNascVazio.setVisible(false);
-
-                    // Para o Timer
-                    timerNascVz.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerNascVz.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkNascVazio.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerNascVz != null) 
-                {
-                    timerNascVz.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelNascVazio.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemNascVazio.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void userVazio()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelUserVazio.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelUserVazio.revalidate();
-        panelUserVazio.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerUserVz != null && timerUserVz.isRunning()) 
-        {
-            timerUserVz.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerUserVz = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemUserVazio.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemUserVazio.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelUserVazio.setVisible(false);
-
-                    // Para o Timer
-                    timerUserVz.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerUserVz.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkUserVazio.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerUserVz != null) 
-                {
-                    timerUserVz.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelUserVazio.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemUserVazio.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void emailVazio()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelEmailVazio.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelEmailVazio.revalidate();
-        panelEmailVazio.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerEmailVz != null && timerEmailVz.isRunning()) 
-        {
-            timerEmailVz.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerEmailVz = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemEmailVazio.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemEmailVazio.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelEmailVazio.setVisible(false);
-
-                    // Para o Timer
-                    timerEmailVz.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerEmailVz.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkEmailVazio.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerEmailVz != null) 
-                {
-                    timerEmailVz.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelEmailVazio.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemEmailVazio.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
-    private void senhaVazia()
-    {
-         // Garantir que o painel esteja visível após a exclusão
-        panelSenhaVazia.setVisible(true);
-
-        // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelSenhaVazia.revalidate();
-        panelSenhaVazia.repaint();
-
-        // Definir tempo inicial da contagem regressiva
-        final int tempoInicial = 5;
-        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
-
-        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerSenhaVz != null && timerSenhaVz.isRunning()) 
-        {
-            timerSenhaVz.stop();  // Para o Timer atual, se já estiver em execução
-        }
-
-        // Criar o Timer para a contagem regressiva
-        timerSenhaVz = new Timer(1000, new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Atualiza o texto da contagem regressiva
-                if (tempoRestante[0] > 0) 
-                {
-                    tempoRestante[0]--;
-                    labelContagemSenhaVazia.setText("Tempo restante: " + tempoRestante[0]);
-                } 
-                else
-                {
-                    // Quando a contagem chega a 0, reinicia o tempo
-                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemSenhaVazia.setText("Tempo restante: " + tempoRestante[0]);
-
-                    // Esconde o painel após a contagem
-                    panelSenhaVazia.setVisible(false);
-
-                    // Para o Timer
-                    timerSenhaVz.stop();
-
-                    acaoConcluida = true;
-                }
-            }
-        });
-
-        // Inicia o Timer de contagem regressiva
-        timerSenhaVz.start();
-
-        // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkSenhaVazia.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Para o Timer imediatamente
-                if (timerSenhaVz != null) 
-                {
-                    timerSenhaVz.stop();
-                }
-
-                // Esconde o painel imediatamente
-                panelSenhaVazia.setVisible(false);
-
-                acaoConcluida = true;
-
-                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
-                tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemSenhaVazia.setText("Tempo restante: " + tempoRestante[0]);
-            }
-        });
-    }
-    
     private void limparCampos() 
     {
         fieldNome.setText("Nome");
@@ -2477,132 +1386,6 @@ private void usuCadastrado()
         this.dispose();
     }//GEN-LAST:event_buttonXTelasActionPerformed
 
-    private void buttonOkNomeVazioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNomeVazioMouseEntered
-        // TODO add your handling code here:
-        buttonOkNomeVazio.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkNomeVazioMouseEntered
-
-    private void buttonOkNomeVazioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNomeVazioMouseExited
-        // TODO add your handling code here:
-        buttonOkNomeVazio.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkNomeVazioMouseExited
-
-    private void panelNomeVazioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNomeVazioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelNomeVazioMouseClicked
-
-    private void buttonOkNascVazioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNascVazioMouseEntered
-        // TODO add your handling code here:
-        buttonOkNascVazio.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkNascVazioMouseEntered
-
-    private void buttonOkNascVazioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNascVazioMouseExited
-        // TODO add your handling code here:
-        buttonOkNascVazio.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkNascVazioMouseExited
-
-    private void panelNascVazioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNascVazioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelNascVazioMouseClicked
-
-    private void buttonOkUserVazioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkUserVazioMouseEntered
-        // TODO add your handling code here:
-        buttonOkUserVazio.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkUserVazioMouseEntered
-
-    private void buttonOkUserVazioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkUserVazioMouseExited
-        // TODO add your handling code here:
-        buttonOkUserVazio.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkUserVazioMouseExited
-
-    private void panelUserVazioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelUserVazioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelUserVazioMouseClicked
-
-    private void buttonOkEmailVazioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailVazioMouseEntered
-        // TODO add your handling code here:
-        buttonOkEmailVazio.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkEmailVazioMouseEntered
-
-    private void buttonOkEmailVazioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailVazioMouseExited
-        // TODO add your handling code here:
-        buttonOkEmailVazio.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkEmailVazioMouseExited
-
-    private void panelEmailVazioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEmailVazioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelEmailVazioMouseClicked
-
-    private void buttonOkSenhaVaziaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkSenhaVaziaMouseEntered
-        // TODO add your handling code here:
-        buttonOkSenhaVazia.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkSenhaVaziaMouseEntered
-
-    private void buttonOkSenhaVaziaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkSenhaVaziaMouseExited
-        // TODO add your handling code here:
-        buttonOkSenhaVazia.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkSenhaVaziaMouseExited
-
-    private void panelSenhaVaziaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSenhaVaziaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelSenhaVaziaMouseClicked
-
-    private void buttonOkEmailExisteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailExisteMouseEntered
-        // TODO add your handling code here:
-        buttonOkEmailExiste.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkEmailExisteMouseEntered
-
-    private void buttonOkEmailExisteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailExisteMouseExited
-        // TODO add your handling code here:
-        buttonOkEmailExiste.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkEmailExisteMouseExited
-
-    private void panelEmailExisteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEmailExisteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelEmailExisteMouseClicked
-
-    private void buttonOkUsuExisteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkUsuExisteMouseEntered
-        // TODO add your handling code here:
-        buttonOkUsuExiste.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkUsuExisteMouseEntered
-
-    private void buttonOkUsuExisteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkUsuExisteMouseExited
-        // TODO add your handling code here:
-        buttonOkUsuExiste.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkUsuExisteMouseExited
-
-    private void panelUsuExisteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelUsuExisteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelUsuExisteMouseClicked
-
-    private void buttonOkDataErradaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkDataErradaMouseEntered
-        // TODO add your handling code here:
-        buttonOkDataErrada.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkDataErradaMouseEntered
-
-    private void buttonOkDataErradaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkDataErradaMouseExited
-        // TODO add your handling code here:
-        buttonOkDataErrada.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkDataErradaMouseExited
-
-    private void panelDataErradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDataErradaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelDataErradaMouseClicked
-
-    private void buttonOkCadastradoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkCadastradoMouseEntered
-        // TODO add your handling code here:
-        buttonOkCadastrado.setFont(poppins.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkCadastradoMouseEntered
-
-    private void buttonOkCadastradoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkCadastradoMouseExited
-        // TODO add your handling code here:
-        buttonOkCadastrado.setFont(poppins.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkCadastradoMouseExited
-
-    private void panelCadastradoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCadastradoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelCadastradoMouseClicked
-
     private void fieldUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldUserActionPerformed
@@ -2633,17 +1416,17 @@ private void usuCadastrado()
         }
     }//GEN-LAST:event_fieldNascFocusLost
 
-    private void buttonOkEmailErradoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailErradoMouseEntered
+    private void buttonOkAlertaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonOkEmailErradoMouseEntered
+    }//GEN-LAST:event_buttonOkAlertaMouseEntered
 
-    private void buttonOkEmailErradoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkEmailErradoMouseExited
+    private void buttonOkAlertaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonOkEmailErradoMouseExited
+    }//GEN-LAST:event_buttonOkAlertaMouseExited
 
-    private void panelEmailErradoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEmailErradoMouseClicked
+    private void panelAlertaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAlertaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelEmailErradoMouseClicked
+    }//GEN-LAST:event_panelAlertaMouseClicked
 //Fim dos comandos do botão X para fechar a aplicação
 
     public boolean validarData(String data) 
@@ -2720,16 +1503,7 @@ private void usuCadastrado()
     private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonCursos;
     private javax.swing.JButton buttonLogin;
-    private javax.swing.JButton buttonOkCadastrado;
-    private javax.swing.JButton buttonOkDataErrada;
-    private javax.swing.JButton buttonOkEmailErrado;
-    private javax.swing.JButton buttonOkEmailExiste;
-    private javax.swing.JButton buttonOkEmailVazio;
-    private javax.swing.JButton buttonOkNascVazio;
-    private javax.swing.JButton buttonOkNomeVazio;
-    private javax.swing.JButton buttonOkSenhaVazia;
-    private javax.swing.JButton buttonOkUserVazio;
-    private javax.swing.JButton buttonOkUsuExiste;
+    private javax.swing.JButton buttonOkAlerta;
     private javax.swing.JButton buttonPR;
     private javax.swing.JButton buttonSeta;
     private javax.swing.JButton buttonSobre;
@@ -2745,51 +1519,16 @@ private void usuCadastrado()
     private javax.swing.JPasswordField fieldSenha;
     private javax.swing.JTextField fieldUser;
     private javax.swing.JLabel fundo;
+    private javax.swing.JLabel fundoAlerta;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labelCadastrado;
-    private javax.swing.JLabel labelContagemCadastrado;
-    private javax.swing.JLabel labelContagemDataErrada;
-    private javax.swing.JLabel labelContagemEmailErrado;
-    private javax.swing.JLabel labelContagemEmailExiste;
-    private javax.swing.JLabel labelContagemEmailVazio;
-    private javax.swing.JLabel labelContagemNascVazio;
-    private javax.swing.JLabel labelContagemNomeVazio;
-    private javax.swing.JLabel labelContagemSenhaVazia;
-    private javax.swing.JLabel labelContagemUserVazio;
-    private javax.swing.JLabel labelContagemUsuExiste;
-    private javax.swing.JLabel labelDataErrada;
+    private javax.swing.JLabel labelAlerta;
+    private javax.swing.JLabel labelContagem;
     private javax.swing.JLabel labelEmail;
-    private javax.swing.JLabel labelEmailErrado;
-    private javax.swing.JLabel labelEmailExiste;
-    private javax.swing.JLabel labelEmailVazio;
     private javax.swing.JLabel labelNasc;
-    private javax.swing.JLabel labelNascVazio;
-    private javax.swing.JLabel labelNomeVazio;
     private javax.swing.JLabel labelSenha;
-    private javax.swing.JLabel labelSenhaVazia;
     private javax.swing.JLabel labelTxtNasc;
     private javax.swing.JLabel labelUser;
-    private javax.swing.JLabel labelUserVazio;
-    private javax.swing.JLabel labelUsuExiste;
-    private javax.swing.JPanel panelCadastrado;
-    private javax.swing.JPanel panelCadastrado2;
-    private javax.swing.JPanel panelDataErrada;
-    private javax.swing.JPanel panelDataErrada2;
-    private javax.swing.JPanel panelEmailErrado;
-    private javax.swing.JPanel panelEmailErrado2;
-    private javax.swing.JPanel panelEmailExiste;
-    private javax.swing.JPanel panelEmailExiste2;
-    private javax.swing.JPanel panelEmailVazio;
-    private javax.swing.JPanel panelEmailVazio2;
-    private javax.swing.JPanel panelNascVazio;
-    private javax.swing.JPanel panelNascVazio2;
-    private javax.swing.JPanel panelNomeVazio;
-    private javax.swing.JPanel panelNomeVazio2;
-    private javax.swing.JPanel panelSenhaVazia;
-    private javax.swing.JPanel panelSenhaVazia2;
-    private javax.swing.JPanel panelUserVazio;
-    private javax.swing.JPanel panelUserVazio2;
-    private javax.swing.JPanel panelUsuExiste;
-    private javax.swing.JPanel panelUsuExiste2;
+    private javax.swing.JPanel panelAlerta;
+    private javax.swing.JPanel panelAlerta2;
     // End of variables declaration//GEN-END:variables
 }
