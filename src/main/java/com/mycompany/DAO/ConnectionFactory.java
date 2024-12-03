@@ -1,5 +1,3 @@
-//mensagem de teste
-
 //@author pkmelo7
 
 //Conecta o Sistema com o banco de dados
