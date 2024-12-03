@@ -4,6 +4,9 @@ package com.mycompany.telas;
 
 //Importações necessárias
 import com.mycompany.classes.Curso;
+import com.mycompany.classes.GerenciadorDeCarrinho;
+import com.mycompany.classes.GerenciadorDeCategorias;
+import com.mycompany.classes.ProdutoCarrinhoJanela;
 import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
 import com.mycompany.scrollbar.ScrollBarCustom;
@@ -26,6 +29,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -41,6 +45,9 @@ public class Tela_ExbCurso extends javax.swing.JFrame {
     Session sessao = new Session();
     
     Curso curso = Session.getCursoSelecionado();
+    
+     //Variavel para trazer a classe ProdutoCarrinho
+    ProdutoCarrinhoJanela produtoCarrinho = new ProdutoCarrinhoJanela();
     
     //Declaração de variáveis
     final int originalX = 10;
@@ -92,12 +99,30 @@ public class Tela_ExbCurso extends javax.swing.JFrame {
             this.dispose();
             Sobre.setVisible(true);
         }
+        
+        private void abrirTelaConteudo() throws FontFormatException, IOException, SQLException
+        {
+            Tela_ExbConteudo Conteudo = new Tela_ExbConteudo();
+            this.dispose();
+            Conteudo.setVisible(true);
+        }
     //Fim da declaração de métodos
         
     public Tela_ExbCurso() throws FontFormatException, IOException, SQLException {
       
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents();
+        
+        // Atualizar painel do carrinho
+        GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
+        try
+        {
+            gerenciador.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+        }
+        catch(Exception e)
+        {
+            System.out.println("não foi possivel listar");
+        }
         
         scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom());
 
@@ -986,7 +1011,20 @@ public class Tela_ExbCurso extends javax.swing.JFrame {
 
     private void buttonAddCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCarrinhoActionPerformed
         // TODO add your handling code here:
-        
+        try {
+        if (curso != null) {
+            Session.adicionarAoCarrinho(curso.getId());
+            System.out.println("Curso adicionado ao carrinho: " + curso.getNome());
+            
+            // Atualizar painel do carrinho
+            GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
+            gerenciador.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+        } else {
+            System.out.println("Nenhum curso selecionado.");
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
     }//GEN-LAST:event_buttonAddCarrinhoActionPerformed
 
     private void buttonCarrinhoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCarrinhoMouseEntered
@@ -1143,6 +1181,9 @@ public class Tela_ExbCurso extends javax.swing.JFrame {
         scrollbarCarrinho.setVisible(false);
         panelPerfil.setVisible(false);
         carrinho2.setVisible(false);
+        buttonAcessarConteudo.setVisible(false);
+        buttonAddCarrinho.setVisible(false);
+        buttonFazerLogin.setVisible(true);
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
     private void buttonFazerLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFazerLoginMouseEntered
@@ -1181,7 +1222,16 @@ public class Tela_ExbCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAcessarConteudoMouseExited
 
     private void buttonAcessarConteudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcessarConteudoActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            abrirTelaConteudo();
+                    } catch (FontFormatException ex) {
+            Logger.getLogger(Tela_ExbCurso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Tela_ExbCurso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_ExbCurso.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonAcessarConteudoActionPerformed
 //Fim dos comandos do botão "Cadastrar-se"
       

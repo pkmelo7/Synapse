@@ -24,7 +24,6 @@ public class GerenciadorDeCategorias {
         // Adicionar cada curso no painel
         for (Curso curso : cursos) {
             Curso c = curso;
-            System.out.println("setando curso: "+ c.getNome());
             produtoCurso.addProduto(tela, panelPrincipal, scrollPane, curso.getId());
         }
 

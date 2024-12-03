@@ -3,6 +3,7 @@
 package com.mycompany.telas;
 
 //Importações necessárias
+import com.mycompany.classes.GerenciadorDeCarrinho;
 import com.mycompany.classes.ProdutoCarrinho;
 import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
@@ -109,6 +110,16 @@ public class Tela_Carrinho extends javax.swing.JFrame
         {
             labelPerfil.setVisible(false);
         }
+        
+        GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
+        try
+        {
+            gerenciador.listarCarrinho(carrinho, scrollbar, labelQtdCarrinho);
+        }
+        catch(Exception e)
+        {
+            System.out.println("não foi possivel listar");
+        }
     }
     
     /**
@@ -136,15 +147,14 @@ public class Tela_Carrinho extends javax.swing.JFrame
         buttonCursos = new javax.swing.JButton();
         buttonXTelas = new javax.swing.JButton();
         buttonPR = new javax.swing.JButton();
-        labelQtdCarrinho = new javax.swing.JLabel();
         buttonAplicarDesc = new javax.swing.JButton();
         labelDescontos = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
         buttonFinalizarCompra = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         scrollbar = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         carrinho = new javax.swing.JPanel();
+        labelQtdCarrinho = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -444,13 +454,6 @@ public class Tela_Carrinho extends javax.swing.JFrame
         fundoPrincipal.add(buttonPR);
         buttonPR.setBounds(1270, 658, 80, 70);
 
-        labelQtdCarrinho.setFont(poppins.deriveFont(20f));
-        labelQtdCarrinho.setForeground(new java.awt.Color(0, 0, 0));
-        labelQtdCarrinho.setText("Carrinho vazio.");
-        produtoCarrinho.setLabel(labelQtdCarrinho);
-        fundoPrincipal.add(labelQtdCarrinho);
-        labelQtdCarrinho.setBounds(10, 175, 940, 30);
-
         buttonAplicarDesc.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         buttonAplicarDesc.setForeground(new java.awt.Color(255, 255, 255));
         buttonAplicarDesc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/AplicarDesconto.png"))); // NOI18N
@@ -503,18 +506,23 @@ public class Tela_Carrinho extends javax.swing.JFrame
         fundoPrincipal.add(buttonFinalizarCompra);
         buttonFinalizarCompra.setBounds(1030, 684, 180, 50);
 
-        jButton1.setText("ADD PRODUTO CARRINHO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        fundoPrincipal.add(jButton1);
-        jButton1.setBounds(1010, 390, 220, 23);
-
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollbar.setVisible(false);
+        try
+        {
+            if(Session.getItensNoCarrinho()>0)
+            {
+                scrollbar.setVisible(true);
+            }
+            else
+            {
+                scrollbar.setVisible(false);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("abljeadndwa");
+        }
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -550,6 +558,35 @@ public class Tela_Carrinho extends javax.swing.JFrame
 
         fundoPrincipal.add(scrollbar);
         scrollbar.setBounds(0, 205, 970, 420);
+
+        labelQtdCarrinho.setBackground(new java.awt.Color(255, 255, 255));
+        labelQtdCarrinho.setFont(poppins.deriveFont(20f));
+        labelQtdCarrinho.setForeground(new java.awt.Color(0, 0, 0));
+        labelQtdCarrinho.setText("Carrinho vazio.");
+        try
+        {
+            if (labelQtdCarrinho != null) 
+            {
+                if (Session.getItensNoCarrinho()==0) 
+                {
+                    labelQtdCarrinho.setText("Carrinho vazio.");
+                } 
+                else if (Session.getItensNoCarrinho() == 1) 
+                {
+                    labelQtdCarrinho.setText(Session.getItensNoCarrinho() + " produto no carrinho.");
+                } 
+                else 
+                {
+                    labelQtdCarrinho.setText(Session.getItensNoCarrinho() + " produtos no carrinho.");
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Erro. Não foi possivel atualizar o label.");
+        }
+        fundoPrincipal.add(labelQtdCarrinho);
+        labelQtdCarrinho.setBounds(10, 175, 940, 30);
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCarrinho.png"))); // NOI18N
         fundoPrincipal.add(fundo);
@@ -784,14 +821,6 @@ public class Tela_Carrinho extends javax.swing.JFrame
 //Fim dos comandos do botão "Aplicar" na parte de cupom
 
 //---------------------------------------------------------------------------------------------------------------------------------
-    
-    //botao teste para adicionar itens ao carrinho
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        produtoCarrinho.addProduto(carrinho, scrollbar);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-//---------------------------------------------------------------------------------------------------------------------------------
 
 //Início dos comandos do botão "Finalizar Compra"
     //<null>
@@ -872,9 +901,15 @@ public class Tela_Carrinho extends javax.swing.JFrame
     private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
         // TODO add your handling code here:
         Session.logout();
-        buttonPerfil.setVisible(false);
-        labelPerfil.setVisible(false);
-        panelPerfil.setVisible(false);
+            try {
+                abrirTelaMenu();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonLogoutActionPerformed
 //Fim dos comandos do botão "Finalizar Compra"
     
@@ -944,7 +979,6 @@ public class Tela_Carrinho extends javax.swing.JFrame
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JLabel fundo;
     private javax.swing.JPanel fundoPrincipal;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelDescontos;
     private javax.swing.JLabel labelPerfil;

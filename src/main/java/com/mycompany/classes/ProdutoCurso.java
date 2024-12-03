@@ -79,9 +79,7 @@ public class ProdutoCurso
             panelCursos.revalidate();
             panelCursos.repaint();
 
-            atualizarScrollPane(scrollPane);
-            
-            System.out.println("Adicionando curso: " + idCurso);
+            atualizarScrollPane(scrollPane);            
         }
         
 //metodo para atualizar o scrollpane como visivel toda vez que houver pelo menos um item no carrinho
@@ -114,9 +112,6 @@ public class ProdutoCurso
             scrollPane.revalidate();
             scrollPane.repaint();
         }
-        
-        System.out.println("Dimensões do painel após ajuste: " 
-        + panel.getWidth() + "x" + panel.getHeight());
     }
     
         public JLabel addNome(JPanel panel, int idCurso) throws SQLException 
@@ -174,7 +169,6 @@ public class ProdutoCurso
                 }
                 else
                 {
-                    System.out.println("Imagem nao encontrada para o ID: "+ idImagem);
                     ImageIcon iconDefault = new ImageIcon(getClass().getClassLoader().getResource("images/Formas/fotocursoDefault.png"));
                     curso.setIcon(new RoundImageIcon(iconDefault));
                 }
@@ -194,7 +188,6 @@ public class ProdutoCurso
                 {
                     try {
                         Session.setCursoSelecionado(Curso.listarCursoporId(idCurso));
-                        System.out.println("curso setado!!!");
                         
                         abrirTelaExbCurso(tela);
                         

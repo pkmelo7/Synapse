@@ -4,6 +4,7 @@ package com.mycompany.telas;
 
 //Importações necessárias
 import com.mycompany.classes.FontePersonalizada;
+import com.mycompany.classes.GerenciadorDeCarrinho;
 import com.mycompany.classes.GerenciadorDeCategorias;
 import com.mycompany.classes.ProdutoCarrinhoJanela;
 import com.mycompany.classes.ProdutoCurso;
@@ -140,6 +141,16 @@ public class Tela_Cursos extends javax.swing.JFrame {
             labelPerfil.setVisible(false);
         }
         
+        GerenciadorDeCarrinho gerenciadorJanela = new GerenciadorDeCarrinho();
+        try
+        {
+            gerenciadorJanela.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+        }
+        catch(Exception e)
+        {
+            System.out.println("não foi possivel listar");
+        }
+        
     }
     
     /**
@@ -172,7 +183,6 @@ public class Tela_Cursos extends javax.swing.JFrame {
         buttonSobre = new javax.swing.JButton();
         buttonXTelas = new javax.swing.JButton();
         fundoBarraSup = new javax.swing.JLabel();
-        labelQtdCarrinho = new javax.swing.JLabel();
         scrollbar = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
         panelCursos = new javax.swing.JPanel();
@@ -576,12 +586,6 @@ public class Tela_Cursos extends javax.swing.JFrame {
         getContentPane().add(fundoBarraSup);
         fundoBarraSup.setBounds(0, 0, 1366, 164);
 
-        labelQtdCarrinho.setFont(poppins.deriveFont(15f));
-        labelQtdCarrinho.setForeground(new java.awt.Color(69, 82, 173));
-        produtoCarrinho.setLabel(labelQtdCarrinho);
-        getContentPane().add(labelQtdCarrinho);
-        labelQtdCarrinho.setBounds(883, 50, 20, 20);
-
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -961,6 +965,10 @@ public class Tela_Cursos extends javax.swing.JFrame {
         buttonPerfil.setVisible(false);
         labelPerfil.setVisible(false);
         panelPerfil.setVisible(false);
+        buttonLogin.setVisible(true);
+        buttonCarrinho.setVisible(false);
+        carrinho2.setVisible(false);
+        scrollbarCarrinho.setVisible(false);
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
     private void buttonPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPerfilMouseEntered
@@ -1214,7 +1222,6 @@ public class Tela_Cursos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel labelPerfil;
-    private javax.swing.JLabel labelQtdCarrinho;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelCursos;
     private javax.swing.JPanel panelDispCursos;

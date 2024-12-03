@@ -22,7 +22,9 @@
                 
                 <include>images/FundosTelas/Default.png</include>
                 <include>images/FundosTelas/ExbCurso.png</include>
+                <include>images/FundosTelas/ExbConteudo.png</include>
                 <include>images/FundosTelas/FundoCadastrarAdmin.png</include>
+                <include>images/FundosTelas/FundoCadastrarConteudo.png</include>
                 <include>images/FundosTelas/FundoCadastrarCurso.png</include>
                 <include>images/FundosTelas/FundoCadastrarCurso2.png</include>
                 <include>images/FundosTelas/FundoCadastro.png</include>
@@ -44,6 +46,8 @@
                 <include>images/Botoes/acessoLoginAzul.png</include>
                 <include>images/Botoes/addCarrinho.png</include>
                 <include>images/Botoes/addCarrinhoAzul.png</include>
+                <include>images/Botoes/adicaoFinalizar.png</include>
+                <include>images/Botoes/adicaoFinalizar2.png</include>
                 <include>images/Botoes/AplicarDesconto.png</include>
                 <include>images/Botoes/AplicarDescontoAzul.png</include>
                 <include>images/Botoes/Cadastrar.png</include>
@@ -74,6 +78,8 @@
                 <include>images/Botoes/EsqueciSenhaAzul.png</include>
                 <include>images/Botoes/ExcluirAdmin.png</include>
                 <include>images/Botoes/ExcluirAdmin2.png</include>
+                <include>images/Botoes/Exibir.png</include>
+                <include>images/Botoes/Exibir2.png</include>
                 <include>images/Botoes/FazerLogin.png</include>
                 <include>images/Botoes/FazerLoginAzul.png</include>
                 <include>images/Botoes/FinalizarCompra.png</include>
@@ -91,8 +97,14 @@
                 <include>images/Botoes/MeusCursosAzul.png</include>
                 <include>images/Botoes/Next.png</include>
                 <include>images/Botoes/Next2.png</include>
+                <include>images/Botoes/paginaAnterior.png</include>
+                <include>images/Botoes/paginaAnteriorAzul.png</include>
+                <include>images/Botoes/paginaProxima.png</include>
+                <include>images/Botoes/paginaProximaAzul.png</include>
                 <include>images/Botoes/prosseguirAdm.png</include>
                 <include>images/Botoes/prosseguirAdm2.png</include>
+                <include>images/Botoes/proximaPagina.png</include>
+                <include>images/Botoes/proximaPagina2.png</include>
                 <include>images/Botoes/Sacola.png</include>
                 <include>images/Botoes/SacolaAzul.png</include>
                 <include>images/Botoes/SalvarAlt.png</include>
@@ -138,6 +150,7 @@
                 <include>images/Botoes/NomeLogo.png</include>
                 <include>images/Formas/VendoVideo.png</include>
                 
+                <include>images/TelasCompletas/BannerGregorio.jpg</include>
                 <include>images/TelasCompletas/Cadastro.png</include>
                 <include>images/TelasCompletas/Carrinho.png</include>
                 <include>images/TelasCompletas/Cursos.png</include>

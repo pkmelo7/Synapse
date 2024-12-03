@@ -831,12 +831,14 @@ public class Tela_Login extends javax.swing.JFrame
                 {
                     // Setando o usuário como logado na sessão
                     Session.setLoggedUser(usuario);  // Aqui, o usuário é registrado como logado
+                    Session.limparCarrinho();
                     abrirTelaAdmin();  // Acesse a tela de admin
                 } 
                 else 
                 {
                     // Setando o usuário como logado na sessão
                     Session.setLoggedUser(usuario);  // Aqui, o usuário é registrado como logado
+                    Session.limparCarrinho();
                     abrirTelaMenu();   // Acesse a tela normal
                 }
             } 

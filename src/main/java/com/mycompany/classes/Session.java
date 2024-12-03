@@ -7,12 +7,39 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Session {
     // Atributo estático para armazenar o usuário logado
     private static Usuario loggedUser = null;
     private static Curso cursoSelecionado = null;
     private static Object codigoCurso = null;
+    private static List<Integer> carrinhoCursos = new ArrayList<>();
+
+    public static void adicionarAoCarrinho(int cursoId) {
+        if (!carrinhoCursos.contains(cursoId)) {
+            carrinhoCursos.add(cursoId);
+        }
+    }
+    
+    public static void removerDoCarrinho(int cursoId) {
+        carrinhoCursos.remove((Integer) cursoId);
+    }
+    
+    public static List<Integer> getCursosNoCarrinho() {
+        return new ArrayList<>(carrinhoCursos);
+    }
+    
+    public static int getItensNoCarrinho()
+    {
+        int itens = carrinhoCursos.size();
+        return itens;
+    }
+
+    public static void limparCarrinho() {
+        carrinhoCursos.clear();
+    }
     
     // Método para setar o usuário logado
     public static void setLoggedUser(Usuario user) {
