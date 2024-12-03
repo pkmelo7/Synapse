@@ -8,9 +8,7 @@ import com.mycompany.classes.Curso;
 import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
 import com.mycompany.scrollbar.ScrollBarCustom_Admin;
-import com.mycompany.telas.NewJFrame;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -21,9 +19,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +27,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -45,7 +40,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.MaskFormatter;
-import javax.swing.text.NumberFormatter;
 //Fim das importações necessárias
 
 public class Tela_AdminEditarCurso extends javax.swing.JFrame {
@@ -637,7 +631,7 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         }
         catch (SQLException ex) 
         {
-            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
