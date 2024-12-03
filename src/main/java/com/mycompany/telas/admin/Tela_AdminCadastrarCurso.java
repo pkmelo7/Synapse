@@ -85,7 +85,12 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
             this.dispose();
         }
    
-        
+        public void abrirTelaConteudo() throws FontFormatException, IOException
+        {
+            Tela_AdminCadastrarConteudo TelaConteudo = new Tela_AdminCadastrarConteudo();
+            TelaConteudo.setVisible(true);
+            this.dispose();
+        }
     //Fim da declaração de métodos
         
     public Tela_AdminCadastrarCurso() throws FontFormatException, IOException {
@@ -192,7 +197,6 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         fieldNivel = new javax.swing.JTextField();
         fieldCategoria = new javax.swing.JTextField();
         contadorLabel = new javax.swing.JLabel();
-        fieldCaminho = new javax.swing.JTextField();
         scrollDescricao = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         textAreaDescricao = new javax.swing.JTextArea();
@@ -493,28 +497,7 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         contadorLabel.setForeground(new java.awt.Color(204, 204, 204));
         contadorLabel.setText("0/500");
         telaAdmin.add(contadorLabel);
-        contadorLabel.setBounds(1245, 540, 110, 20);
-
-        fieldCaminho.setBackground(new java.awt.Color(0, 0, 0));
-        fieldCaminho.setFont(poppins.deriveFont(18f));
-        fieldCaminho.setForeground(new java.awt.Color(0, 178, 6));
-        fieldCaminho.setText("Caminho da imagem do curso");
-        fieldCaminho.setBorder(null);
-        fieldCaminho.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldCaminhoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldCaminhoFocusLost(evt);
-            }
-        });
-        fieldCaminho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldCaminhoActionPerformed(evt);
-            }
-        });
-        telaAdmin.add(fieldCaminho);
-        fieldCaminho.setBounds(190, 591, 1030, 50);
+        contadorLabel.setBounds(1245, 620, 110, 20);
 
         scrollDescricao.setBackground(new java.awt.Color(0, 0, 0));
         scrollDescricao.setBorder(null);
@@ -548,15 +531,13 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(textAreaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(textAreaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         scrollDescricao.setViewportView(jPanel1);
 
         telaAdmin.add(scrollDescricao);
-        scrollDescricao.setBounds(182, 392, 1040, 165);
+        scrollDescricao.setBounds(182, 392, 1040, 240);
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarCurso.png"))); // NOI18N
         telaAdmin.add(fundo);
@@ -655,7 +636,6 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         String preco = fieldValor.getText();
         String categoria = fieldCategoria.getText();
         String descricao = textAreaDescricao.getText();
-        String caminhoImagem = fieldCaminho.getText();
     
         // Criação do objeto Curso
         Curso curso = new Curso();
@@ -672,18 +652,18 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         {
             // Cadastrar o curso e obter o ID gerado
             int cursoId = curso.cadastraCurso();
-
-            if (cursoId != -1) 
-            {
-               // Inserir a imagem associada ao curso
-                Curso cursoHelper = new Curso(); // Supondo que `inserirImagem` esteja em `Curso`
-                cursoHelper.inserirImagem(caminhoImagem, cursoId);
-                
-               /////////////////////abir tela inserir conteudos
-            }
-            else 
-            {
-                System.out.println("Erro ao cadastrar curso.");
+            Curso cHelper = new Curso();
+            Session.setCursoSelecionado(cHelper.listarCursoporId(cursoId));
+            
+            System.out.println(cursoId);
+            System.out.println("Curso setado.");
+            
+            try {
+                abrirTelaConteudo();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(Tela_AdminCadastrarCurso.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Tela_AdminCadastrarCurso.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         catch (SQLException ex) 
@@ -933,10 +913,6 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldValorFocusLost
 
-    private void fieldCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCaminhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldCaminhoActionPerformed
-
     private void fieldIdAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdAutorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldIdAutorActionPerformed
@@ -972,39 +948,6 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
             fieldCategoria.setText("Categoria do Curso");
         }
     }//GEN-LAST:event_fieldCategoriaFocusLost
-
-    private void fieldCaminhoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCaminhoFocusGained
-        // TODO add your handling code here:
-         if (fieldCaminho.getText().equals("Caminho da imagem do curso")) {
-            fieldCaminho.setText("");
-            fieldCaminho.setForeground(new Color(0,255,8));
-        }
-    }//GEN-LAST:event_fieldCaminhoFocusGained
-
-    private void fieldCaminhoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCaminhoFocusLost
-        // TODO add your handling code here:
-        if (fieldCaminho.getText().isEmpty()) {
-            fieldCaminho.setForeground(new Color(0,178,6));
-            fieldCaminho.setText("Caminho da imagem do curso");
-        }
-    }//GEN-LAST:event_fieldCaminhoFocusLost
-
-    private void textAreaDescricaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusGained
-        // TODO add your handling code here:
-        if (textAreaDescricao.getText().equals("Descrição (opcional)")) {
-            textAreaDescricao.setText("");
-            textAreaDescricao.setForeground(new Color(0,255,8));
-        }
-    }//GEN-LAST:event_textAreaDescricaoFocusGained
-
-    private void textAreaDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusLost
-        // TODO add your handling code here:
-        if (textAreaDescricao.getText().isEmpty()) {
-            textAreaDescricao.setForeground(new Color(0,178,6));
-            textAreaDescricao.setText("Descrição (opcional)");
-            contadorLabel.setText("0/500");
-        }
-    }//GEN-LAST:event_textAreaDescricaoFocusLost
 
     private void buttonNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNaoActionPerformed
         // TODO add your handling code here:
@@ -1083,6 +1026,23 @@ public class Tela_AdminCadastrarCurso extends javax.swing.JFrame {
         if(buttonNao.getText().equals(">  Nao"))
             buttonNao.setText("> Nao");
     }//GEN-LAST:event_buttonNaoMouseExited
+
+    private void textAreaDescricaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusGained
+        // TODO add your handling code here:
+        if (textAreaDescricao.getText().equals("Descrição (opcional)")) {
+            textAreaDescricao.setText("");
+            textAreaDescricao.setForeground(new Color(0,255,8));
+        }
+    }//GEN-LAST:event_textAreaDescricaoFocusGained
+
+    private void textAreaDescricaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusLost
+        // TODO add your handling code here:
+        if (textAreaDescricao.getText().isEmpty()) {
+            textAreaDescricao.setForeground(new Color(0,178,6));
+            textAreaDescricao.setText("Descrição (opcional)");
+            contadorLabel.setText("0/500");
+        }
+    }//GEN-LAST:event_textAreaDescricaoFocusLost
 
     public boolean validarData(String data) 
     {
@@ -1470,7 +1430,6 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JButton buttonVoltar;
     private javax.swing.JButton buttonXTelas;
     private javax.swing.JLabel contadorLabel;
-    private javax.swing.JTextField fieldCaminho;
     private javax.swing.JTextField fieldCategoria;
     private javax.swing.JFormattedTextField fieldIdAutor;
     private javax.swing.JTextField fieldNivel;

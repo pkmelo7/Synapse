@@ -77,9 +77,9 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
     
     //Declaração de métodos
         
-        public void abrirTelaAnterior() throws FontFormatException, IOException
+        public void abrirTelaAnterior() throws FontFormatException, IOException, SQLException
         {
-            Tela_AdminCadastrar1 TelaAnterior = new Tela_AdminCadastrar1();
+            Tela_AdminCrudCursos TelaAnterior = new Tela_AdminCrudCursos();
             TelaAnterior.setVisible(true);
             this.dispose();
         }
@@ -227,11 +227,10 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         fieldNivel = new javax.swing.JTextField();
         fieldCategoria = new javax.swing.JTextField();
         contadorLabel = new javax.swing.JLabel();
-        fieldCaminho = new javax.swing.JTextField();
+        fundo = new javax.swing.JLabel();
         scrollDescricao = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         textAreaDescricao = new javax.swing.JTextArea();
-        fundo = new javax.swing.JLabel();
         panelNomeVazio = new javax.swing.JPanel();
         panelNomeVazio2 = new javax.swing.JPanel();
         labelNomeVazio = new javax.swing.JLabel();
@@ -470,26 +469,9 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         telaAdmin.add(contadorLabel);
         contadorLabel.setBounds(1245, 540, 110, 20);
 
-        fieldCaminho.setBackground(new java.awt.Color(0, 0, 0));
-        fieldCaminho.setFont(poppins.deriveFont(18f));
-        fieldCaminho.setForeground(new java.awt.Color(0, 178, 6));
-        fieldCaminho.setText("Caminho da imagem do curso");
-        fieldCaminho.setBorder(null);
-        fieldCaminho.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldCaminhoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldCaminhoFocusLost(evt);
-            }
-        });
-        fieldCaminho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldCaminhoActionPerformed(evt);
-            }
-        });
-        telaAdmin.add(fieldCaminho);
-        fieldCaminho.setBounds(190, 591, 1030, 50);
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarCurso2.png"))); // NOI18N
+        telaAdmin.add(fundo);
+        fundo.setBounds(0, 0, 1366, 768);
 
         scrollDescricao.setBackground(new java.awt.Color(0, 0, 0));
         scrollDescricao.setBorder(null);
@@ -523,19 +505,13 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(textAreaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(textAreaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         scrollDescricao.setViewportView(jPanel1);
 
         telaAdmin.add(scrollDescricao);
-        scrollDescricao.setBounds(182, 392, 1040, 165);
-
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarCurso2.png"))); // NOI18N
-        telaAdmin.add(fundo);
-        fundo.setBounds(0, 0, 1366, 768);
+        scrollDescricao.setBounds(182, 392, 1040, 240);
 
         panel.add(telaAdmin);
         telaAdmin.setBounds(0, 0, 1366, 768);
@@ -630,7 +606,6 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         String preco = fieldValor.getText();
         String categoria = fieldCategoria.getText();
         String descricao = textAreaDescricao.getText();
-        String caminhoImagem = fieldCaminho.getText();
     
         // Criação do objeto Curso
         Curso curso = new Curso();
@@ -652,7 +627,6 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
             {
                // Inserir a imagem associada ao curso
                 Curso cursoHelper = new Curso(); // Supondo que `inserirImagem` esteja em `Curso`
-                cursoHelper.inserirImagem(caminhoImagem, cursoId);
                 
                /////////////////////abir tela inserir conteudos
             }
@@ -778,6 +752,8 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
             } catch (FontFormatException ex) {
                 Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
+                Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonVoltarActionPerformed
@@ -908,10 +884,6 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldValorFocusLost
 
-    private void fieldCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCaminhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldCaminhoActionPerformed
-
     private void fieldIdAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdAutorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldIdAutorActionPerformed
@@ -947,22 +919,6 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
             fieldCategoria.setText("Categoria do Curso");
         }
     }//GEN-LAST:event_fieldCategoriaFocusLost
-
-    private void fieldCaminhoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCaminhoFocusGained
-        // TODO add your handling code here:
-         if (fieldCaminho.getText().equals("Caminho da imagem do curso")) {
-            fieldCaminho.setText("");
-            fieldCaminho.setForeground(new Color(0,255,8));
-        }
-    }//GEN-LAST:event_fieldCaminhoFocusGained
-
-    private void fieldCaminhoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCaminhoFocusLost
-        // TODO add your handling code here:
-        if (fieldCaminho.getText().isEmpty()) {
-            fieldCaminho.setForeground(new Color(0,178,6));
-            fieldCaminho.setText("Caminho da imagem do curso");
-        }
-    }//GEN-LAST:event_fieldCaminhoFocusLost
 
     private void textAreaDescricaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDescricaoFocusGained
         // TODO add your handling code here:
@@ -1623,7 +1579,6 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JButton buttonVoltar;
     private javax.swing.JButton buttonXTelas;
     private javax.swing.JLabel contadorLabel;
-    private javax.swing.JTextField fieldCaminho;
     private javax.swing.JTextField fieldCategoria;
     private javax.swing.JFormattedTextField fieldIdAutor;
     private javax.swing.JTextField fieldNivel;

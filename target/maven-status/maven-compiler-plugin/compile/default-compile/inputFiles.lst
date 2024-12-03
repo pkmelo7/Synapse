@@ -11,12 +11,12 @@ C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\sc
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\classes\GerenciadorDeCategorias.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\admin\Tela_Admin1.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_Cursos.java
+C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_ExbConteudo.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\classes\Admin.java
-C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_Padrao.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\admin\Tela_AdminCadastrarUser.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\admin\Tela_AdminCrud1.java
+C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\classes\GerenciadorDeCarrinho.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\classes\ProdutoCarrinhoJanela.java
-C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_CarrinhoTESTE.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_Menu.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\classes\Categoria.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_Login.java
@@ -26,6 +26,7 @@ C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\cl
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\classes\ProdutoCurso.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\scrollbar\ScrollBarCustom_Admin.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_Sobre.java
+C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\admin\Tela_AdminCadastrarConteudo.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\admin\Tela_AdminCrudCursos.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\admin\Tela_AdminEditarCurso.java
 C:\Users\grego\Documents\NetBeansProjects\Synapse\src\main\java\com\mycompany\telas\Tela_Cadastro.java

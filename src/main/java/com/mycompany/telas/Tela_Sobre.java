@@ -3,6 +3,7 @@
 package com.mycompany.telas;
 
 //Importações necessárias
+import com.mycompany.classes.GerenciadorDeCarrinho;
 import com.mycompany.classes.ProdutoCarrinhoJanela;
 import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
@@ -103,6 +104,16 @@ public class Tela_Sobre extends javax.swing.JFrame {
         else
         {
             labelPerfil.setVisible(false);
+        }
+        
+        GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
+        try
+        {
+            gerenciador.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+        }
+        catch(Exception e)
+        {
+            System.out.println("não foi possivel listar");
         }
     }
 

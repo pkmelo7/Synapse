@@ -3,7 +3,9 @@
 package com.mycompany.telas;
 
 //Importações necessárias
+import com.mycompany.classes.Curso;
 import com.mycompany.classes.FontePersonalizada;
+import com.mycompany.classes.GerenciadorDeCarrinho;
 import com.mycompany.classes.GerenciadorDeCategorias;
 import com.mycompany.classes.ProdutoCarrinhoJanela;
 import com.mycompany.classes.Session;
@@ -19,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -100,14 +103,14 @@ public class Tela_Menu extends javax.swing.JFrame {
         this.poppins = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Poppins-Bold.ttf"));
         initComponents(); 
         
+        FontePersonalizada fp = new FontePersonalizada();
+        fp.carregarFonte();
+        
         Session.outCursoSelecionado();
         
         //Configurar scrollbar vertical como customizada
         scrollbar.setVerticalScrollBar(new ScrollBarCustom());
         scrollbarCarrinho.setVerticalScrollBar(new ScrollBarCustom()); 
-        
-        FontePersonalizada fp = new FontePersonalizada();
-        fp.carregarFonte();
         
         ScrollBarCustom_Cursos sb = new ScrollBarCustom_Cursos();
         sb.setOrientation(JScrollBar.HORIZONTAL);
@@ -143,9 +146,22 @@ public class Tela_Menu extends javax.swing.JFrame {
         {
             labelPerfil.setVisible(false);
         }
+        
+        GerenciadorDeCarrinho gerenciadorJanela = new GerenciadorDeCarrinho();
+        try
+        {
+            gerenciadorJanela.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+        }
+        catch(Exception e)
+        {
+            System.out.println("não foi possivel listar");
+        }
+        
+        // Atualizar painel do carrinho
+        System.out.println("Itens no Carrinho "+Session.getItensNoCarrinho());    
     }
         
-        
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,7 +195,6 @@ public class Tela_Menu extends javax.swing.JFrame {
         buttonCarrinho = new javax.swing.JButton();
         fundoBarraSup = new javax.swing.JLabel();
         buttonPR = new javax.swing.JButton();
-        labelQtdCarrinho = new javax.swing.JLabel();
         scrollbar = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
@@ -629,12 +644,6 @@ public class Tela_Menu extends javax.swing.JFrame {
         });
         getContentPane().add(buttonPR);
         buttonPR.setBounds(1270, 658, 80, 70);
-
-        labelQtdCarrinho.setFont(poppins.deriveFont(15f));
-        labelQtdCarrinho.setForeground(new java.awt.Color(69, 82, 173));
-        produtoCarrinho.setLabel(labelQtdCarrinho);
-        getContentPane().add(labelQtdCarrinho);
-        labelQtdCarrinho.setBounds(883, 50, 20, 20);
 
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -1269,7 +1278,6 @@ public class Tela_Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel labelPerfil;
-    private javax.swing.JLabel labelQtdCarrinho;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel panelDispCursos;
     private javax.swing.JPanel panelDispCursos1;
