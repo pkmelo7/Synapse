@@ -8,7 +8,6 @@ import com.mycompany.classes.ProdutoCarrinho;
 import com.mycompany.classes.Session;
 import com.mycompany.classes.Usuario;
 import com.mycompany.scrollbar.ScrollBarCustom;
-import static com.mycompany.telas.Tela_Menu.capitalizeFirstLetter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -30,6 +29,8 @@ public class Tela_Carrinho extends javax.swing.JFrame
 {
     //Declaração de variáveis
         Session sessao = new Session();
+       
+        GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
     
         //Variáveis para o movimento do logo Synapse
         final int originalX = 10;
@@ -46,6 +47,8 @@ public class Tela_Carrinho extends javax.swing.JFrame
         
         //Variavel para trazer a classe ProdutoCarrinho
         ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho();
+        
+        
     //Final da declaração de variáveis
         
     //Variavel provisoria para teste    
@@ -111,15 +114,16 @@ public class Tela_Carrinho extends javax.swing.JFrame
             labelPerfil.setVisible(false);
         }
         
-        GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
         try
         {
-            gerenciador.listarCarrinho(carrinho, scrollbar, labelQtdCarrinho);
+            gerenciador.listarCarrinho(carrinho, scrollbar, labelQtdCarrinho, labelTotal);
         }
         catch(Exception e)
         {
             System.out.println("não foi possivel listar");
         }
+
+        gerenciador.atualizarLabelValor(labelTotal);
     }
     
     /**
@@ -486,7 +490,6 @@ public class Tela_Carrinho extends javax.swing.JFrame
 
         labelTotal.setFont(poppins.deriveFont(40f));
         labelTotal.setForeground(new java.awt.Color(30, 30, 30));
-        labelTotal.setText("R$"+totalcarrinho);
         fundoPrincipal.add(labelTotal);
         labelTotal.setBounds(25, 680, 550, 50);
 
@@ -498,13 +501,21 @@ public class Tela_Carrinho extends javax.swing.JFrame
         buttonFinalizarCompra.setContentAreaFilled(false);
         buttonFinalizarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonFinalizarCompra.setFocusPainted(false);
+        buttonFinalizarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonFinalizarCompraMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonFinalizarCompraMouseExited(evt);
+            }
+        });
         buttonFinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonFinalizarCompraActionPerformed(evt);
             }
         });
         fundoPrincipal.add(buttonFinalizarCompra);
-        buttonFinalizarCompra.setBounds(1030, 684, 180, 50);
+        buttonFinalizarCompra.setBounds(1020, 674, 200, 60);
 
         scrollbar.setBorder(null);
         scrollbar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -825,9 +836,25 @@ public class Tela_Carrinho extends javax.swing.JFrame
 //Início dos comandos do botão "Finalizar Compra"
     //<null>
     private void buttonFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFinalizarCompraActionPerformed
-        // TODO add your handling code here:
+            try {
+                // TODO add your handling code here:
+                gerenciador.cadastrarAcessos(carrinho);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Session.limparCarrinho();
+            
+            carrinho.revalidate();
+            carrinho.repaint();
+            produtoCarrinho.atualizarLabel(labelQtdCarrinho);
+            try {
+                gerenciador.atualizarLabelValor(labelTotal);
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_buttonFinalizarCompraActionPerformed
-
+        
     private void buttonPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPerfilMouseEntered
         // TODO add your handling code here:
         ImageIcon PerfilAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/ContaAzul.png"));
@@ -911,6 +938,18 @@ public class Tela_Carrinho extends javax.swing.JFrame
                 Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonLogoutActionPerformed
+
+    private void buttonFinalizarCompraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFinalizarCompraMouseEntered
+        // TODO add your handling code here:
+        ImageIcon FC2 = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/FinalizarCompra2.png"));
+        buttonFinalizarCompra.setIcon(FC2);
+    }//GEN-LAST:event_buttonFinalizarCompraMouseEntered
+
+    private void buttonFinalizarCompraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFinalizarCompraMouseExited
+        // TODO add your handling code here:
+        ImageIcon FC = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/FinalizarCompra.png"));
+        buttonFinalizarCompra.setIcon(FC);
+    }//GEN-LAST:event_buttonFinalizarCompraMouseExited
 //Fim dos comandos do botão "Finalizar Compra"
     
 //---------------------------------------------------------------------------------------------------------------------------------

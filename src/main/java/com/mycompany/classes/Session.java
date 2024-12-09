@@ -79,6 +79,40 @@ public class Session {
         }
         return null;
     }
+    
+    public static Curso listarCursoporId(int idCurso) throws SQLException
+    {
+        ConnectionFactory cf = new ConnectionFactory();
+        
+        String sql = "SELECT * FROM curso WHERE id = ?";
+        
+        try (Connection conn = cf.obtemConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setObject(1, idCurso);
+            ResultSet rs = ps.executeQuery();
+            
+            rs.next();
+            
+            Curso c = new Curso();
+                c.setId(rs.getInt("id"));
+                c.setNome(rs.getString("nome"));
+                c.setAutorId(rs.getInt("autor_id"));
+            c.setTempo(rs.getString("tempo")); 
+                c.setNivel(rs.getString("nivel"));
+                c.setPreco(rs.getString("preco"));
+                c.setCategoria(rs.getString("categoria"));
+                Curso cursoTemp = new Curso();
+                c.setFotoCurso(cursoTemp.exibirImagemIcon(rs.getInt("id")));
+                
+                System.out.println("Curso listado: "+c.getNome());
+                
+                return c;
+                } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     // Método para obter o usuário logado
     public static Usuario getLoggedUser() {

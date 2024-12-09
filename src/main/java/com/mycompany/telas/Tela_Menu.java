@@ -155,10 +155,7 @@ public class Tela_Menu extends javax.swing.JFrame {
         catch(Exception e)
         {
             System.out.println("não foi possivel listar");
-        }
-        
-        // Atualizar painel do carrinho
-        System.out.println("Itens no Carrinho "+Session.getItensNoCarrinho());    
+        }        
     }
         
     

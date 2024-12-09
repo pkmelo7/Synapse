@@ -333,7 +333,7 @@ public class Usuario {
             }
         }
         
-        public int getIdPorUsuario(String usu) throws SQLException 
+        public static int getIdPorUsuario(String usu) throws SQLException 
         {
             String sql = "SELECT id FROM user WHERE usuario = ?";
             ConnectionFactory cf = new ConnectionFactory();
@@ -432,6 +432,30 @@ public class Usuario {
         throw e; // Propaga a exceção para tratamento externo
     }
 }
+    
+    public static void cadastraAcesso(int usuario_id, int curso_id)
+    {
+        String sql = "INSERT INTO acesso (usuario_id, curso_id) VALUES (?, ?)";
+
+        ConnectionFactory cf = new ConnectionFactory();
+
+        try 
+        (
+            Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql);
+        ) 
+            {
+                ps.setInt(1, usuario_id);
+                ps.setInt(2, curso_id); 
+
+                int affectedRows = ps.executeUpdate(); 
+            }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            System.out.println("ERRO. Não foi possível cadastrar.");
+        }
+    }
     
 //Fim da declaração de metodos
         
