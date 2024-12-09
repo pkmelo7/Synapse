@@ -81,9 +81,9 @@ public class ProdutoCarrinho
 //Declaração de métodos
     
     //Metodo para adicionar produto no carrinho
-    public void addProduto(JPanel carrinho, JScrollPane scrollPane, int idCurso, JLabel label) throws SQLException 
+    public void addProduto(JPanel carrinho, JScrollPane scrollPane, int idCurso, JLabel label, JLabel labelValor) throws SQLException 
     {
-        JButton buttonXCompra = addBtFechar(carrinho, scrollPane, label, idCurso);
+        JButton buttonXCompra = addBtFechar(carrinho, scrollPane, label, labelValor, idCurso);
         JLabel fotoProduto = addFotoProduto(carrinho, idCurso);
         JTextArea nomeCurso = addNome(carrinho, idCurso);
         JLabel autorCurso = addAutor(carrinho, idCurso);
@@ -211,7 +211,7 @@ public class ProdutoCarrinho
 //Declaração de metodos para adição de componentes que estarao no carrinho 
 
     //adiciona o botao de X para excluir o item    
-        private JButton addBtFechar(JPanel carrinho, JScrollPane scrollPane, JLabel label, int idCurso) 
+        private JButton addBtFechar(JPanel carrinho, JScrollPane scrollPane, JLabel label, JLabel labelValor, int idCurso) 
         {
             JButton buttonXCompra = new JButton();
             buttonXCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XCompra.png")));
@@ -237,7 +237,8 @@ public class ProdutoCarrinho
                     // Atualizar o carrinho (refazer a listagem dos cursos no painel)
                     try {
                         GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
-                        gerenciador.listarCarrinho(carrinho, scrollPane, label);
+                        gerenciador.listarCarrinho(carrinho, scrollPane, label, labelValor);
+                        gerenciador.atualizarLabelValor(labelValor);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }                                
@@ -374,7 +375,7 @@ public class ProdutoCarrinho
         }
     
     //metodo para atualizar o label conforme a quantidade de itens no carrinho
-    private void atualizarLabel(JLabel label) 
+    public void atualizarLabel(JLabel label) 
     {
         if (label != null) 
         {

@@ -688,10 +688,13 @@ public class Tela_ExbConteudo extends javax.swing.JFrame {
         scrollImagem.setBackground(new java.awt.Color(255, 255, 255));
         scrollImagem.setBorder(new RoundedBorder(15));
         scrollImagem.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollImagem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         labelImagem.setBackground(new java.awt.Color(255, 255, 255));
+        labelImagem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
