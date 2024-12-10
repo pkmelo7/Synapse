@@ -189,6 +189,7 @@ public class Tela_Cadastro extends javax.swing.JFrame
         buttonOkAlerta.setBorder(null);
         buttonOkAlerta.setBorderPainted(false);
         buttonOkAlerta.setContentAreaFilled(false);
+        buttonOkAlerta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonOkAlerta.setFocusable(false);
         buttonOkAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -210,6 +211,7 @@ public class Tela_Cadastro extends javax.swing.JFrame
         labelContagem.setBounds(87, 210, 260, 40);
 
         fundoAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/janelaAlerta.png"))); // NOI18N
+        fundoAlerta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
         panelAlerta2.add(fundoAlerta);
         fundoAlerta.setBounds(0, 0, 500, 280);
 
@@ -1418,10 +1420,12 @@ private void mensagemErro()
 
     private void buttonOkAlertaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseEntered
         // TODO add your handling code here:
+        buttonOkAlerta.setFont(poppins.deriveFont(25f));
     }//GEN-LAST:event_buttonOkAlertaMouseEntered
 
     private void buttonOkAlertaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseExited
         // TODO add your handling code here:
+        buttonOkAlerta.setFont(poppins.deriveFont(20f));
     }//GEN-LAST:event_buttonOkAlertaMouseExited
 
     private void panelAlertaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAlertaMouseClicked

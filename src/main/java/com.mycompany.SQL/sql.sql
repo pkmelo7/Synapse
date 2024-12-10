@@ -14,6 +14,13 @@ CREATE TABLE User
 
 SELECT * FROM user;
 
+INSERT INTO user 
+(nome, dataNasc, usuario, email, senha, is_admin) values
+("Admin", "09/12/2024", "admin.synapse", "admin@synapse.com", "admin.synapse123", "1");
+/*utilize este login acima para o primeiro acesso como administrador*/
+/*Usuario: admin.synapse
+Senha: admin.synapse123*/
+
 CREATE TABLE Curso 
 (
     id INT AUTO_INCREMENT PRIMARY KEY,

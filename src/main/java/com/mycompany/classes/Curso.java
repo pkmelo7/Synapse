@@ -32,6 +32,40 @@ public class Curso
     private String descricao;
     private ImageIcon fotoCurso; 
     
+    public boolean atualizaCurso(int id) throws SQLException
+    {
+        String sql = "UPDATE curso SET nome = ?, autor_id = ?, tempo = ?, nivel = ?, preco = ?, categoria = ?, descricao = ? WHERE id = ?";
+        
+        ConnectionFactory cf = new ConnectionFactory();
+        
+        try
+        (
+            Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        )
+        {
+            ps.setString(1, getNome());        // nome do curso
+            ps.setInt(2, getAutorId());        // id do autor (relacionamento com a tabela User)
+            ps.setString(3, getTempo());   // tempo do curso (DECIMAL)
+            ps.setString(4, getNivel());       // nível do curso (ex: "Básico", "Avançado")
+            ps.setString(5, getPreco());   // preço do curso (DECIMAL)
+            ps.setString(6, getCategoria());   // categoria do curso (ex: "Tecnologia", "Negócios")
+            ps.setString(7, getDescricao());   // descrição do curso
+            System.out.println("Desdcas = "+ getDescricao());
+            
+            ps.setInt(8, id);
+            
+            int affectedRows = ps.executeUpdate(); 
+            return affectedRows > 0;
+                }   
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                System.out.println("ERRO. Não foi possível cadastrar.");
+                return false;
+            }    
+    }
+    
     public int cadastraCurso() throws SQLException
     {
         String sql = "INSERT INTO curso (nome, autor_id, tempo, nivel, preco, categoria, descricao) VALUES (?,?,?,?,?,?,?)";

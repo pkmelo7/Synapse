@@ -64,7 +64,9 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         MaskFormatter maskTempo;
         MaskFormatter maskValor;
         
-        Timer timerNomeVz;
+       Timer timerAlerta;
+        
+        boolean cadastrado = false;
         
         boolean acaoConcluida = false;
     //Final da declaração de variáveis
@@ -92,7 +94,7 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         
         Usuario usu = new Usuario();
         int id = c.getAutorId();
-        System.out.println("ID dO AUTOR "+id);
+
         String user = usu.getUserPorId(id);
         fieldIdAutor.setText(user);
         labelIdAutor.setVisible(false);
@@ -111,8 +113,15 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         
         fieldCategoria.setText(c.getCategoria());
         
-        textAreaDescricao.setText(c.getDescricaoporId(c.getId()));
-
+        String desc = c.getDescricaoporId(c.getId());
+        
+        textAreaDescricao.setText(desc);
+        
+        textAreaDescricao.repaint();
+        textAreaDescricao.revalidate();
+        textAreaDescricao.setVisible(true);
+        scrollDescricao.setVisible(true);
+        
         buttonXTelas.repaint();
         buttonXTelas.revalidate();
         
@@ -204,6 +213,12 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelAlerta = new javax.swing.JPanel();
+        panelAlerta2 = new javax.swing.JPanel();
+        labelAlerta = new javax.swing.JLabel();
+        buttonOkAlerta = new javax.swing.JButton();
+        labelContagem = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
         buttonXTelas = new javax.swing.JButton();
         messageLabel1 = new javax.swing.JLabel();
@@ -221,15 +236,10 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         fieldNivel = new javax.swing.JTextField();
         fieldCategoria = new javax.swing.JTextField();
         contadorLabel = new javax.swing.JLabel();
-        fundo = new javax.swing.JLabel();
         scrollDescricao = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         textAreaDescricao = new javax.swing.JTextArea();
-        panelNomeVazio = new javax.swing.JPanel();
-        panelNomeVazio2 = new javax.swing.JPanel();
-        labelNomeVazio = new javax.swing.JLabel();
-        buttonOkNomeVazio = new javax.swing.JButton();
-        labelContagemNomeVazio = new javax.swing.JLabel();
+        fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Synapse Connect");
@@ -241,6 +251,63 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        panelAlerta.setOpaque(false);
+        panelAlerta.setVisible(false);
+        panelAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAlertaMouseClicked(evt);
+            }
+        });
+        panelAlerta.setLayout(null);
+
+        panelAlerta2.setBackground(new java.awt.Color(0, 0, 0));
+        panelAlerta2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 8), 1, true));
+        panelAlerta2.setForeground(new java.awt.Color(0, 255, 8));
+        panelAlerta2.setLayout(null);
+
+        labelAlerta.setFont(digital7.deriveFont(23f));
+        labelAlerta.setForeground(new java.awt.Color(0, 255, 8));
+        labelAlerta.setHorizontalAlignment(SwingConstants.CENTER);
+        panelAlerta2.add(labelAlerta);
+        labelAlerta.setBounds(7, 66, 490, 110);
+
+        buttonOkAlerta.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkAlerta.setFont(digital7.deriveFont(20f));
+        buttonOkAlerta.setForeground(new java.awt.Color(0, 255, 8));
+        buttonOkAlerta.setText("OK");
+        buttonOkAlerta.setBorder(null);
+        buttonOkAlerta.setBorderPainted(false);
+        buttonOkAlerta.setContentAreaFilled(false);
+        buttonOkAlerta.setFocusable(false);
+        buttonOkAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseExited(evt);
+            }
+        });
+        panelAlerta2.add(buttonOkAlerta);
+        buttonOkAlerta.setBounds(355, 210, 100, 40);
+
+        labelContagem.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagem.setFont(digital7.deriveFont(20f));
+        labelContagem.setForeground(new java.awt.Color(0, 255, 8));
+        labelContagem.setText("Tempo Restante: 5");
+        labelContagem.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelAlerta2.add(labelContagem);
+        labelContagem.setBounds(87, 210, 260, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/janelaAlertaAdmin.png"))); // NOI18N
+        panelAlerta2.add(jLabel1);
+        jLabel1.setBounds(0, 0, 500, 281);
+
+        panelAlerta.add(panelAlerta2);
+        panelAlerta2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelAlerta);
+        panelAlerta.setBounds(0, 0, 1366, 768);
 
         panel.setBackground(new java.awt.Color(0, 0, 0));
         panel.setLayout(null);
@@ -463,10 +530,6 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         telaAdmin.add(contadorLabel);
         contadorLabel.setBounds(1245, 540, 110, 20);
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarCurso2.png"))); // NOI18N
-        telaAdmin.add(fundo);
-        fundo.setBounds(0, 0, 1366, 768);
-
         scrollDescricao.setBackground(new java.awt.Color(0, 0, 0));
         scrollDescricao.setBorder(null);
         scrollDescricao.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -507,65 +570,15 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         telaAdmin.add(scrollDescricao);
         scrollDescricao.setBounds(182, 392, 1040, 240);
 
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCadastrarCurso2.png"))); // NOI18N
+        telaAdmin.add(fundo);
+        fundo.setBounds(0, 0, 1366, 768);
+
         panel.add(telaAdmin);
         telaAdmin.setBounds(0, 0, 1366, 768);
 
         getContentPane().add(panel);
         panel.setBounds(0, 0, 1366, 768);
-
-        panelNomeVazio.setOpaque(false);
-        panelNomeVazio.setVisible(false);
-        panelNomeVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelNomeVazioMouseClicked(evt);
-            }
-        });
-        panelNomeVazio.setLayout(null);
-
-        panelNomeVazio2.setBackground(new java.awt.Color(0, 0, 0));
-        panelNomeVazio2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 255, 8), 1, true));
-        panelNomeVazio2.setForeground(new java.awt.Color(0, 255, 8));
-        panelNomeVazio2.setLayout(null);
-
-        labelNomeVazio.setFont(digital7.deriveFont(25f));
-        labelNomeVazio.setForeground(new java.awt.Color(0, 255, 8));
-        labelNomeVazio.setText("Nome vazio, por favor preencha.");
-        labelNomeVazio.setHorizontalAlignment(SwingConstants.CENTER);
-        panelNomeVazio2.add(labelNomeVazio);
-        labelNomeVazio.setBounds(7, 26, 490, 120);
-
-        buttonOkNomeVazio.setBackground(new java.awt.Color(0, 0, 0));
-        buttonOkNomeVazio.setFont(digital7.deriveFont(20f));
-        buttonOkNomeVazio.setForeground(new java.awt.Color(0, 255, 8));
-        buttonOkNomeVazio.setText("OK");
-        buttonOkNomeVazio.setBorder(null);
-        buttonOkNomeVazio.setBorderPainted(false);
-        buttonOkNomeVazio.setContentAreaFilled(false);
-        buttonOkNomeVazio.setFocusable(false);
-        buttonOkNomeVazio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonOkNomeVazioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonOkNomeVazioMouseExited(evt);
-            }
-        });
-        panelNomeVazio2.add(buttonOkNomeVazio);
-        buttonOkNomeVazio.setBounds(355, 210, 100, 40);
-
-        labelContagemNomeVazio.setBackground(new java.awt.Color(0, 0, 0));
-        labelContagemNomeVazio.setFont(digital7.deriveFont(20f));
-        labelContagemNomeVazio.setForeground(new java.awt.Color(0, 255, 8));
-        labelContagemNomeVazio.setText("Tempo Restante: 5");
-        labelContagemNomeVazio.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelNomeVazio2.add(labelContagemNomeVazio);
-        labelContagemNomeVazio.setBounds(87, 210, 260, 40);
-
-        panelNomeVazio.add(panelNomeVazio2);
-        panelNomeVazio2.setBounds(433, 243, 500, 281);
-
-        getContentPane().add(panelNomeVazio);
-        panelNomeVazio.setBounds(0, 0, 1366, 768);
 
         setBounds(-6, 0, 1366, 768);
     }// </editor-fold>//GEN-END:initComponents
@@ -587,20 +600,105 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
     //<null>
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
         // TODO add your handling code here:
+        // TODO add your handling code here:
         // Obter os valores dos campos
-        String nome = fieldNome.getText();
+        String nome = null;
         int autorId = 0;
+        String tempo = null;
+        String nivel = null;
+        String preco = null;
+        String categoria = null;
+        String descricao = null;
+        
+        if(fieldNome.getText().equals("Nome do Curso") || fieldNome.getText().equals(""))
+        {
+            labelAlerta.setText("Nome vazio, por favor preencha.");
+            mensagemErro();
+        }
+        else
+        {
+            nome = fieldNome.getText();
+        }
+        
+        
+        
+        autorId = 0;
             try {
                 autorId = usuario.getIdPorUsuario(user);
             } catch (SQLException ex) {
-                Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
+                labelAlerta.setText("Autor invalido, tente novamente.");
+                mensagemErro();
+                Logger.getLogger(Tela_AdminCadastrarCurso.class.getName()).log(Level.SEVERE, null, ex);
             }
-        String tempo = fieldTempo.getText();
-        String nivel = fieldNivel.getText();
-        String preco = fieldValor.getText();
-        String categoria = fieldCategoria.getText();
-        String descricao = textAreaDescricao.getText();
-    
+              
+        if(fieldTempo.getText().equals("") || labelTempo.isVisible())
+        {
+            labelAlerta.setText("Tempo vazio, por favor preencha.");
+            mensagemErro();
+        }
+        else
+        {
+            if (!validarTempo(fieldTempo.getText())) 
+            {
+                labelAlerta.setText("Tempo invalido, tente novamente.");
+                mensagemErro();
+            }
+            else
+            {
+               tempo = fieldTempo.getText();
+            }
+        }
+        
+        if(fieldNivel.getText().equals("Nivel do Curso") || fieldNivel.getText().equals(""))
+        {
+            labelAlerta.setText("Nivel vazio, por favor preencha.");
+            mensagemErro();
+        }
+        else
+        {
+            nivel = fieldNivel.getText();
+        }
+        
+        if(fieldValor.getText().equals("") || labelValor.isVisible())
+        {
+            labelAlerta.setText("Valor vazio, por favor preencha.");
+            mensagemErro();
+        }
+        else
+        {
+            if (!validarValor(fieldValor.getText())) 
+            {
+                labelAlerta.setText("Valor invalido, tente novamente.");
+                mensagemErro();
+            }
+            else
+            {
+               preco = fieldValor.getText();
+            }
+        }
+             
+        if(fieldCategoria.getText().equals("Categoria do Curso") || fieldCategoria.getText().equals(""))
+        {
+            labelAlerta.setText("Categoria vazia, por favor preencha.");
+            mensagemErro();
+        }
+        else
+        {
+            categoria = fieldCategoria.getText();
+        }
+        
+        if(textAreaDescricao.getText().equals("Descrição (opcional)") || textAreaDescricao.getText().equals(""))
+        {
+            labelAlerta.setText("Descricao vazia, por favor preencha.");
+            mensagemErro();
+        }
+        else
+        {
+            descricao = textAreaDescricao.getText();
+        }
+        
+        System.out.println(descricao);
+        
         // Criação do objeto Curso
         Curso curso = new Curso();
         curso.setNome(nome);
@@ -612,50 +710,49 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         curso.setCategoria(categoria);
         curso.setDescricao(descricao);
     
-        try 
-        {
-            // Cadastrar o curso e obter o ID gerado
-            int cursoId = curso.cadastraCurso();
-
-            if (cursoId != -1) 
-            {
-               // Inserir a imagem associada ao curso
-                Curso cursoHelper = new Curso(); // Supondo que `inserirImagem` esteja em `Curso`
+        Curso c = null;
+            try {
+                c = Session.listarCursoporId();
+            } catch (SQLException ex) {
+                labelAlerta.setText("Não foi possivel listar pelo ID.");
+                mensagemErro();
+                Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        int idCurso = c.getId();
                 
-               /////////////////////abir tela inserir conteudos
+            try {
+                c.atualizaCurso(idCurso);
+                System.out.println("atualizando curso.");
+            } catch (SQLException ex) {
+                labelAlerta.setText("Não foi possivel atualizar o curso.");
+                mensagemErro();
+                Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else 
-            {
-                System.out.println("Erro ao cadastrar curso.");
-            }
-        }
-        catch (SQLException ex) 
-        {
-            Logger.getLogger(Tela_AdminEditarCurso.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
-    private void nomeVazio()
-    {
+    
+    private void mensagemErro()
+    {        
          // Garantir que o painel esteja visível após a exclusão
-        panelNomeVazio.setVisible(true);
+        panelAlerta.setVisible(true);
 
         // Revalide o layout para garantir que o painel seja renderizado corretamente
-        panelNomeVazio.revalidate();
-        panelNomeVazio.repaint();
+        panelAlerta.revalidate();
+        panelAlerta.repaint();
 
         // Definir tempo inicial da contagem regressiva
         final int tempoInicial = 5;
         final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
 
         // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
-        if (timerNomeVz != null && timerNomeVz.isRunning()) 
+        if (timerAlerta != null && timerAlerta.isRunning()) 
         {
-            timerNomeVz.stop();  // Para o Timer atual, se já estiver em execução
+            timerAlerta.stop();  // Para o Timer atual, se já estiver em execução
         }
 
         // Criar o Timer para a contagem regressiva
-        timerNomeVz = new Timer(1000, new ActionListener() 
+        timerAlerta = new Timer(1000, new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent e) 
@@ -664,63 +761,143 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
                 if (tempoRestante[0] > 0) 
                 {
                     tempoRestante[0]--;
-                    labelContagemNomeVazio.setText("Tempo restante: " + tempoRestante[0]);
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
                 } 
                 else
                 {
                     // Quando a contagem chega a 0, reinicia o tempo
                     tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
-                    labelContagemNomeVazio.setText("Tempo restante: " + tempoRestante[0]);
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
 
                     // Esconde o painel após a contagem
-                    panelNomeVazio.setVisible(false);
+                    panelAlerta.setVisible(false);
 
                     // Para o Timer
-                    timerNomeVz.stop();
+                    timerAlerta.stop();
 
                     acaoConcluida = true;
+                    
+                    if(cadastrado != false)
+                    {
+                        limparCampos();
+                    }
+                    else
+                    {
+                        System.out.println("usuario nao cadastrado");
+                    }
                 }
             }
         });
 
         // Inicia o Timer de contagem regressiva
-        timerNomeVz.start();
+        timerAlerta.start();
 
         // Ação do botão "OK" para fechar o painel antes do tempo
-        buttonOkNomeVazio.addActionListener(new ActionListener() 
+        buttonOkAlerta.addActionListener(new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent e) 
             {
                 // Para o Timer imediatamente
-                if (timerNomeVz != null) 
+                if (timerAlerta != null) 
                 {
-                    timerNomeVz.stop();
+                    timerAlerta.stop();
                 }
 
                 // Esconde o painel imediatamente
-                panelNomeVazio.setVisible(false);
+                panelAlerta.setVisible(false);
 
                 acaoConcluida = true;
+                
+                if(cadastrado != false)
+                    {
+                        limparCampos();
+                    }
+                else
+                {
+                    System.out.println("usuario nao cadastrado");
+                }
 
                 // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
                 tempoRestante[0] = tempoInicial; // Reinicia a contagem
-                labelContagemNomeVazio.setText("Tempo restante: " + tempoRestante[0]);
+                labelContagem.setText("Tempo restante: " + tempoRestante[0]);
             }
         });
     }
     
     private void limparCampos() 
     {
-        fieldNome.setText("Nome");
+        fieldNome.setText("Nome do Curso");
         fieldNome.setForeground(new Color(0,178,6));
+        
         fieldTempo.setText("");
         labelTempo.setVisible(true);
+        
+        fieldValor.setText("");
+        labelValor.setVisible(true);
+        
+        fieldIdAutor.setText("");
+        fieldIdAutor.setVisible(true);
+        labelIdAutor.setVisible(true);
+
+        
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/FundosTelas/FundoCadastrarCurso2.png"));
+        fundo.setIcon(icon);
+        
         fieldNivel.setText("Nivel do Curso");
         fieldNivel.setForeground(new Color(0,178,6));
+        
         fieldCategoria.setText("Categoria do Curso");
-        textAreaDescricao.setText("Descricao");
+        fieldCategoria.setForeground(new Color(0,178,6));
+        
+        textAreaDescricao.setText("Descrição (opcional)");
+        textAreaDescricao.setForeground(new Color(0,178,6));
     }
+    
+    public boolean validarTempo(String entrada) {
+    // Expressão regular para o formato "00.00h" até "99.99h"
+    String regex = "\\d{2}\\.\\d{2}h";
+    
+    // Verifica se o texto corresponde ao padrão
+    if (entrada.matches(regex)) {
+        try {
+            // Extrai as partes antes e depois do ponto
+            String[] partes = entrada.substring(0, 5).split("\\.");
+            int parteInteira = Integer.parseInt(partes[0]);
+            int parteDecimal = Integer.parseInt(partes[1]);
+
+            // Valida se as partes estão no intervalo de 00 a 99
+            if (parteInteira >= 0 && parteInteira <= 99 && parteDecimal >= 0 && parteDecimal <= 99) {
+                return true; // Formato válido
+            }
+        } catch (NumberFormatException e) {
+            return false; // Caso ocorra erro ao converter para números
+        }
+    }
+    return false; // Não está no formato correto
+}
+    
+    public boolean validarValor(String valor) {
+    // Expressão regular para o formato "R$00000,00"
+    String regex = "R\\$\\d{1,5},\\d{2}";
+
+    // Verifica se o texto corresponde ao padrão
+    if (valor.matches(regex)) {
+        try {
+            // Remove o "R$" e substitui a vírgula por ponto para facilitar a conversão
+            String valorNumerico = valor.replace("R$", "").replace(",", ".");
+            double numero = Double.parseDouble(valorNumerico);
+
+            // Valida se o número está no intervalo de 0.00 a 99999.99
+            if (numero >= 0 && numero <= 99999.99) {
+                return true; // Valor válido
+            }
+        } catch (NumberFormatException e) {
+            return false; // Caso ocorra erro ao converter para número
+        }
+    }
+    return false; // Não está no formato correto
+}
 
 //Fim dos comandos do botao Cursos
 
@@ -834,20 +1011,6 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_fieldTempoFocusLost
 
-    private void buttonOkNomeVazioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNomeVazioMouseEntered
-        // TODO add your handling code here:
-        buttonOkNomeVazio.setFont(digital7.deriveFont(25f));
-    }//GEN-LAST:event_buttonOkNomeVazioMouseEntered
-
-    private void buttonOkNomeVazioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkNomeVazioMouseExited
-        // TODO add your handling code here:
-        buttonOkNomeVazio.setFont(digital7.deriveFont(20f));
-    }//GEN-LAST:event_buttonOkNomeVazioMouseExited
-
-    private void panelNomeVazioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelNomeVazioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelNomeVazioMouseClicked
-
     private void buttonXTelasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonXTelasMouseEntered
         // TODO add your handling code here:
         ImageIcon XTelasVerm = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/XFecharTelasAdmin2.png"));
@@ -930,6 +1093,20 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
             contadorLabel.setText("0/500");
         }
     }//GEN-LAST:event_textAreaDescricaoFocusLost
+
+    private void buttonOkAlertaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseEntered
+        // TODO add your handling code here:
+        buttonOkAlerta.setFont(digital7.deriveFont(25f));
+    }//GEN-LAST:event_buttonOkAlertaMouseEntered
+
+    private void buttonOkAlertaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseExited
+        // TODO add your handling code here:
+        buttonOkAlerta.setFont(digital7.deriveFont(20f));
+    }//GEN-LAST:event_buttonOkAlertaMouseExited
+
+    private void panelAlertaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAlertaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAlertaMouseClicked
 
     public boolean validarData(String data) 
     {
@@ -1569,7 +1746,7 @@ private static void typingEffect(JButton button, String message)
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCadastrar;
-    private javax.swing.JButton buttonOkNomeVazio;
+    private javax.swing.JButton buttonOkAlerta;
     private javax.swing.JButton buttonVoltar;
     private javax.swing.JButton buttonXTelas;
     private javax.swing.JLabel contadorLabel;
@@ -1580,17 +1757,18 @@ private static void typingEffect(JButton button, String message)
     private javax.swing.JFormattedTextField fieldTempo;
     private javax.swing.JFormattedTextField fieldValor;
     private javax.swing.JLabel fundo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labelContagemNomeVazio;
+    private javax.swing.JLabel labelAlerta;
+    private javax.swing.JLabel labelContagem;
     private javax.swing.JLabel labelIdAutor;
-    private javax.swing.JLabel labelNomeVazio;
     private javax.swing.JLabel labelTempo;
     private javax.swing.JLabel labelTxtIdAutor;
     private javax.swing.JLabel labelValor;
     private javax.swing.JLabel messageLabel1;
     private javax.swing.JPanel panel;
-    private javax.swing.JPanel panelNomeVazio;
-    private javax.swing.JPanel panelNomeVazio2;
+    private javax.swing.JPanel panelAlerta;
+    private javax.swing.JPanel panelAlerta2;
     private javax.swing.JScrollPane scrollDescricao;
     private javax.swing.JPanel telaAdmin;
     private javax.swing.JTextArea textAreaDescricao;

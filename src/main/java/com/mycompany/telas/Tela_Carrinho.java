@@ -47,7 +47,10 @@ public class Tela_Carrinho extends javax.swing.JFrame
         
         //Variavel para trazer a classe ProdutoCarrinho
         ProdutoCarrinho produtoCarrinho = new ProdutoCarrinho();
-        
+       
+        Timer timerAlerta;
+                
+        boolean acaoConcluida = false;
         
     //Final da declaração de variáveis
         
@@ -116,7 +119,7 @@ public class Tela_Carrinho extends javax.swing.JFrame
         
         try
         {
-            gerenciador.listarCarrinho(carrinho, scrollbar, labelQtdCarrinho, labelTotal);
+            gerenciador.listarCarrinho(carrinho, scrollbar, labelQtdCarrinho, labelTotal, buttonFinalizarCompra);
         }
         catch(Exception e)
         {
@@ -124,6 +127,11 @@ public class Tela_Carrinho extends javax.swing.JFrame
         }
 
         gerenciador.atualizarLabelValor(labelTotal);
+        
+        if(Session.getCursosNoCarrinho().size()>0)
+        {
+            buttonFinalizarCompra.setVisible(true);
+        }
     }
     
     /**
@@ -136,6 +144,12 @@ public class Tela_Carrinho extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelAlerta = new javax.swing.JPanel();
+        panelAlerta2 = new javax.swing.JPanel();
+        labelAlerta = new javax.swing.JLabel();
+        buttonOkAlerta = new javax.swing.JButton();
+        labelContagem = new javax.swing.JLabel();
+        fundoAlerta = new javax.swing.JLabel();
         fundoPrincipal = new javax.swing.JPanel();
         panelPerfil = new javax.swing.JPanel();
         buttonMeuPerfil = new javax.swing.JButton();
@@ -171,6 +185,64 @@ public class Tela_Carrinho extends javax.swing.JFrame
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        panelAlerta.setOpaque(false);
+        panelAlerta.setVisible(false);
+        panelAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAlertaMouseClicked(evt);
+            }
+        });
+        panelAlerta.setLayout(null);
+
+        panelAlerta2.setBackground(new java.awt.Color(204, 204, 204));
+        panelAlerta2.setForeground(new java.awt.Color(69, 82, 173));
+        panelAlerta2.setLayout(null);
+
+        labelAlerta.setFont(poppins.deriveFont(20f));
+        labelAlerta.setForeground(new java.awt.Color(69, 82, 173));
+        labelAlerta.setHorizontalAlignment(SwingConstants.CENTER);
+        panelAlerta2.add(labelAlerta);
+        labelAlerta.setBounds(7, 66, 490, 100);
+
+        buttonOkAlerta.setBackground(new java.awt.Color(0, 0, 0));
+        buttonOkAlerta.setFont(poppins.deriveFont(20f));
+        buttonOkAlerta.setForeground(new java.awt.Color(69, 82, 173));
+        buttonOkAlerta.setText("OK");
+        buttonOkAlerta.setBorder(null);
+        buttonOkAlerta.setBorderPainted(false);
+        buttonOkAlerta.setContentAreaFilled(false);
+        buttonOkAlerta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonOkAlerta.setFocusable(false);
+        buttonOkAlerta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonOkAlertaMouseExited(evt);
+            }
+        });
+        panelAlerta2.add(buttonOkAlerta);
+        buttonOkAlerta.setBounds(355, 210, 100, 40);
+
+        labelContagem.setBackground(new java.awt.Color(0, 0, 0));
+        labelContagem.setFont(poppins.deriveFont(20f));
+        labelContagem.setForeground(new java.awt.Color(69, 82, 173));
+        labelContagem.setText("Tempo Restante: 5");
+        labelContagem.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelAlerta2.add(labelContagem);
+        labelContagem.setBounds(87, 210, 260, 40);
+
+        fundoAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/janelaAlerta.png"))); // NOI18N
+        fundoAlerta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 1, true));
+        panelAlerta2.add(fundoAlerta);
+        fundoAlerta.setBounds(0, 0, 500, 280);
+
+        panelAlerta.add(panelAlerta2);
+        panelAlerta2.setBounds(433, 243, 500, 281);
+
+        getContentPane().add(panelAlerta);
+        panelAlerta.setBounds(0, 0, 1366, 768);
 
         fundoPrincipal.setBackground(new java.awt.Color(224, 222, 222));
         fundoPrincipal.setForeground(new java.awt.Color(224, 222, 222));
@@ -501,6 +573,7 @@ public class Tela_Carrinho extends javax.swing.JFrame
         buttonFinalizarCompra.setContentAreaFilled(false);
         buttonFinalizarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonFinalizarCompra.setFocusPainted(false);
+        buttonFinalizarCompra.setVisible(false);
         buttonFinalizarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttonFinalizarCompraMouseEntered(evt);
@@ -839,6 +912,8 @@ public class Tela_Carrinho extends javax.swing.JFrame
             try {
                 // TODO add your handling code here:
                 gerenciador.cadastrarAcessos(carrinho);
+                labelAlerta.setText("Compra finalizada com sucesso.");
+                mensagemErro();
             } catch (SQLException ex) {
                 Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -850,11 +925,87 @@ public class Tela_Carrinho extends javax.swing.JFrame
             produtoCarrinho.atualizarLabel(labelQtdCarrinho);
             try {
                 gerenciador.atualizarLabelValor(labelTotal);
+                gerenciador.atualizarBotao(buttonFinalizarCompra);
             } catch (SQLException ex) {
                 Logger.getLogger(Tela_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_buttonFinalizarCompraActionPerformed
         
+    private void mensagemErro()
+    {        
+         // Garantir que o painel esteja visível após a exclusão
+        panelAlerta.setVisible(true);
+
+        // Revalide o layout para garantir que o painel seja renderizado corretamente
+        panelAlerta.revalidate();
+        panelAlerta.repaint();
+
+        // Definir tempo inicial da contagem regressiva
+        final int tempoInicial = 5;
+        final int[] tempoRestante = {tempoInicial}; // Usamos um array para poder alterar o valor dentro do Timer
+
+        // **Cancelar o Timer anterior, se houver** (importante para a segunda, terceira exclusão, etc.)
+        if (timerAlerta != null && timerAlerta.isRunning()) 
+        {
+            timerAlerta.stop();  // Para o Timer atual, se já estiver em execução
+        }
+
+        // Criar o Timer para a contagem regressiva
+        timerAlerta = new Timer(1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Atualiza o texto da contagem regressiva
+                if (tempoRestante[0] > 0) 
+                {
+                    tempoRestante[0]--;
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+                } 
+                else
+                {
+                    // Quando a contagem chega a 0, reinicia o tempo
+                    tempoRestante[0] = tempoInicial; // Reinicia para 5 segundos
+                    labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+
+                    // Esconde o painel após a contagem
+                    panelAlerta.setVisible(false);
+
+                    // Para o Timer
+                    timerAlerta.stop();
+
+                    acaoConcluida = true;
+                }
+            }
+        });
+
+        // Inicia o Timer de contagem regressiva
+        timerAlerta.start();
+
+        // Ação do botão "OK" para fechar o painel antes do tempo
+        buttonOkAlerta.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                // Para o Timer imediatamente
+                if (timerAlerta != null) 
+                {
+                    timerAlerta.stop();
+                }
+
+                // Esconde o painel imediatamente
+                panelAlerta.setVisible(false);
+
+                acaoConcluida = true;
+
+                // Opcional: Resetar a contagem se necessário (reiniciar a contagem para o próximo uso)
+                tempoRestante[0] = tempoInicial; // Reinicia a contagem
+                labelContagem.setText("Tempo restante: " + tempoRestante[0]);
+            }
+        });
+    }
+    
     private void buttonPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPerfilMouseEntered
         // TODO add your handling code here:
         ImageIcon PerfilAzul = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/ContaAzul.png"));
@@ -950,6 +1101,20 @@ public class Tela_Carrinho extends javax.swing.JFrame
         ImageIcon FC = new ImageIcon(getClass().getClassLoader().getResource("images/Botoes/FinalizarCompra.png"));
         buttonFinalizarCompra.setIcon(FC);
     }//GEN-LAST:event_buttonFinalizarCompraMouseExited
+
+    private void buttonOkAlertaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseEntered
+        // TODO add your handling code here:
+        buttonOkAlerta.setFont(poppins.deriveFont(25f));
+    }//GEN-LAST:event_buttonOkAlertaMouseEntered
+
+    private void buttonOkAlertaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonOkAlertaMouseExited
+        // TODO add your handling code here:
+        buttonOkAlerta.setFont(poppins.deriveFont(20f));
+    }//GEN-LAST:event_buttonOkAlertaMouseExited
+
+    private void panelAlertaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAlertaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAlertaMouseClicked
 //Fim dos comandos do botão "Finalizar Compra"
     
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -1007,6 +1172,7 @@ public class Tela_Carrinho extends javax.swing.JFrame
     private javax.swing.JButton buttonLogout;
     private javax.swing.JButton buttonMeuPerfil;
     private javax.swing.JButton buttonMeusCursos;
+    private javax.swing.JButton buttonOkAlerta;
     private javax.swing.JButton buttonPR;
     private javax.swing.JButton buttonPerfil;
     private javax.swing.JButton buttonSobre;
@@ -1017,12 +1183,17 @@ public class Tela_Carrinho extends javax.swing.JFrame
     private javax.swing.JPanel carrinho;
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JLabel fundo;
+    private javax.swing.JLabel fundoAlerta;
     private javax.swing.JPanel fundoPrincipal;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelAlerta;
+    private javax.swing.JLabel labelContagem;
     private javax.swing.JLabel labelDescontos;
     private javax.swing.JLabel labelPerfil;
     private javax.swing.JLabel labelQtdCarrinho;
     private javax.swing.JLabel labelTotal;
+    private javax.swing.JPanel panelAlerta;
+    private javax.swing.JPanel panelAlerta2;
     private javax.swing.JPanel panelPerfil;
     private javax.swing.JScrollPane scrollbar;
     // End of variables declaration//GEN-END:variables

@@ -83,9 +83,9 @@ public class ProdutoCarrinhoJanela
 //Declaração de métodos
     
     //Metodo para adicionar produto no carrinho
-    public void addProduto(JPanel carrinho, JScrollPane scrollPane, int idCurso) throws SQLException 
+    public void addProduto(JPanel carrinho, JScrollPane scrollPane, int idCurso, JLabel labelQtd, JLabel labelFQtd) throws SQLException 
     {
-        JButton buttonXCompra = addBtFechar(carrinho, scrollPane, idCurso);
+        JButton buttonXCompra = addBtFechar(carrinho, scrollPane, idCurso, labelQtd, labelFQtd);
         JLabel fotoProduto = addFotoProduto(carrinho, idCurso);
         JTextArea nomeCurso = addNome(carrinho, idCurso);
         JLabel autorCurso = addAutor(carrinho, idCurso);
@@ -207,7 +207,7 @@ public class ProdutoCarrinhoJanela
 //Declaração de metodos para adição de componentes que estarao no carrinho 
 
     //adiciona o botao de X para excluir o item    
-        private JButton addBtFechar(JPanel carrinho, JScrollPane scrollPane, int idCurso) 
+        private JButton addBtFechar(JPanel carrinho, JScrollPane scrollPane, int idCurso, JLabel labelQtd, JLabel labelFQtd) 
         {
             JButton buttonXCompra = new JButton();
             buttonXCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Botoes/XCompraJanela.png")));
@@ -232,7 +232,7 @@ public class ProdutoCarrinhoJanela
                     // Atualizar o carrinho (refazer a listagem dos cursos no painel)
                     try {
                         GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
-                        gerenciador.listarCarrinhoJanela(carrinho, scrollPane);
+                        gerenciador.listarCarrinhoJanela(carrinho, scrollPane, labelQtd, labelFQtd);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }                

@@ -30,6 +30,7 @@
                 <include>images/FundosTelas/FundoCadastro.png</include>
                 <include>images/FundosTelas/FundoCarrinho.png</include>
                 <include>images/FundosTelas/FundoCrudAdmin.png</include>
+                <include>images/FundosTelas/FundoCrudAdminCurso.png</include>
                 <include>images/FundosTelas/FundoCursos.png</include>
                 <include>images/FundosTelas/FundoDefault.png</include>
                 <include>images/FundosTelas/FundoLogin.png</include>
@@ -144,6 +145,7 @@
                 <include>images/Formas/EditarPerfil.png</include>
                 <include>images/Formas/Field.png</include>
                 <include>images/Formas/FundoBarraSup.png</include>
+                <include>images/Formas/fundoQtd.png</include>
                 <include>images/Formas/icon.png</include>
                 <include>images/Formas/IconSynapse.png</include>
                 <include>images/Formas/IconSynapse.jpg</include>
