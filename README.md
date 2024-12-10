@@ -1,8 +1,8 @@
 Projeto Synapse
 
 INFORMAÇÃO IMPORTANTE PARA PRIMEIRO USO DO PROJETO:
-- Ao baixar o projeto pela primeira vez, lembre-se de utilizar em seu workbench o código sql, (arquivo sql.sql localizado na pasta com.mycompany.SQL).
-- Após isto, lembre-se de alterar as informações de conexão com o banco de dados no arquivo ConnectionFactory (localizado em com.mycompany.DAO)
+- Ao baixar o projeto pela primeira vez, lembre-se de utilizar em seu workbench o código sql (arquivo sql.sql localizado na pasta com.mycompany.SQL).
+- Após isto, lembre-se de alterar as informações de conexão com o banco de dados no arquivo ConnectionFactory (localizado em com.mycompany.DAO).
 
 EXEMPLO:
 
