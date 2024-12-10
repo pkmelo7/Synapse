@@ -5,10 +5,15 @@ INFORMAÇÃO IMPORTANTE PARA PRIMEIRO USO DO PROJETO:
 - Após isto, lembre-se de alterar as informações de conexão com o banco de dados no arquivo ConnectionFactory (localizado em com.mycompany.DAO)
 
 EXEMPLO:
+
     private String usuario = "root";
+    
     private String senha = "root";
+    
     private String host = "localhost";
+    
     private String porta = "3306";
+    
     private String bd = "synapse";"
     
 Altere usuário e senha.
