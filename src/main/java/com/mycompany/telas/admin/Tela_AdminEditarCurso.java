@@ -698,18 +698,13 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
         }
         
         System.out.println(descricao);
-        
-        // Criação do objeto Curso
-        Curso curso = new Curso();
-        curso.setNome(nome);
-        if (autorId>0)
-        curso.setAutorId(autorId);
-        curso.setTempo(tempo);
-        curso.setNivel(nivel);
-        curso.setPreco(preco);
-        curso.setCategoria(categoria);
-        curso.setDescricao(descricao);
-    
+        System.out.println(nome);
+        System.out.println(autorId);
+        System.out.println(tempo);
+        System.out.println(nivel);
+        System.out.println(preco);
+        System.out.println(categoria);
+ 
         Curso c = null;
             try {
                 c = Session.listarCursoporId();
@@ -720,10 +715,13 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
             }
         
         int idCurso = c.getId();
+        System.out.println("id do Curso = "+idCurso);
                 
             try {
-                c.atualizaCurso(idCurso);
-                System.out.println("atualizando curso.");
+                c.atualizaCurso(idCurso, nome, autorId, tempo, nivel, preco, categoria, descricao);
+                cadastrado = true;
+                labelAlerta.setText("Curso atualizado com sucesso.");
+                mensagemErro();
             } catch (SQLException ex) {
                 labelAlerta.setText("Não foi possivel atualizar o curso.");
                 mensagemErro();
@@ -779,7 +777,7 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
                     
                     if(cadastrado != false)
                     {
-                        limparCampos();
+                        
                     }
                     else
                     {
@@ -811,7 +809,7 @@ public class Tela_AdminEditarCurso extends javax.swing.JFrame {
                 
                 if(cadastrado != false)
                     {
-                        limparCampos();
+                  
                     }
                 else
                 {
