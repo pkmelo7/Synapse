@@ -21,7 +21,9 @@ Altere usuário e senha.
 OBSERVAÇÃO: O código SQL insere automáticamente um usuário administrador no banco de dados, este usuário será responsável para ter o primeiro acesso a parte de administração do projeto.
 
 Para acessar a parte de administração pela primeira vez utilize na tela de login:
+
 Usuario: admin.synapse
+
 Senha: admin.synapse123
 
 Após isto você pode inserir novos administradores no banco de dados seguindo os seguintes passos:
