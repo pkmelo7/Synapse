@@ -22,9 +22,9 @@ OBSERVAÇÃO: O código SQL insere automáticamente um usuário administrador no
 
 Para acessar a parte de administração pela primeira vez utilize na tela de login:
 
-Usuario: admin.synapse
+Usuario: *admin.synapse*
 
-Senha: admin.synapse123
+Senha: *admin.synapse123*
 
 Após isto você pode inserir novos administradores no banco de dados seguindo os seguintes passos:
 Cadastrar > Usuários > Preencha as informações necessárias > Selecione "Cadastrar usuario como admin?" > Cadastrar;
