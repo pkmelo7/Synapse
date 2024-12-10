@@ -422,7 +422,7 @@ public class Tela_AdminCrudCursos extends javax.swing.JFrame {
         telaAdmin.add(label);
         label.setBounds(30, 650, 500, 15);
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCrudAdmin.png"))); // NOI18N
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FundosTelas/FundoCrudAdminCurso.png"))); // NOI18N
         telaAdmin.add(fundo);
         fundo.setBounds(0, 0, 1366, 768);
         fundo.getAccessibleContext().setAccessibleName("");

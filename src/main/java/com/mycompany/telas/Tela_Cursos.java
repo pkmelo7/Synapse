@@ -144,7 +144,7 @@ public class Tela_Cursos extends javax.swing.JFrame {
         GerenciadorDeCarrinho gerenciadorJanela = new GerenciadorDeCarrinho();
         try
         {
-            gerenciadorJanela.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+            gerenciadorJanela.listarCarrinhoJanela(carrinho, scrollbarCarrinho, labelQtd, labelFQtd);
         }
         catch(Exception e)
         {
@@ -163,6 +163,8 @@ public class Tela_Cursos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labelQtd = new javax.swing.JLabel();
+        labelFQtd = new javax.swing.JLabel();
         scrollbarCarrinho = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         carrinho = new javax.swing.JPanel();
@@ -208,6 +210,20 @@ public class Tela_Cursos extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(null);
+
+        labelQtd.setFont(poppins.deriveFont(15f));
+        labelQtd.setForeground(new java.awt.Color(255, 255, 255));
+        labelQtd.setVisible(false);
+        labelQtd.setHorizontalAlignment(SwingConstants.CENTER);
+        getContentPane().add(labelQtd);
+        labelQtd.setBounds(1000, 49, 19, 23);
+
+        labelFQtd.setForeground(new java.awt.Color(69, 82, 173));
+        labelFQtd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Formas/fundoQtd.png"))); // NOI18N
+        labelFQtd.setText(" ");
+        labelFQtd.setVisible(false);
+        getContentPane().add(labelFQtd);
+        labelFQtd.setBounds(999, 50, 21, 21);
 
         scrollbarCarrinho.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 82, 173), 2, true));
         scrollbarCarrinho.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -1221,7 +1237,9 @@ public class Tela_Cursos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel labelFQtd;
     private javax.swing.JLabel labelPerfil;
+    private javax.swing.JLabel labelQtd;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelCursos;
     private javax.swing.JPanel panelDispCursos;

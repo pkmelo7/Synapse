@@ -48,6 +48,7 @@ com\mycompany\telas\admin\Tela_AdminCadastrarCurso$19.class
 com\mycompany\telas\admin\Tela_AdminCrudUser$22.class
 com\mycompany\telas\admin\Tela_AdminCadastrar1$5.class
 com\mycompany\telas\admin\Tela_AdminCadastrarUser$7.class
+com\mycompany\telas\Tela_Carrinho$30.class
 com\mycompany\telas\admin\Tela_AdminCadastrarConteudo$6.class
 com\mycompany\telas\Tela_Carrinho$2.class
 com\mycompany\telas\Tela_ExbCurso.class
@@ -69,6 +70,7 @@ com\mycompany\telas\admin\Tela_Admin1.class
 com\mycompany\telas\admin\Tela_AdminCrud1$10.class
 com\mycompany\telas\admin\Tela_AdminEditarCurso$22.class
 com\mycompany\telas\Tela_ExbConteudo$35.class
+com\mycompany\telas\Tela_Carrinho$32.class
 com\mycompany\DAO\ConnectionFactory.class
 com\mycompany\telas\Tela_Menu$22.class
 com\mycompany\telas\admin\Tela_AdminCadastrarUser$2.class
@@ -273,6 +275,7 @@ com\mycompany\telas\Tela_ExbConteudo$7.class
 com\mycompany\telas\Tela_Perfil$11.class
 com\mycompany\telas\admin\Tela_Admin2$2.class
 com\mycompany\telas\admin\Tela_AdminCadastrarConteudo$7.class
+com\mycompany\telas\Tela_Carrinho$31.class
 com\mycompany\telas\admin\Tela_AdminCadastrar1$4.class
 com\mycompany\telas\Tela_Cadastro$33.class
 com\mycompany\telas\admin\Tela_AdminCrudUser$21.class
@@ -376,6 +379,7 @@ com\mycompany\telas\admin\Tela_AdminCadastrar1$7.class
 com\mycompany\telas\Tela_Menu$1.class
 com\mycompany\telas\admin\Tela_AdminEditarCurso$7.class
 com\mycompany\telas\admin\Tela_AdminCadastrar1$11.class
+com\mycompany\telas\Tela_Carrinho$33.class
 com\mycompany\telas\Tela_Perfil$13.class
 com\mycompany\telas\Tela_Login$31.class
 com\mycompany\telas\admin\Tela_AdminCadastrarUser$3.class

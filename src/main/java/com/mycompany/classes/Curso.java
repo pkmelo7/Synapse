@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +30,41 @@ public class Curso
     private String categoria;
     private String descricao;
     private ImageIcon fotoCurso; 
+    
+    public boolean atualizaCurso(int id, String nomeCurso, int idAutor, String tempoCurso, String nivelCurso, String precoCurso, String catCurso, String desc) throws SQLException
+    {
+        String sql = "UPDATE curso SET nome = ?, autor_id = ?, tempo = ?, nivel = ?, preco = ?, categoria = ?, descricao = ? WHERE id = ?";
+        
+        ConnectionFactory cf = new ConnectionFactory();
+        
+        try
+        (
+            Connection conn = cf.obtemConexao();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        )
+        {
+            ps.setString(1, nomeCurso);        // nome do curso
+            ps.setInt(2, idAutor);        // id do autor (relacionamento com a tabela User)
+            ps.setString(3, tempoCurso);   // tempo do curso (DECIMAL)
+            ps.setString(4, nivelCurso);       // nível do curso (ex: "Básico", "Avançado")
+            ps.setString(5, precoCurso);   // preço do curso (DECIMAL)
+            ps.setString(6, catCurso);   // categoria do curso (ex: "Tecnologia", "Negócios")
+            ps.setString(7, desc);   // descrição do curso
+            
+            ps.setInt(8, id);
+            
+            System.out.println("Atualiacnso curso.");
+            
+            int affectedRows = ps.executeUpdate(); 
+            return affectedRows > 0;
+                }   
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+                System.out.println("ERRO. Não foi possível cadastrar.");
+                return false;
+            }    
+    }
     
     public int cadastraCurso() throws SQLException
     {

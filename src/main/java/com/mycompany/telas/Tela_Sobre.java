@@ -109,7 +109,7 @@ public class Tela_Sobre extends javax.swing.JFrame {
         GerenciadorDeCarrinho gerenciador = new GerenciadorDeCarrinho();
         try
         {
-            gerenciador.listarCarrinhoJanela(carrinho, scrollbarCarrinho);
+            gerenciador.listarCarrinhoJanela(carrinho, scrollbarCarrinho, labelQtd, labelFQtd);
         }
         catch(Exception e)
         {
@@ -131,6 +131,8 @@ public class Tela_Sobre extends javax.swing.JFrame {
         buttonMeuPerfil = new javax.swing.JButton();
         buttonMeusCursos = new javax.swing.JButton();
         buttonLogout = new javax.swing.JButton();
+        labelQtd = new javax.swing.JLabel();
+        labelFQtd = new javax.swing.JLabel();
         labelPerfil = new javax.swing.JLabel();
         buttonPerfil = new javax.swing.JButton();
         buttonLogin = new javax.swing.JButton();
@@ -232,6 +234,20 @@ public class Tela_Sobre extends javax.swing.JFrame {
 
         getContentPane().add(panelPerfil);
         panelPerfil.setBounds(1120, 110, 230, 210);
+
+        labelQtd.setFont(poppins.deriveFont(15f));
+        labelQtd.setForeground(new java.awt.Color(255, 255, 255));
+        labelQtd.setVisible(false);
+        labelQtd.setHorizontalAlignment(SwingConstants.CENTER);
+        getContentPane().add(labelQtd);
+        labelQtd.setBounds(1000, 49, 19, 23);
+
+        labelFQtd.setForeground(new java.awt.Color(69, 82, 173));
+        labelFQtd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Formas/fundoQtd.png"))); // NOI18N
+        labelFQtd.setText(" ");
+        labelFQtd.setVisible(false);
+        getContentPane().add(labelFQtd);
+        labelFQtd.setBounds(999, 50, 21, 21);
 
         labelPerfil.setBackground(new java.awt.Color(102, 255, 102));
         labelPerfil.setFont(poppins.deriveFont(16f));
@@ -1009,7 +1025,9 @@ public class Tela_Sobre extends javax.swing.JFrame {
     private javax.swing.JTextField fieldPesquisa;
     private javax.swing.JLabel fundo;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelFQtd;
     private javax.swing.JLabel labelPerfil;
+    private javax.swing.JLabel labelQtd;
     private javax.swing.JPanel panelPerfil;
     private javax.swing.JScrollPane scrollbarCarrinho;
     // End of variables declaration//GEN-END:variables

@@ -70,9 +70,7 @@ public class Session {
                 c.setCategoria(rs.getString("categoria"));
                 Curso cursoTemp = new Curso();
                 c.setFotoCurso(cursoTemp.exibirImagemIcon(rs.getInt("id")));
-                
-                System.out.println("Curso listado: "+c.getNome());
-                
+                                
                 return c;
                 } catch (Exception e) {
             e.printStackTrace();
