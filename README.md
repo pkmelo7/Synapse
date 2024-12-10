@@ -16,7 +16,7 @@ EXEMPLO:
     
     private String bd = "synapse";"
     
-Altere usuário e senha.
+Altere usuário e senha conforme necessário.
 
 OBSERVAÇÃO: O código SQL insere automáticamente um usuário administrador no banco de dados, este usuário será responsável para ter o primeiro acesso a parte de administração do projeto.
 
